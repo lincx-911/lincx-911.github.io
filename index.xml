@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>lincx blog</title>
-    <link>https://example.com/</link>
+    <link>https://github.com/lincx-911/</link>
     <description>Recent content on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
     <lastBuildDate>Wed, 01 Dec 2021 18:39:17 +0800</lastBuildDate>
     
-        <atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://github.com/lincx-911/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>First</title>
-      <link>https://example.com/2021/12/first/</link>
+      <link>https://github.com/lincx-911/2021/12/first/</link>
       <pubDate>Wed, 01 Dec 2021 18:39:17 +0800</pubDate>
       
-      <guid>https://example.com/2021/12/first/</guid>
+      <guid>https://github.com/lincx-911/2021/12/first/</guid>
       <description>First Page djckjc</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://example.com/about/</link>
+      <link>https://github.com/lincx-911/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/about/</guid>
+      <guid>https://github.com/lincx-911/about/</guid>
       <description></description>
     </item>
     
