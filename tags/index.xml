@@ -6,10 +6,19 @@
     <description>Recent content in Tags on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Thu, 02 Dec 2021 18:39:17 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 Dec 2021 20:43:32 +0800</lastBuildDate>
     
         <atom:link href="https://lincx-911.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gitee PicGo打造免费个人图床</title>
+      <link>https://lincx-911.github.io/2021/12/picturebed/</link>
+      <pubDate>Fri, 03 Dec 2021 20:43:32 +0800</pubDate>
+      
+      <guid>https://lincx-911.github.io/2021/12/picturebed/</guid>
+      <description>一、前言 Markdown是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，Markdown文件的后缀名便是“.md”。Mar</description>
+    </item>
     
     <item>
       <title>hugo搭建个人博客</title>
