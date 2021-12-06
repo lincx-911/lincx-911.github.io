@@ -3,7 +3,70 @@
   
   <url>
     <loc>https://www.stana.top/categories/</loc>
-    <lastmod>2021-12-03T20:43:32+08:00</lastmod>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/categories/csapp/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/2021/12/bomb_lab/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/tags/csapp-lab/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/posts/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/tags/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/tags/%E6%B1%87%E7%BC%96/</loc>
+    <lastmod>2021-12-06T14:20:42+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/tags/csapp/</loc>
+    <lastmod>2021-12-04T11:31:20+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.stana.top/2021/12/csapp_datalab/</loc>
+    <lastmod>2021-12-04T11:31:20+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -23,28 +86,7 @@
   </url>
   
   <url>
-    <loc>https://www.stana.top/</loc>
-    <lastmod>2021-12-03T20:43:32+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://www.stana.top/tags/markdown/</loc>
-    <lastmod>2021-12-03T20:43:32+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.stana.top/posts/</loc>
-    <lastmod>2021-12-03T20:43:32+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.stana.top/tags/</loc>
     <lastmod>2021-12-03T20:43:32+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

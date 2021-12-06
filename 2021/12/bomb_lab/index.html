@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        CSAPP--Bomb Lab实验记录 - lincx blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="google-site-verification" content="4MZdGdeC01hQIYurYzKBAjusQxTyeztil3joPOvIqQc" />
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="csapp bomb lab实验记录" />
+    <meta name="generator" content="Hugo 0.89.4 with theme pure" />
+    <title>CSAPP--Bomb Lab实验记录 - lincx blog</title>
+    
+    
+    <link rel="stylesheet" href="https://www.stana.top/css/style.min.a85959a41e7abcc0db1f81f44bd264649303417f91b536e87dcde644340fea6d.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="CSAPP--Bomb Lab实验记录" />
+<meta property="og:description" content="csapp bomb lab实验记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stana.top/2021/12/bomb_lab/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-06T14:20:42+08:00" />
+<meta property="article:modified_time" content="2021-12-06T14:20:42+08:00" />
+
+<meta itemprop="name" content="CSAPP--Bomb Lab实验记录">
+<meta itemprop="description" content="csapp bomb lab实验记录"><meta itemprop="datePublished" content="2021-12-06T14:20:42+08:00" />
+<meta itemprop="dateModified" content="2021-12-06T14:20:42+08:00" />
+<meta itemprop="wordCount" content="9131">
+<meta itemprop="keywords" content="csapp-lab,汇编," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSAPP--Bomb Lab实验记录"/>
+<meta name="twitter:description" content="csapp bomb lab实验记录"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          
+            <img class="img-circle img-rotate" src="https://www.stana.top/images/avatar.png" width="150" height="150">
+          
+          <h2 id="name" class="hidden-xs hidden-sm">lincx</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">developer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Guangdong, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>enjoy~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://www.stana.top/tags/csapp/" class="tag-list-link" rel="1">csapp<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link" rel="1">csapp-lab<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/git-pages/" class="tag-list-link" rel="1">git-pages<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/gitee/" class="tag-list-link" rel="1">gitee<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/hugo/" class="tag-list-link" rel="1">hugo<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/vercel/" class="tag-list-link" rel="1">vercel<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link" rel="1">汇编<span
+               class="tag-list-count">1</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.stana.top/categories/csapp/" class="category-list-link">csapp</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://www.stana.top/categories/tool/" class="category-list-link">tool</a><span class="category-list-count">2</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/csapp/" class="tag-list-link">csapp</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link">csapp-lab</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/git-pages/" class="tag-list-link">git-pages</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/gitee/" class="tag-list-link">gitee</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/markdown/" class="tag-list-link">markdown</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/vercel/" class="tag-list-link">vercel</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link">汇编</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/bomb_lab/" class="title">CSAPP--Bomb Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-06 14:20:42 &#43;0800 CST" itemprop="datePublished">2021-12-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/csapp_datalab/" class="title">csapp datalab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-04 11:31:20 &#43;0800 CST" itemprop="datePublished">2021-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/picturebed/" class="title">Gitee PicGo打造免费个人图床</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-03 20:43:32 &#43;0800 CST" itemprop="datePublished">2021-12-03</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/first/" class="title">hugo搭建个人博客</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-02 18:39:17 &#43;0800 CST" itemprop="datePublished">2021-12-02</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/12/bomb_lab/"
+    >CSAPP--Bomb Lab实验记录</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.stana.top/2021/12/bomb_lab/" class="article-date">
+  <time datetime="2021-12-06 14:20:42 &#43;0800 CST" itemprop="datePublished">2021-12-06</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/csapp/"> CSAPP </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/csapp-lab/"> csapp-lab </a>
+    <a class="article-tag-link" href="/tags/%E6%B1%87%E7%BC%96/"> 汇编 </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2021/12/bomb_lab/" class="leancloud_visitors"  data-flag-title="CSAPP--Bomb Lab实验记录">
+			<span class="leancloud-visitors-count">0</span>
+		</span>
+    </span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/12/bomb_lab/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 9131字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 19分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="csapp--bomb-lab实验记录">CSAPP&ndash;Bomb Lab实验记录</h1>
+<h2 id="前言">前言</h2>
+<p>本实验是《深入理解计算机系统》一书中的附带实验——二进制炸弹实验。二进制炸弹是一个作为目标代码文件提供给学生们的程序。运行时，它提示用户输入6个不同的字符串。如果其中的任何一个不正确，炸弹就会“爆炸”，打印出一条错误信息，并且在一个分级服务器上记录事件日志。学生们必须通过对程序反汇编和逆向工程来测定应该是哪6个串，从而解除他们各自炸弹的雷管。
+该实验教会学生理解汇编语言，并且强制他们学习怎么使用调试器。</p>
+<h2 id="一实验准备">一、实验准备</h2>
+<h3 id="11-配置实验环境">1.1 配置实验环境</h3>
+<ul>
+<li>linux 环境（ubuntu）</li>
+<li>gdb（调试程序使用）</li>
+</ul>
+<h3 id="12-实验必备知识">1.2 实验必备知识</h3>
+<ul>
+<li>汇编语法</li>
+<li>gdb基本指令使用</li>
+</ul>
+<h3 id="13-实验资源">1.3 实验资源</h3>
+<p><a href="http://csapp.cs.cmu.edu/3e/labs.html">实验官网</a> 下载 <code>Self-Study Handout</code></p>
+<p>或者</p>
+<p><a href="https://github.com/ScarboroughCoral/CSAPP-Lab">Github</a> 这是其他人的，有自己的实验记录</p>
+<h2 id="二实验内容">二、实验内容</h2>
+<h3 id="1-phase_1">1. phase_1</h3>
+<p>将bomb程序 反编译 得到汇编代码，放到bomb.ams文件中</p>
+<pre><code class="language-shell">$ objdump -d bomb &gt; bomb.asm
+</code></pre>
+<p>使用编辑器（vscode)打开bomb.ams文件,定位到 <code>main</code>函数在的地方，找到<code>phase_1</code>函数的地址 <code>400ee0</code>。这行前面的可以对着看 <code>bomb.c</code>文件对应的代码。</p>
+<pre><code class="language-asciiarmor">0000000000400da0 &lt;main&gt;:
+  400da0:	53                   	push   %rbx
+  400da1:	83 ff 01             	cmp    $0x1,%edi
+
+
+  ......
+
+  &lt;read_line&gt;
+  400e37:	48 89 c7             	mov    %rax,%rdi
+  400e3a:	e8 a1 00 00 00       	callq  400ee0 &lt;phase_1&gt;
+  400e3f:	e8 80 07 00 00       	callq  4015c4 
+  ......
+</code></pre>
+<p>然后 搜索 <code>400ee0</code>的位置，得到 <code>phase_1</code>函数的汇编代码</p>
+<pre><code class="language-asciiarmor">0000000000400ee0 &lt;phase_1&gt;:
+  400ee0:	48 83 ec 08          	sub    $0x8,%rsp  # 栈指针减去8（分配空间）
+  400ee4:	be 00 24 40 00       	mov    $0x402400,%esi # 将0x402400作为参数传入
+  400ee9:	e8 4a 04 00 00       	callq  401338 &lt;strings_not_equal&gt; #调用该方法
+  400eee:	85 c0                	test   %eax,%eax # 比较返回值
+  400ef0:	74 05                	je     400ef7 &lt;phase_1+0x17&gt;
+  400ef2:	e8 43 05 00 00       	callq  40143a &lt;explode_bomb&gt; # 如果返回值不为0，爆炸
+  400ef7:	48 83 c4 08          	add    $0x8,%rsp
+  400efb:	c3                   	retq
+</code></pre>
+<p>其实从<code>&lt;strings_not_equal&gt; </code>可以大致猜到这个函数是字符串比较的函数，为了验证猜想是否正确，我们继续跳到这个函数地址<code>401338</code>看看</p>
+<pre><code class="language-asciiarmor">0000000000401338 &lt;strings_not_equal&gt;:
+  401338:	41 54                	push   %r12 
+  40133a:	55                   	push   %rbp 
+  40133b:	53                   	push   %rbx 
+  40133c:	48 89 fb             	mov    %rdi,%rbx 
+  40133f:	48 89 f5             	mov    %rsi,%rbp
+  401342:	e8 d4 ff ff ff       	callq  40131b &lt;string_length&gt;
+  401347:	41 89 c4             	mov    %eax,%r12d
+  40134a:	48 89 ef             	mov    %rbp,%rdi
+  40134d:	e8 c9 ff ff ff       	callq  40131b &lt;string_length&gt;
+  401352:	ba 01 00 00 00       	mov    $0x1,%edx
+  401357:	41 39 c4             	cmp    %eax,%r12d
+  40135a:	75 3f                	jne    40139b &lt;strings_not_equal+0x63&gt;
+  40135c:	0f b6 03             	movzbl (%rbx),%eax
+  40135f:	84 c0                	test   %al,%al
+  401361:	74 25                	je     401388 &lt;strings_not_equal+0x50&gt;
+  401363:	3a 45 00             	cmp    0x0(%rbp),%al
+  401366:	74 0a                	je     401372 &lt;strings_not_equal+0x3a&gt;
+  401368:	eb 25                	jmp    40138f &lt;strings_not_equal+0x57&gt;
+  40136a:	3a 45 00             	cmp    0x0(%rbp),%al
+  40136d:	0f 1f 00             	nopl   (%rax)
+  401370:	75 24                	jne    401396 &lt;strings_not_equal+0x5e&gt;
+  401372:	48 83 c3 01          	add    $0x1,%rbx
+  401376:	48 83 c5 01          	add    $0x1,%rbp
+  40137a:	0f b6 03             	movzbl (%rbx),%eax
+  40137d:	84 c0                	test   %al,%al
+  40137f:	75 e9                	jne    40136a &lt;strings_not_equal+0x32&gt;
+  401381:	ba 00 00 00 00       	mov    $0x0,%edx
+  401386:	eb 13                	jmp    40139b &lt;strings_not_equal+0x63&gt;
+  401388:	ba 00 00 00 00       	mov    $0x0,%edx
+  40138d:	eb 0c                	jmp    40139b &lt;strings_not_equal+0x63&gt;
+  40138f:	ba 01 00 00 00       	mov    $0x1,%edx
+  401394:	eb 05                	jmp    40139b &lt;strings_not_equal+0x63&gt;
+  401396:	ba 01 00 00 00       	mov    $0x1,%edx
+  40139b:	89 d0                	mov    %edx,%eax
+  40139d:	5b                   	pop    %rbx
+  40139e:	5d                   	pop    %rbp
+  40139f:	41 5c                	pop    %r12
+  4013a1:	c3                   	retq
+</code></pre>
+<p>可以看到，这个<code>strings_not_equal</code>函数接收两个参数，然后接下来就是比较这两个参数的长度是否相等，若相等则继续比较每个位置对应的字符是否相同，最后返回结果</p>
+<p>那现在<code>phase_1</code>函数的内容很明显了，就是比较我们输入的字符串与<code>0x402400</code>这个位置的字符串是否相等，不相等就会bomb</p>
+<p>接下来我们看看<code>0x402400</code>这个位置究竟存了什么内容。</p>
+<ol>
+<li>首先gdb调试bomb程序</li>
+<li>在这个<code>phase_1</code>函数设置断点</li>
+<li>输出这个位置的内容</li>
+</ol>
+<pre><code class="language-asciiarmor">$ gdb bomb
+
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from bomb...
+(gdb) b *0x400ee4
+Breakpoint 1 at 0x400ee4
+(gdb) run
+Starting program: /home/lincx/文档/CSAPP-Labs-master/labs/source/bomb/bomb 
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+
+
+asd   
+
+Breakpoint 1, 0x0000000000400ee4 in phase_1 ()
+(gdb) x/s 0x402400
+0x402400:	&quot;Border relations with Canada have never been better.&quot;
+(gdb) 
+</code></pre>
+<p>其中 <code>b*0x400ee4</code>表示设置断点，<code>x/s 0x402400</code>表示输出该位置的内容为字符串形式。
+可以看到内容是
+&ldquo;<code>Border relations with Canada have never been better.</code>&rdquo; 这也是我们需要找的答案了。</p>
+<h3 id="2-phase_2">2. phase_2</h3>
+<p>首先也是在bomb.asm文件中，定位到<code>phase_2</code>的位置，然后逐句分析</p>
+<pre><code class="language-asciiarmor">0000000000400efc &lt;phase_2&gt;:
+  400efc:	55                   	push   %rbp #栈帧
+  400efd:	53                   	push   %rbx #栈帧
+  400efe:	48 83 ec 28          	sub    $0x28,%rsp #栈指针减40
+  400f02:	48 89 e6             	mov    %rsp,%rsi # 将栈指针作为第二个参数
+  400f05:	e8 52 05 00 00       	callq  40145c &lt;read_six_numbers&gt; #调用函数
+  400f0a:	83 3c 24 01          	cmpl   $0x1,(%rsp) # 栈指针内存位置的内容与1比较
+  400f0e:	74 20                	je     400f30 &lt;phase_2+0x34&gt; # 相等跳到 400f30
+  400f10:	e8 25 05 00 00       	callq  40143a &lt;explode_bomb&gt; # 不相等就会爆炸
+  400f15:	eb 19                	jmp    400f30 &lt;phase_2+0x34&gt; # 跳到400f30
+  400f17:	8b 43 fc             	mov    -0x4(%rbx),%eax # 将 %rbx-0x4 内存位置的内容 赋值给%eax
+  400f1a:	01 c0                	add    %eax,%eax # %eax = %eax+%eax 相当于 乘2
+  400f1c:	39 03                	cmp    %eax,(%rbx) # 比较 %eax与（%rbx）
+  400f1e:	74 05                	je     400f25 &lt;phase_2+0x29&gt; #相等就跳到 400f25
+  400f20:	e8 15 05 00 00       	callq  40143a &lt;explode_bomb&gt; #不相等就会爆炸
+  400f25:	48 83 c3 04          	add    $0x4,%rbx # %rbx+0x4
+  400f29:	48 39 eb             	cmp    %rbp,%rbx # 比较%rbp 与 %rbx
+  400f2c:	75 e9                	jne    400f17 &lt;phase_2+0x1b&gt; #不相等就跳到400f17（是不是有点像循环）
+  400f2e:	eb 0c                	jmp    400f3c &lt;phase_2+0x40&gt; # 跳到400f3c
+  400f30:	48 8d 5c 24 04       	lea    0x4(%rsp),%rbx # 栈指针+4后赋值给%rbx
+  400f35:	48 8d 6c 24 18       	lea    0x18(%rsp),%rbp # 栈指针+24后赋值给%rbp
+  400f3a:	eb db                	jmp    400f17 &lt;phase_2+0x1b&gt; #跳到400f17
+  400f3c:	48 83 c4 28          	add    $0x28,%rsp #可以理解为释放栈？
+  400f40:	5b                   	pop    %rbx
+  400f41:	5d                   	pop    %rbp
+  400f42:	c3                   	retq   
+
+</code></pre>
+<p>分析完后，会发现，这个函数的功能是比较我们输入的6个数是否为等比数列，从 <code>cmpl   $0x1,(%rsp)</code>可以看出，最先开始的值为1，然后<code>add    %eax,%eax</code>这个表示，等比数列的比值为2，由此可以推出我们需要输入的六个数字为</p>
+<pre><code>1 2 4 8 16 32
+</code></pre>
+<h3 id="3-phase_3">3. phase_3</h3>
+<p>首先也是在bomb.asm文件中，定位到<code>phase_3</code>的位置，然后逐句分析</p>
+<pre><code class="language-asciiarmor">0000000000400f43 &lt;phase_3&gt;:
+  400f43:	48 83 ec 18          	sub    $0x18,%rsp #栈帧相关
+  400f47:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx # 将栈指针地址赋值给 %rcx
+  400f4c:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx # 将栈指针地址+0x8 赋值给 %rdx
+  400f51:	be cf 25 40 00       	mov    $0x4025cf,%esi # 将0x4025cf的内容赋值给%esi
+  400f56:	b8 00 00 00 00       	mov    $0x0,%eax #将0赋值给 %eax
+  400f5b:	e8 90 fc ff ff       	callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  400f60:	83 f8 01             	cmp    $0x1,%eax #比较1 与 %eax的内容
+  400f63:	7f 05                	jg     400f6a &lt;phase_3+0x27&gt; #大于1 则跳到 400f6a
+  400f65:	e8 d0 04 00 00       	callq  40143a &lt;explode_bomb&gt; # 否则爆炸
+  400f6a:	83 7c 24 08 07       	cmpl   $0x7,0x8(%rsp) # 比较 （%rsp+8）与 7
+  400f6f:	77 3c                	ja     400fad &lt;phase_3+0x6a&gt; # 大于则跳转400fad，爆炸
+  400f71:	8b 44 24 08          	mov    0x8(%rsp),%eax # 将（%rsp+8） 赋值给 %eax，也就是第一个
+  400f75:	ff 24 c5 70 24 40 00 	jmpq   *0x402470(,%rax,8)  #并跳转至%rax*8+0x402470的内存保存的地址上
+  400f7c:	b8 cf 00 00 00       	mov    $0xcf,%eax 
+  400f81:	eb 3b                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f83:	b8 c3 02 00 00       	mov    $0x2c3,%eax
+  400f88:	eb 34                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f8a:	b8 00 01 00 00       	mov    $0x100,%eax
+  400f8f:	eb 2d                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f91:	b8 85 01 00 00       	mov    $0x185,%eax
+  400f96:	eb 26                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f98:	b8 ce 00 00 00       	mov    $0xce,%eax
+  400f9d:	eb 1f                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400f9f:	b8 aa 02 00 00       	mov    $0x2aa,%eax
+  400fa4:	eb 18                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fa6:	b8 47 01 00 00       	mov    $0x147,%eax
+  400fab:	eb 11                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fad:	e8 88 04 00 00       	callq  40143a &lt;explode_bomb&gt;
+  400fb2:	b8 00 00 00 00       	mov    $0x0,%eax
+  400fb7:	eb 05                	jmp    400fbe &lt;phase_3+0x7b&gt;
+  400fb9:	b8 37 01 00 00       	mov    $0x137,%eax
+  400fbe:	3b 44 24 0c          	cmp    0xc(%rsp),%eax
+  400fc2:	74 05                	je     400fc9 &lt;phase_3+0x86&gt;
+  400fc4:	e8 71 04 00 00       	callq  40143a &lt;explode_bomb&gt;
+  400fc9:	48 83 c4 18          	add    $0x18,%rsp
+  400fcd:	c3                   	retq
+</code></pre>
+<p>分析到<code>jmpq   *0x402470(,%rax,8)</code>这一步，就得停下来看看，这个跳转的内容了。而且前面<code>mov    $0x4025cf,%esi</code>这个也需要看看其中的内容是什么。</p>
+<pre><code>$ gdb bomb
+......
+
+(gdb) x/s 0x4025cf
+0x4025cf:	&quot;%d %d&quot;
+</code></pre>
+<p>可以看到 <code>0x4025cf</code>这个地址的内容是两个整数，再看到下面有scanf函数，可以推测我们需要输入两个整数。
+栈顶 <code>%rsp</code> 的前 8 位存的是函数的返回地址所在栈地址，从 <code>8(%rsp)</code>开始存第一个参数。由<code>cmpl   $0x7,0x8(%rsp)</code>这一步可以看到，第一个数需要比7小才不会爆炸。所以有 <code>0～7</code>可以选择。</p>
+<p>接着 看看<code>*0x402470(,%rax,8)</code>,这个可以看作是 <code>%rax*8+0x402470</code>。已经把第一个参数传到 %eax 里，x86-64规定低位四字节作整体传的时候，高四字节置 0 。把 0x402470里的东西输出看一下：</p>
+<pre><code class="language-asciiarmor">(gdb) x/8a 0x402470
+0x402470:	0x400f7c &lt;phase_3+57&gt;	0x400fb9 &lt;phase_3+118&gt;
+0x402480:	0x400f83 &lt;phase_3+64&gt;	0x400f8a &lt;phase_3+71&gt;
+0x402490:	0x400f91 &lt;phase_3+78&gt;	0x400f98 &lt;phase_3+85&gt;
+0x4024a0:	0x400f9f &lt;phase_3+92&gt;	0x400fa6 &lt;phase_3+99&gt;
+</code></pre>
+<p>可以看到出现了八个地址，分别对应这上面未分析的汇编代码的八个地址，有点像<code>switch</code>,再往下跳转，<code>cmp    0xc(%rsp),%eax</code>,也就是说第二个参数只要是跟其中一个相等，就会避开炸弹。
+列出这八个数，以及对应的第一个参数。</p>
+<pre><code class="language-asciiarmor">十六进制   十进制  第一个参数
+ 0xcf      207      0
+ 0x2c3     707      2
+ 0x100     256      3
+ 0x185     389      4
+ 0xce      206      5
+ 0x2aa     682      6
+ 0x147     327      7
+ 0x137     311      1
+</code></pre>
+<p>所以，第一个参数可以从 <code>0～7</code>选择，第二个参数是它对应的十进制数。验证</p>
+<pre><code class="language-shell">1 311
+
+Halfway there!
+</code></pre>
+<p>成功！</p>
+<h3 id="4-phase_4">4. phase_4</h3>
+<p>可以看到<code>phase_4</code>前面的部分，跟<code>phase_3</code>很相似，都是输入两个参数。接着还是逐句分析。</p>
+<pre><code class="language-asciiarmor">
+0000000000400fce &lt;func4&gt;:
+  400fce:	48 83 ec 08          	sub    $0x8,%rsp
+  400fd2:	89 d0                	mov    %edx,%eax
+  400fd4:	29 f0                	sub    %esi,%eax
+  400fd6:	89 c1                	mov    %eax,%ecx
+  400fd8:	c1 e9 1f             	shr    $0x1f,%ecx #逻辑右移31位
+  400fdb:	01 c8                	add    %ecx,%eax 
+  400fdd:	d1 f8                	sar    %eax
+  400fdf:	8d 0c 30             	lea    (%rax,%rsi,1),%ecx
+  400fe2:	39 f9                	cmp    %edi,%ecx
+  400fe4:	7e 0c                	jle    400ff2 &lt;func4+0x24&gt;
+  400fe6:	8d 51 ff             	lea    -0x1(%rcx),%edx
+  400fe9:	e8 e0 ff ff ff       	callq  400fce &lt;func4&gt;
+  400fee:	01 c0                	add    %eax,%eax
+  400ff0:	eb 15                	jmp    401007 &lt;func4+0x39&gt;
+  400ff2:	b8 00 00 00 00       	mov    $0x0,%eax
+  400ff7:	39 f9                	cmp    %edi,%ecx
+  400ff9:	7d 0c                	jge    401007 &lt;func4+0x39&gt;
+  400ffb:	8d 71 01             	lea    0x1(%rcx),%esi
+  400ffe:	e8 cb ff ff ff       	callq  400fce &lt;func4&gt;
+  401003:	8d 44 00 01          	lea    0x1(%rax,%rax,1),%eax
+  401007:	48 83 c4 08          	add    $0x8,%rsp
+  40100b:	c3                   	retq
+
+000000000040100c &lt;phase_4&gt;:
+  40100c:	48 83 ec 18          	sub    $0x18,%rsp
+  401010:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx
+  401015:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx
+  40101a:	be cf 25 40 00       	mov    $0x4025cf,%esi
+  40101f:	b8 00 00 00 00       	mov    $0x0,%eax
+  401024:	e8 c7 fb ff ff       	callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  401029:	83 f8 02             	cmp    $0x2,%eax
+  40102c:	75 07                	jne    401035 &lt;phase_4+0x29&gt;
+  40102e:	83 7c 24 08 0e       	cmpl   $0xe,0x8(%rsp) #比较输入的第一个参数与 0xe
+  401033:	76 05                	jbe    40103a &lt;phase_4+0x2e&gt; #&lt;= 跳转
+  401035:	e8 00 04 00 00       	callq  40143a &lt;explode_bomb&gt;
+  40103a:	ba 0e 00 00 00       	mov    $0xe,%edx #第三个参数设为 0xe
+  40103f:	be 00 00 00 00       	mov    $0x0,%esi #第二个参数设为 0x0
+  401044:	8b 7c 24 08          	mov    0x8(%rsp),%edi 第一个参数为输入的第一个数
+  401048:	e8 81 ff ff ff       	callq  400fce &lt;func4&gt;
+  40104d:	85 c0                	test   %eax,%eax #判断返回值正负
+  40104f:	75 07                	jne    401058 &lt;phase_4+0x4c&gt; #非0跳转爆炸
+  401051:	83 7c 24 0c 00       	cmpl   $0x0,0xc(%rsp) #比较输入的第二个参数
+  401056:	74 05                	je     40105d &lt;phase_4+0x51&gt; #相等则跳过爆炸
+  401058:	e8 dd 03 00 00       	callq  40143a &lt;explode_bomb&gt;
+  40105d:	48 83 c4 18          	add    $0x18,%rsp
+  401061:	c3                   	retq
+</code></pre>
+<p>由分析可知，当调用<code>func4</code>返回值为0的时候，才能不触发炸弹。所以接着分析<code>func4</code>。
+为了方便分析，将func4 翻译成c 语言代码：</p>
+<pre><code class="language-c">int func4(int x,int y,int z){
+  int res = z-y;
+  int tmp = res&gt;&gt;31;
+  res= (res+tmp)&gt;&gt;1;
+  tmp = res+y;
+  if(x&gt;tmp){
+    z = tmp-1;
+    res=func4(x,y,z);
+    res+=res;
+    return res;
+  }else{
+    res=0;
+    if(x&gt;=tmp){ /*目标*/
+      return res;
+    }
+    y=tmp+1;
+    res=func4(x,y,z);
+    res = res*res+1;
+    return res;
+  } 
+
+}
+
+</code></pre>
+<p>可以看到 当<code>x&gt;=tmp</code>的时候，函数会返回我们预期的0。
+由上边分析可知道，函数<code>func4</code>的三个参数分别为 x(我们输入的第一个参数)、0、14。代入上边代码，可以得到tmp=7（第一次）所以，当x=7的时候，就刚好可以满足这个条件。所以暂时确定第一个数为 <code>7</code>.</p>
+<p>往下继续分析 <code>cmpl   $0x0,0xc(%rsp)</code> 这一句就表明了，第二个输入的参数为 <code>0</code></p>
+<p>最终答案为：</p>
+<pre><code class="language-shell">7 0
+So you got that one.  Try this one.
+</code></pre>
+<h3 id="5-phase_5">5. phase_5</h3>
+<blockquote>
+<p>On x86_64, segmented addressing is no longer used, but the both the FS and GS registers can be used as base-pointer addresses in order to access special operating system data-structures. So what you&rsquo;re seeing is a value loaded at an offset from the value held in the FS register, and not bit manipulation of the contents of the FS register.
+Specifically what&rsquo;s taking place, is that FS:0x28 on Linux is storing a special sentinel stack-guard value, and the code is performing a stack-guard check. For instance, if you look further in your code, you&rsquo;ll see that the value at FS:0x28 is stored on the stack, and then the contents of the stack are recalled and an XOR is performed with the original value at FS:0x28. If the two values are equal, which means that the zero-bit has been set because XOR&rsquo;ing two of the same values results in a zero-value, then we jump to the test routine, otherwise we jump to a special function that indicates that the stack was somehow corrupted, and the sentinel value stored on the stack was changed.
+在 x86_64 上，不再使用分段寻址，但 FS 和 GS 寄存器都可以用作基址指针地址，以便访问特殊的操作系统数据结构。所以你看到的是一个加载的值与 FS 寄存器中保存的值有一个偏移量，而不是对 FS 寄存器内容的位操作。
+具体发生的事情是，Linux 上的 FS:0x28 正在存储一个特殊的哨兵堆栈保护值，并且代码正在执行堆栈保护检查。例如，如果您进一步查看代码，您会看到 FS:0x28 处的值存储在堆栈中，然后调用堆栈中的内容并与 FS:0x28 处的原始值执行 XOR .如果两个值相等，这意味着已经设置了零位，因为对两个相同的值进行异或会产生一个零值，那么我们跳转到测试例程，否则我们跳转到一个特殊的函数，表明堆栈以某种方式损坏，并且存储在堆栈中的标记值已更改。</p>
+</blockquote>
+<p>上面是自己查了一下<code>%fs:0x28</code>指令的用法。</p>
+<p>下面开始解题。</p>
+<p>老方法，逐句分析</p>
+<pre><code class="language-asciiarmor">0000000000401062 &lt;phase_5&gt;:
+  401062:	53                   	push   %rbx
+  401063:	48 83 ec 20          	sub    $0x20,%rsp
+  401067:	48 89 fb             	mov    %rdi,%rbx # 将输入的参数1赋值给 %rbx
+  40106a:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax 
+  401071:	00 00 
+  401073:	48 89 44 24 18       	mov    %rax,0x18(%rsp) #作为一个栈保护值
+  401078:	31 c0                	xor    %eax,%eax #异或 置零
+  40107a:	e8 9c 02 00 00       	callq  40131b &lt;string_length&gt; #调用函数计算字符串长度
+  40107f:	83 f8 06             	cmp    $0x6,%eax
+  401082:	74 4e                	je     4010d2 &lt;phase_5+0x70&gt; #输入的字符串长度等于6，继续
+  401084:	e8 b1 03 00 00       	callq  40143a &lt;explode_bomb&gt;#否则，爆炸
+  401089:	eb 47                	jmp    4010d2 &lt;phase_5+0x70&gt;
+  40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx
+  40108f:	88 0c 24             	mov    %cl,(%rsp)
+  401092:	48 8b 14 24          	mov    (%rsp),%rdx
+  401096:	83 e2 0f             	and    $0xf,%edx
+  401099:	0f b6 92 b0 24 40 00 	movzbl 0x4024b0(%rdx),%edx
+  4010a0:	88 54 04 10          	mov    %dl,0x10(%rsp,%rax,1)
+  4010a4:	48 83 c0 01          	add    $0x1,%rax
+  4010a8:	48 83 f8 06          	cmp    $0x6,%rax
+  4010ac:	75 dd                	jne    40108b &lt;phase_5+0x29&gt;
+  4010ae:	c6 44 24 16 00       	movb   $0x0,0x16(%rsp)
+  4010b3:	be 5e 24 40 00       	mov    $0x40245e,%esi
+  4010b8:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi
+  4010bd:	e8 76 02 00 00       	callq  401338 &lt;strings_not_equal&gt;
+  4010c2:	85 c0                	test   %eax,%eax
+  4010c4:	74 13                	je     4010d9 &lt;phase_5+0x77&gt;
+  4010c6:	e8 6f 03 00 00       	callq  40143a &lt;explode_bomb&gt;
+  4010cb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+  4010d0:	eb 07                	jmp    4010d9 &lt;phase_5+0x77&gt;
+  4010d2:	b8 00 00 00 00       	mov    $0x0,%eax #将%eax置0
+  4010d7:	eb b2                	jmp    40108b &lt;phase_5+0x29&gt; #跳转至40108b
+  4010d9:	48 8b 44 24 18       	mov    0x18(%rsp),%rax
+  4010de:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
+  4010e5:	00 00 
+  4010e7:	74 05                	je     4010ee &lt;phase_5+0x8c&gt;
+  4010e9:	e8 42 fa ff ff       	callq  400b30 &lt;__stack_chk_fail@plt&gt;
+  4010ee:	48 83 c4 20          	add    $0x20,%rsp
+  4010f2:	5b                   	pop    %rbx
+  4010f3:	c3                   	retq   
+</code></pre>
+<p>这段代码最关键的部分是在下面这里。</p>
+<pre><code class="language-asciiarmor">40108b:	0f b6 0c 03          	movzbl (%rbx,%rax,1),%ecx
+  40108f:	88 0c 24             	mov    %cl,(%rsp)
+  401092:	48 8b 14 24          	mov    (%rsp),%rdx
+  401096:	83 e2 0f             	and    $0xf,%edx
+  401099:	0f b6 92 b0 24 40 00 	movzbl 0x4024b0(%rdx),%edx
+  4010a0:	88 54 04 10          	mov    %dl,0x10(%rsp,%rax,1)
+  4010a4:	48 83 c0 01          	add    $0x1,%rax
+  4010a8:	48 83 f8 06          	cmp    $0x6,%rax
+  4010ac:	75 dd                	jne    40108b &lt;phase_5+0x29&gt;
+</code></pre>
+<p>首先 对 <code>%rax+%rbx</code> 的值进行高位置零拓展,接着 <code>mov %cl,(%rsp)</code>将截取低16位，然后 <code>and $0xf %edx</code>，截取低四位。这里可以理解成是，将我们输入的字符，对应ASCII码的第四位，也就是十六进制最后一位。</p>
+<p><code>movzbl 0x4024b0(%rdx),%edx</code> 0x4024b0+%rdx的值赋值给%edx。 这里出现了一个地址 <code>0x4024b0</code>,我们看看它的内容是啥。</p>
+<pre><code class="language-shell">(gdb) x/s 0x4024b0
+0x4024b0 &lt;array.3449&gt;:	&quot;maduiersnfotvbylSo you think you can stop the bomb with ctrl-c, do you?&quot;
+</code></pre>
+<p><code>maduiersnfotvbyl...</code>这是这个地址里边的内容。暂时不知道有什么用，接着往下看。</p>
+<p><code>mov    %dl,0x10(%rsp,%rax,1)</code> 这里就是将 %edx的低八位 赋值给 <code>%rsp+%rax+16</code>这个地址。注意这里的地址，是栈的地址。</p>
+<p>然后 %rax自增，如果%rax==6，则结束循环。
+所以 %rax 从0增加到6，进行了6次循环，每次循环都从我们输入的字符中按序取一个，然后获取它的低四位（十六进制最后一位）作为下标，到<code>0x4024b0</code> 这个地址存放的字符串<code>maduiersnfotvbyl...</code>中取出字符放到<code>%rsp+%rax+16</code>中。</p>
+<p>再往下看，当循环结束后，<code>movb   $0x0,0x16(%rsp)</code> 将 0 赋值给 <code>%rsp+22</code> 这里的22可以看成 16+6 则为 <code>%rsp+6+16</code>刚好跟前面的对应了。这里0的作用可以看成字符串结尾。</p>
+<pre><code class="language-asciiarmor">4010ae:	c6 44 24 16 00       	movb   $0x0,0x16(%rsp)
+  4010b3:	be 5e 24 40 00       	mov    $0x40245e,%esi
+  4010b8:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi
+  4010bd:	e8 76 02 00 00       	callq  401338 &lt;strings_not_equal&gt;
+  4010c2:	85 c0                	test   %eax,%eax
+  4010c4:	74 13                	je     4010d9 &lt;phase_5+0x77&gt;
+  4010c6:	e8 6f 03 00 00       	callq  40143a &lt;explode_bomb&gt;
+</code></pre>
+<p>然后，将地址<code>0x40245e</code>的内容作为第二个参数。这里可以看看内容是啥。</p>
+<pre><code class="language-shell">(gdb) x/s 0x40245e
+0x40245e:	&quot;flyers&quot;
+</code></pre>
+<p>接着，将栈中存放第一个字符的地址赋值给%rdi作为第一个参数。调用字符串比较函数，比较这两个字符串是否相等。若不相等则爆炸，相等则顺利完成任务。</p>
+<p>所以，我们比较的内容是 <code>flyers</code>,这几个字符在<code>maduiersnfotvbyl...</code>中出现的位置为 9EF567
+那么我们只需要到ASCII码的表中找到，十六进制末位为这几个数对应的字符，即可。</p>
+<p>下面是我找到的其中一个。</p>
+<pre><code>IONEFG
+</code></pre>
+<h3 id="6-phase_6">6. phase_6</h3>
+<p>终于到最后一个了，也是最长最难的一个。老规矩先上代码：</p>
+<pre><code class="language-asciiarmor">00000000004010f4 &lt;phase_6&gt;:
+  4010f4:	41 56                	push   %r14
+  4010f6:	41 55                	push   %r13
+  4010f8:	41 54                	push   %r12
+  4010fa:	55                   	push   %rbp
+  4010fb:	53                   	push   %rbx
+  4010fc:	48 83 ec 50          	sub    $0x50,%rsp
+  401100:	49 89 e5             	mov    %rsp,%r13
+  401103:	48 89 e6             	mov    %rsp,%rsi
+  401106:	e8 51 03 00 00       	callq  40145c &lt;read_six_numbers&gt;
+  40110b:	49 89 e6             	mov    %rsp,%r14
+  40110e:	41 bc 00 00 00 00    	mov    $0x0,%r12d
+  401114:	4c 89 ed             	mov    %r13,%rbp
+  401117:	41 8b 45 00          	mov    0x0(%r13),%eax
+  40111b:	83 e8 01             	sub    $0x1,%eax
+  40111e:	83 f8 05             	cmp    $0x5,%eax
+  401121:	76 05                	jbe    401128 &lt;phase_6+0x34&gt; #%eax&lt;=5 输入的六个数必须小于6
+  401123:	e8 12 03 00 00       	callq  40143a &lt;explode_bomb&gt;
+  401128:	41 83 c4 01          	add    $0x1,%r12d
+  40112c:	41 83 fc 06          	cmp    $0x6,%r12d
+  401130:	74 21                	je     401153 &lt;phase_6+0x5f&gt;
+  401132:	44 89 e3             	mov    %r12d,%ebx
+  401135:	48 63 c3             	movslq %ebx,%rax
+  401138:	8b 04 84             	mov    (%rsp,%rax,4),%eax
+  40113b:	39 45 00             	cmp    %eax,0x0(%rbp) 
+  40113e:	75 05                	jne    401145 &lt;phase_6+0x51&gt;
+  401140:	e8 f5 02 00 00       	callq  40143a &lt;explode_bomb&gt; #相等就会爆炸
+  401145:	83 c3 01             	add    $0x1,%ebx 
+  401148:	83 fb 05             	cmp    $0x5,%ebx
+  40114b:	7e e8                	jle    401135 &lt;phase_6+0x41&gt;
+  40114d:	49 83 c5 04          	add    $0x4,%r13
+  401151:	eb c1                	jmp    401114 &lt;phase_6+0x20&gt; # 这个循环检验输入的六个数是否互异，存在相等的两个数就是会爆炸
+  401153:	48 8d 74 24 18       	lea    0x18(%rsp),%rsi
+  401158:	4c 89 f0             	mov    %r14,%rax
+  40115b:	b9 07 00 00 00       	mov    $0x7,%ecx
+  401160:	89 ca                	mov    %ecx,%edx
+  401162:	2b 10                	sub    (%rax),%edx
+  401164:	89 10                	mov    %edx,(%rax)
+  401166:	48 83 c0 04          	add    $0x4,%rax
+  40116a:	48 39 f0             	cmp    %rsi,%rax
+  40116d:	75 f1                	jne    401160 &lt;phase_6+0x6c&gt; #这个循环是 用7分别减去这六个数
+  40116f:	be 00 00 00 00       	mov    $0x0,%esi
+  401174:	eb 21                	jmp    401197 &lt;phase_6+0xa3&gt;
+  401176:	48 8b 52 08          	mov    0x8(%rdx),%rdx # ptr=ptr-&gt;next;
+  40117a:	83 c0 01             	add    $0x1,%eax
+  40117d:	39 c8                	cmp    %ecx,%eax
+  40117f:	75 f5                	jne    401176 &lt;phase_6+0x82&gt;
+  401181:	eb 05                	jmp    401188 &lt;phase_6+0x94&gt;
+  401183:	ba d0 32 60 00       	mov    $0x6032d0,%edx 
+  401188:	48 89 54 74 20       	mov    %rdx,0x20(%rsp,%rsi,2) #将节点放到栈 %rsp+%rsi*2+32
+  40118d:	48 83 c6 04          	add    $0x4,%rsi
+  401191:	48 83 fe 18          	cmp    $0x18,%rsi
+  401195:	74 14                	je     4011ab &lt;phase_6+0xb7&gt; #进行六次
+  401197:	8b 0c 34             	mov    (%rsp,%rsi,1),%ecx
+  40119a:	83 f9 01             	cmp    $0x1,%ecx
+  40119d:	7e e4                	jle    401183 &lt;phase_6+0x8f&gt; #%ecx&lt;=1 每个数都跟1比较
+  40119f:	b8 01 00 00 00       	mov    $0x1,%eax
+  4011a4:	ba d0 32 60 00       	mov    $0x6032d0,%edx # 一个节点
+  4011a9:	eb cb                	jmp    401176 &lt;phase_6+0x82&gt;
+  4011ab:	48 8b 5c 24 20       	mov    0x20(%rsp),%rbx
+  4011b0:	48 8d 44 24 28       	lea    0x28(%rsp),%rax
+  4011b5:	48 8d 74 24 50       	lea    0x50(%rsp),%rsi
+  4011ba:	48 89 d9             	mov    %rbx,%rcx
+  4011bd:	48 8b 10             	mov    (%rax),%rdx
+  4011c0:	48 89 51 08          	mov    %rdx,0x8(%rcx)
+  4011c4:	48 83 c0 08          	add    $0x8,%rax
+  4011c8:	48 39 f0             	cmp    %rsi,%rax
+  4011cb:	74 05                	je     4011d2 &lt;phase_6+0xde&gt;# 将栈存的地址转换成地址内容
+  4011cd:	48 89 d1             	mov    %rdx,%rcx
+  4011d0:	eb eb                	jmp    4011bd &lt;phase_6+0xc9&gt;
+  4011d2:	48 c7 42 08 00 00 00 	movq   $0x0,0x8(%rdx)
+  4011d9:	00 
+  4011da:	bd 05 00 00 00       	mov    $0x5,%ebp
+  4011df:	48 8b 43 08          	mov    0x8(%rbx),%rax
+  4011e3:	8b 00                	mov    (%rax),%eax
+  4011e5:	39 03                	cmp    %eax,(%rbx)
+  4011e7:	7d 05                	jge    4011ee &lt;phase_6+0xfa&gt; #前一个数要比后一个数要大或者相等，循环比较
+  4011e9:	e8 4c 02 00 00       	callq  40143a &lt;explode_bomb&gt;
+  4011ee:	48 8b 5b 08          	mov    0x8(%rbx),%rbx
+  4011f2:	83 ed 01             	sub    $0x1,%ebp
+  4011f5:	75 e8                	jne    4011df &lt;phase_6+0xeb&gt;
+  4011f7:	48 83 c4 50          	add    $0x50,%rsp
+  4011fb:	5b                   	pop    %rbx
+  4011fc:	5d                   	pop    %rbp
+  4011fd:	41 5c                	pop    %r12
+  4011ff:	41 5d                	pop    %r13
+  401201:	41 5e                	pop    %r14
+  401203:	c3                   	retq 
+</code></pre>
+<p>首先前面<code>callq  40145c &lt;read_six_numbers&gt;</code>这里跟前面<code>phase_2</code>的一样，都是输入6个数，分别存在%rsp、%rsp+4、%rsp+8、%rsp+12、%rsp+16、%rsp+20。做这道题最有效的方法就是准备好草稿纸，跟着指令，记录下每个寄存器的
+值，这样子思路会清晰一些.</p>
+<pre><code class="language-asciiarmor">401114:	4c 89 ed             	mov    %r13,%rbp
+  401117:	41 8b 45 00          	mov    0x0(%r13),%eax
+  40111b:	83 e8 01             	sub    $0x1,%eax
+  40111e:	83 f8 05             	cmp    $0x5,%eax
+  401121:	76 05                	jbe    401128 &lt;phase_6+0x34&gt; #%eax&lt;=5 输入的六个数必须小于6
+  401123:	e8 12 03 00 00       	callq  40143a &lt;explode_bomb&gt;
+  401128:	41 83 c4 01          	add    $0x1,%r12d
+  40112c:	41 83 fc 06          	cmp    $0x6,%r12d
+  401130:	74 21                	je     401153 &lt;phase_6+0x5f&gt;
+  401132:	44 89 e3             	mov    %r12d,%ebx
+  401135:	48 63 c3             	movslq %ebx,%rax
+  401138:	8b 04 84             	mov    (%rsp,%rax,4),%eax
+  40113b:	39 45 00             	cmp    %eax,0x0(%rbp) 
+  40113e:	75 05                	jne    401145 &lt;phase_6+0x51&gt;
+  401140:	e8 f5 02 00 00       	callq  40143a &lt;explode_bomb&gt; #相等就会爆炸
+  401145:	83 c3 01             	add    $0x1,%ebx 
+  401148:	83 fb 05             	cmp    $0x5,%ebx
+  40114b:	7e e8                	jle    401135 &lt;phase_6+0x41&gt;
+  40114d:	49 83 c5 04          	add    $0x4,%r13
+  401151:	eb c1                	jmp    401114 &lt;phase_6+0x20&gt; # 这个循环检验输入的六个数是否互异，存在相等的两个数就是会爆炸
+</code></pre>
+<p>接下来会进入第一个循环，这个循环主要是判断输入的这六个数是否互不相等，若存在两个相等的数，就会爆炸。所以<code>输入限定条件1：六个互不相等的数</code>。</p>
+<pre><code class="language-asciiarmor">401153:	48 8d 74 24 18       	lea    0x18(%rsp),%rsi
+  401158:	4c 89 f0             	mov    %r14,%rax
+  40115b:	b9 07 00 00 00       	mov    $0x7,%ecx
+  401160:	89 ca                	mov    %ecx,%edx
+  401162:	2b 10                	sub    (%rax),%edx
+  401164:	89 10                	mov    %edx,(%rax)
+  401166:	48 83 c0 04          	add    $0x4,%rax
+  40116a:	48 39 f0             	cmp    %rsi,%rax
+  40116d:	75 f1                	jne    401160 &lt;phase_6+0x6c&gt; #这个循环是 用7分别减去这六个数
+</code></pre>
+<p>接着，这个循环就是对输入的六个数分别用7减去自身，并将结果覆盖原来的值。（这里标重点，后面会考）</p>
+<pre><code class="language-asciiarmor"> 401176:	48 8b 52 08          	mov    0x8(%rdx),%rdx # ptr=ptr-&gt;next;
+  40117a:	83 c0 01             	add    $0x1,%eax
+  40117d:	39 c8                	cmp    %ecx,%eax
+  40117f:	75 f5                	jne    401176 &lt;phase_6+0x82&gt;
+  401181:	eb 05                	jmp    401188 &lt;phase_6+0x94&gt;
+  401183:	ba d0 32 60 00       	mov    $0x6032d0,%edx 
+  401188:	48 89 54 74 20       	mov    %rdx,0x20(%rsp,%rsi,2) #将节点放到栈 %rsp+%rsi*2+32
+  40118d:	48 83 c6 04          	add    $0x4,%rsi
+  401191:	48 83 fe 18          	cmp    $0x18,%rsi
+  401195:	74 14                	je     4011ab &lt;phase_6+0xb7&gt; #进行六次
+  401197:	8b 0c 34             	mov    (%rsp,%rsi,1),%ecx
+  40119a:	83 f9 01             	cmp    $0x1,%ecx
+  40119d:	7e e4                	jle    401183 &lt;phase_6+0x8f&gt; #%ecx&lt;=1 每个数都跟1比较
+  40119f:	b8 01 00 00 00       	mov    $0x1,%eax
+  4011a4:	ba d0 32 60 00       	mov    $0x6032d0,%edx # 一个节点
+  4011a9:	eb cb                	jmp    401176 &lt;phase_6+0x82&gt;
+</code></pre>
+<p>这里是一个双重循环，第一层循环进行六次，每次更新<code>0x20(%rsp,%rsi,2)</code>的值，也就是
+%rsp+32、%rsp+40、%rsp+48、%rsp+56、%rsp+64、%rsp+72
+当<code>cmp    $0x1,%ecx</code>比较（7-输入的数）与1，若大于1则会进入内层循环，可以看到 <code>401176</code>。</p>
+<p>内层循环中，<code>mov    0x8(%rdx),%rdx</code> 这个是不是可以看成<code>ptr=ptr-&gt;next;</code>因为指针大小跟0x8有点像，可以推测这应该是个链表。链表头节点指针为<code>0x6032d0</code>。这里循环次数也跟（7-输入的数）有关。</p>
+<p>我们可以看看<code>0x6032d0</code>这有什么内容,暂时还看不出什么名堂，那就继续往下走吧。</p>
+<pre><code class="language-shell">(gdb) x/24w 0x6032d0
+0x6032d0 &lt;node1&gt;:	0x0000014c	0x00000001	0x006032e0	0x00000000
+0x6032e0 &lt;node2&gt;:	0x000000a8	0x00000002	0x006032f0	0x00000000
+0x6032f0 &lt;node3&gt;:	0x0000039c	0x00000003	0x00603300	0x00000000
+0x603300 &lt;node4&gt;:	0x000002b3	0x00000004	0x00603310	0x00000000
+0x603310 &lt;node5&gt;:	0x000001dd	0x00000005	0x00603320	0x00000000
+0x603320 &lt;node6&gt;:	0x000001bb	0x00000006	0x00000000	0x00000000
+
+</code></pre>
+<p>接下来又是一个循环：</p>
+<pre><code class="language-asciiarmor">4011ab:	48 8b 5c 24 20       	mov    0x20(%rsp),%rbx
+  4011b0:	48 8d 44 24 28       	lea    0x28(%rsp),%rax
+  4011b5:	48 8d 74 24 50       	lea    0x50(%rsp),%rsi
+  4011ba:	48 89 d9             	mov    %rbx,%rcx
+  4011bd:	48 8b 10             	mov    (%rax),%rdx
+  4011c0:	48 89 51 08          	mov    %rdx,0x8(%rcx)
+  4011c4:	48 83 c0 08          	add    $0x8,%rax
+  4011c8:	48 39 f0             	cmp    %rsi,%rax
+  4011cb:	74 05                	je     4011d2 &lt;phase_6+0xde&gt;# 将栈存的地址转换成地址内容
+  4011cd:	48 89 d1             	mov    %rdx,%rcx
+  4011d0:	eb eb                	jmp    4011bd &lt;phase_6+0xc9&gt;
+</code></pre>
+<p>这个循环主要的作用就是将上面循环保存到对应位置的指针修改为对应的内容。</p>
+<p>终于到了最后一个循环，也是决定我们输入的重要内容之一：</p>
+<pre><code class="language-asciiarmor">4011da:	bd 05 00 00 00       	mov    $0x5,%ebp
+  4011df:	48 8b 43 08          	mov    0x8(%rbx),%rax
+  4011e3:	8b 00                	mov    (%rax),%eax
+  4011e5:	39 03                	cmp    %eax,(%rbx)
+  4011e7:	7d 05                	jge    4011ee &lt;phase_6+0xfa&gt; #前一个数要比后一个数要大或者相等，循环比较
+  4011e9:	e8 4c 02 00 00       	callq  40143a &lt;explode_bomb&gt;
+  4011ee:	48 8b 5b 08          	mov    0x8(%rbx),%rbx
+  4011f2:	83 ed 01             	sub    $0x1,%ebp
+  4011f5:	75 e8                	jne    4011df &lt;phase_6+0xeb&gt;
+</code></pre>
+<p>可以看到这个循环其实就是在做一个链表前后值之间的比较，只有前面的值比后面的值大的时候才不会爆炸，也就是说这个链表其实是一个单调递减的链表，那我们需要看到构造这个链表的前两个循环。</p>
+<p>认真看的话，其实就是每次将次序为（7-%ecx）的链表节点，放到指定的地址，这个地址又是递增的。所以我们可以给节点按值由大到小进行排序</p>
+<pre><code> 3 &lt;node1&gt;
+ 4 &lt;node2&gt;
+ 5 &lt;node3&gt;
+ 6 &lt;node4&gt;
+ 1 &lt;node5&gt;
+ 2 &lt;node6&gt;
+</code></pre>
+<p>但是这个顺序是由 （7-输入的数）得到的，所以我们需要再用7减一次，就得到我们想要的结果了。</p>
+<pre><code>4 3 2 1 6 5
+</code></pre>
+<p>运行一下看看结果</p>
+<pre><code class="language-shell">(gdb) run
+
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Border relations with Canada have never been better.
+Phase 1 defused. How about the next one?
+1 2 4 8 16 32
+That's number 2.  Keep going!
+1 311
+Halfway there!
+7 0
+So you got that one.  Try this one.
+IONEFG
+Good work!  On to the next...
+4 3 2 1 6 5
+Congratulations! You've defused the bomb!
+
+</code></pre>
+<p>至此，该实验的几个任务算基本完成了。后面其实还有一个<code>secret_phase</code>。</p>
+<h3 id="secret_phase">secret_phase</h3>
+<p>首先，从<code>bomb.c</code>文件里面的内容可以看到，这个函数是没有直接显示入口的，需要我们找一下。查找以下<code>secret_phase</code>出现的地方,发现<code>pahase_defused</code>这个函数有调用到。我们看看这个函数的内容：</p>
+<pre><code class="language-asciiarmor">00000000004015c4 &lt;phase_defused&gt;:
+  4015c4:	48 83 ec 78          	sub    $0x78,%rsp
+  4015c8:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  4015cf:	00 00 
+  4015d1:	48 89 44 24 68       	mov    %rax,0x68(%rsp)
+  4015d6:	31 c0                	xor    %eax,%eax
+  4015d8:	83 3d 81 21 20 00 06 	cmpl   $0x6,0x202181(%rip)        # 603760 &lt;num_input_strings&gt;
+  4015df:	75 5e                	jne    40163f &lt;phase_defused+0x7b&gt;
+  4015e1:	4c 8d 44 24 10       	lea    0x10(%rsp),%r8
+  4015e6:	48 8d 4c 24 0c       	lea    0xc(%rsp),%rcx
+  4015eb:	48 8d 54 24 08       	lea    0x8(%rsp),%rdx
+  4015f0:	be 19 26 40 00       	mov    $0x402619,%esi 
+  4015f5:	bf 70 38 60 00       	mov    $0x603870,%edi
+  4015fa:	e8 f1 f5 ff ff       	callq  400bf0 &lt;__isoc99_sscanf@plt&gt;
+  4015ff:	83 f8 03             	cmp    $0x3,%eax
+  401602:	75 31                	jne    401635 &lt;phase_defused+0x71&gt;
+  401604:	be 22 26 40 00       	mov    $0x402622,%esi
+  401609:	48 8d 7c 24 10       	lea    0x10(%rsp),%rdi
+  40160e:	e8 25 fd ff ff       	callq  401338 &lt;strings_not_equal&gt;
+  401613:	85 c0                	test   %eax,%eax
+  401615:	75 1e                	jne    401635 &lt;phase_defused+0x71&gt;
+  401617:	bf f8 24 40 00       	mov    $0x4024f8,%edi
+  40161c:	e8 ef f4 ff ff       	callq  400b10 &lt;puts@plt&gt;
+  401621:	bf 20 25 40 00       	mov    $0x402520,%edi
+  401626:	e8 e5 f4 ff ff       	callq  400b10 &lt;puts@plt&gt;
+  40162b:	b8 00 00 00 00       	mov    $0x0,%eax
+  401630:	e8 0d fc ff ff       	callq  401242 &lt;secret_phase&gt;
+  401635:	bf 58 25 40 00       	mov    $0x402558,%edi
+  40163a:	e8 d1 f4 ff ff       	callq  400b10 &lt;puts@plt&gt;
+  40163f:	48 8b 44 24 68       	mov    0x68(%rsp),%rax
+  401644:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
+  40164b:	00 00 
+  40164d:	74 05                	je     401654 &lt;phase_defused+0x90&gt;
+  40164f:	e8 dc f4 ff ff       	callq  400b30 &lt;__stack_chk_fail@plt&gt;
+  401654:	48 83 c4 78          	add    $0x78,%rsp
+  401658:	c3                   	retq   
+  401659:	90                   	nop
+  40165a:	90                   	nop
+  40165b:	90                   	nop
+  40165c:	90                   	nop
+  40165d:	90                   	nop
+  40165e:	90                   	nop
+  40165f:	90                   	nop
+</code></pre>
+<p>打印一下<code>0x402619</code>的内容：</p>
+<pre><code class="language-shell">(gdb) x/s 0x402619
+0x402619:	&quot;%d %d %s&quot;
+</code></pre>
+<pre><code>cmp    $0x3,%eax
+jne    401635 &lt;phase_defused+0x71&gt;
+
+</code></pre>
+<p>这里显示 两个整形数与一个字符串格式，接着就调用<code>scanf</code>函数输入数据。紧接着，返回值与3进行比较，如果不相等就会跳过下面的部分，可以看到刚好跳到了<code>call secret_phase</code>的后面一行。这个返回值也是我们输入参数的个数，也就是说当我们输入参数为3 ，且按照&quot;%d %d %s&quot;的格式输入就会继续往下执行，不会跳过。</p>
+<p>再往下，打印<code>0x402622</code>的内容：</p>
+<pre><code class="language-asciiarmor">‵‵‵
+
+0000000000401204 &lt;fun7&gt;:
+  401204:	48 83 ec 08          	sub    $0x8,%rsp
+  401208:	48 85 ff             	test   %rdi,%rdi
+  40120b:	74 2b                	je     401238 &lt;fun7+0x34&gt;
+  40120d:	8b 17                	mov    (%rdi),%edx
+  40120f:	39 f2                	cmp    %esi,%edx
+  401211:	7e 0d                	jle    401220 &lt;fun7+0x1c&gt;
+  401213:	48 8b 7f 08          	mov    0x8(%rdi),%rdi
+  401217:	e8 e8 ff ff ff       	callq  401204 &lt;fun7&gt;
+  40121c:	01 c0                	add    %eax,%eax
+  40121e:	eb 1d                	jmp    40123d &lt;fun7+0x39&gt;
+  401220:	b8 00 00 00 00       	mov    $0x0,%eax
+  401225:	39 f2                	cmp    %esi,%edx
+  401227:	74 14                	je     40123d &lt;fun7+0x39&gt;
+  401229:	48 8b 7f 10          	mov    0x10(%rdi),%rdi
+  40122d:	e8 d2 ff ff ff       	callq  401204 &lt;fun7&gt;
+  401232:	8d 44 00 01          	lea    0x1(%rax,%rax,1),%eax
+  401236:	eb 05                	jmp    40123d &lt;fun7+0x39&gt;
+  401238:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
+  40123d:	48 83 c4 08          	add    $0x8,%rsp
+  401241:	c3                   	retq
+
+0000000000401242 &lt;secret_phase&gt;:
+  401242:	53                   	push   %rbx
+  401243:	e8 56 02 00 00       	callq  40149e &lt;read_line&gt;
+  401248:	ba 0a 00 00 00       	mov    $0xa,%edx
+  40124d:	be 00 00 00 00       	mov    $0x0,%esi
+  401252:	48 89 c7             	mov    %rax,%rdi
+  401255:	e8 76 f9 ff ff       	callq  400bd0 &lt;strtol@plt&gt; #strtol函数     
+  # 会将参数nptr字符串根据参数base来转换成长整型数，参数base范围从2至36
+  40125a:	48 89 c3             	mov    %rax,%rbx
+  40125d:	8d 40 ff             	lea    -0x1(%rax),%eax
+  401260:	3d e8 03 00 00       	cmp    $0x3e8,%eax #1000比较
+  401265:	76 05                	jbe    40126c &lt;secret_phase+0x2a&gt;
+  401267:	e8 ce 01 00 00       	callq  40143a &lt;explode_bomb&gt; # 输入的值比1000大会爆炸
+  40126c:	89 de                	mov    %ebx,%esi 
+  40126e:	bf f0 30 60 00       	mov    $0x6030f0,%edi 
+  401273:	e8 8c ff ff ff       	callq  401204 &lt;fun7&gt;
+  401278:	83 f8 02             	cmp    $0x2,%eax 
+  40127b:	74 05                	je     401282 &lt;secret_phase+0x40&gt;# 当func7返回值为2才算成功
+  40127d:	e8 b8 01 00 00       	callq  40143a &lt;explode_bomb&gt;
+  401282:	bf 38 24 40 00       	mov    $0x402438,%edi
+  401287:	e8 84 f8 ff ff       	callq  400b10 &lt;puts@plt&gt;
+  40128c:	e8 33 03 00 00       	callq  4015c4 &lt;phase_defused&gt;
+  401291:	5b                   	pop    %rbx
+  401292:	c3                   	retq   
+  401293:	90                   	nop
+  401294:	90                   	nop
+  401295:	90                   	nop
+  401296:	90                   	nop
+  401297:	90                   	nop
+  401298:	90                   	nop
+  401299:	90                   	nop
+  40129a:	90                   	nop
+  40129b:	90                   	nop
+  40129c:	90                   	nop
+  40129d:	90                   	nop
+  40129e:	90                   	nop
+  40129f:	90                   	nop
+</code></pre>
+<p>输出 <code>0x6030f0</code>这个位置的内容，如下，可以看到是一棵二叉树。其中n1为根节点，nxy为第x层第y个节点。</p>
+<pre><code class="language-asciiarmor">(gdb) x/120a 0x6030f0
+0x6030f0 &lt;n1&gt;:	0x24	0x603110 &lt;n21&gt;
+0x603100 &lt;n1+16&gt;:	0x603130 &lt;n22&gt;	0x0
+0x603110 &lt;n21&gt;:	0x8	0x603190 &lt;n31&gt;
+0x603120 &lt;n21+16&gt;:	0x603150 &lt;n32&gt;	0x0
+0x603130 &lt;n22&gt;:	0x32	0x603170 &lt;n33&gt;
+0x603140 &lt;n22+16&gt;:	0x6031b0 &lt;n34&gt;	0x0
+0x603150 &lt;n32&gt;:	0x16	0x603270 &lt;n43&gt;
+0x603160 &lt;n32+16&gt;:	0x603230 &lt;n44&gt;	0x0
+0x603170 &lt;n33&gt;:	0x2d	0x6031d0 &lt;n45&gt;
+0x603180 &lt;n33+16&gt;:	0x603290 &lt;n46&gt;	0x0
+0x603190 &lt;n31&gt;:	0x6	0x6031f0 &lt;n41&gt;
+0x6031a0 &lt;n31+16&gt;:	0x603250 &lt;n42&gt;	0x0
+0x6031b0 &lt;n34&gt;:	0x6b	0x603210 &lt;n47&gt;
+0x6031c0 &lt;n34+16&gt;:	0x6032b0 &lt;n48&gt;	0x0
+0x6031d0 &lt;n45&gt;:	0x28	0x0
+0x6031e0 &lt;n45+16&gt;:	0x0	0x0
+0x6031f0 &lt;n41&gt;:	0x1	0x0
+0x603200 &lt;n41+16&gt;:	0x0	0x0
+0x603210 &lt;n47&gt;:	0x63	0x0
+0x603220 &lt;n47+16&gt;:	0x0	0x0
+0x603230 &lt;n44&gt;:	0x23	0x0
+0x603240 &lt;n44+16&gt;:	0x0	0x0
+0x603250 &lt;n42&gt;:	0x7	0x0
+
+</code></pre>
+<p>那么我们可以将func7 转换为c语言代码：</p>
+<pre><code class="language-c">int func7(node *root,int num){
+  if(root==NULL)return 0;
+  if(root-&gt;val==num)return 0;
+  else if(root-&gt;val &lt; num)return 2*func7(root-&gt;right)+1;
+  return 2*func7(root-&gt;left);
+}
+</code></pre>
+<p>当我们想要<code>func7</code>返回的结果为2的时候，应当执行的结果为 <code>2*(1+(0))</code>。所以 <code>num &lt; root-&gt;val&amp;&amp;num &gt; root-&gt;left-&gt;val&amp;&amp;num==root-&gt;left-&gt;right-&gt;val</code>。查看<code>&lt;n32&gt; :0x16</code>
+这就是我们要的答案。0x16 转10进制 22。</p>
+<h2 id="总结">总结</h2>
+<p>这次实验对自己汇编语言这块的掌握巩固有很大促进作用，通过实验，自己学习到了汇编语言的一些语法，学会看一些汇编代码了。同时也开始接触到<code>gdb</code>这个工具，以前就是写c++或者c语言代码，用这个做断点，然后按F5调试使用，没有用它来做过其他工作，也不知了解它的强大的功能，在实验 中也是多次用到了，例如查看某个地址的内容等。实验虽然结束了，但是对汇编以及GDB的学习还需要继续下去！</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://www.stana.top/2021/12/bomb_lab/" title="CSAPP--Bomb Lab实验记录" target="_blank" rel="external">https://www.stana.top/2021/12/bomb_lab/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lincx-911" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.stana.top/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lincx-911" target="_blank"><span class="text-dark">lincx</span><small class="ml-1x">developer</small></a></h3>
+        <div>预防掉发，多敲代码</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="vcomments"></div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.stana.top/2021/12/csapp_datalab/" title="csapp datalab实验记录"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone,wechat"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/lincx-911" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.stana.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://twitter.com/" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+</ul>
+  
+  <div class="copyright">
+    &copy;2020  -
+    2021
+    <div class="publishby">
+        Theme by <a href="https://github.com/lincx-911" target="_blank"> lincx </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+      <div>
+        <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2020130626号-1</a>
+      </div>
+    
+    
+  </div>
+  
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.stana.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://www.stana.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/www.stana.top\/',
+            CONTENT_URL: 'https:\/\/www.stana.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.stana.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+    var GUEST = ['nick', 'mail', 'link'];
+    var meta = 'nick,mail';
+    meta = meta.split(',').filter(function (item) {
+        return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+        el: '#vcomments',
+        verify: null ,
+        notify: null ,
+        appId: 'ocMp8WMQiBMKT83NJXmMrHR2-gzGzoHsz',
+        appKey: '1rmhmMQvdUG0trgmzmTWYGea',
+        placeholder: 'enjoy~',
+        avatar: 'wavatar',
+        meta: meta,
+        pageSize: '10' || 10,
+        visitor: true 
+});
+</script>
+
+  </body>
+</html>
