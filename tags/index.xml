@@ -21,12 +21,12 @@
     </item>
     
     <item>
-      <title>csapp datalab实验记录</title>
+      <title>CSAPP--Data Lab实验记录</title>
       <link>https://www.stana.top/2021/12/csapp_datalab/</link>
       <pubDate>Sat, 04 Dec 2021 11:31:20 +0800</pubDate>
       
       <guid>https://www.stana.top/2021/12/csapp_datalab/</guid>
-      <description></description>
+      <description>CSAPP&amp;ndash;Data Lab实验记录 [TOC] 前言 Students implement simple logical, two&amp;rsquo;s complement, and floating point functions, but using a highly restricted subset of C. For example, they might be asked to compute the absolute value of a number using only bit-level operations and straightline code. This lab helps students understand the bit-level representations of C data types and the bit-level behavior of the operations on</description>
     </item>
     
     <item>
