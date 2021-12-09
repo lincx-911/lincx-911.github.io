@@ -369,7 +369,6 @@ function tagCloud(where, min, max) {
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
       <h1 id="csapp--attack-lab实验记录">CSAPP&ndash;Attack Lab实验记录</h1>
-<p>[toc]</p>
 <h2 id="前言">前言</h2>
 <p>这个实验是csapp lab系列的第三个实验，实验内容主要是通过一些“攻击”手段，让我们了解缓冲区溢出隐患以及如何利用缓冲区溢出对现有的程序进行控制流劫持、执行非法程序&hellip;&hellip;</p>
 <h2 id="实验准备">实验准备</h2>
@@ -378,6 +377,7 @@ function tagCloud(where, min, max) {
 <li>《深入理解计算机系统》3.10.2~3.10.5</li>
 <li>实验指导书&ndash;<a href="http://csapp.cs.cmu.edu/3e/attacklab.pdf">writeup</a></li>
 <li><a href="http://csapp.cs.cmu.edu/2e/docs/gdbnotes-x86-64.pdf">GDB的使用</a></li>
+<li><a href="https://cs.brown.edu/courses/cs033/docs/guides/x64_cheatsheet.pdf">x64_cheatsheet</a></li>
 </ul>
 <h3 id="相关知识">相关知识</h3>
 <p>c语言对数组的引用不进行任何边界检查，而局部变量和状态信息（如保存寄存器的值和返回地址）都放到了栈中。多数组进行写操作越界的时候，会破环存储在栈中的状态信息。当程序使用这个被破环的状态，试图重新加载寄存器或执行<code>ret</code>指令时，就会出现很严重的错误。例如，<code>缓冲区溢出</code>。</p>
