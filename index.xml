@@ -6,10 +6,19 @@
     <description>Recent content on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Mon, 06 Dec 2021 14:20:42 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Dec 2021 23:42:32 +0800</lastBuildDate>
     
         <atom:link href="https://www.stana.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSAPP--Attack Lab实验记录</title>
+      <link>https://www.stana.top/2021/12/attack_lab/</link>
+      <pubDate>Tue, 07 Dec 2021 23:42:32 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2021/12/attack_lab/</guid>
+      <description>CSAPP&amp;ndash;Attack Lab实验记录 [toc] 前言 这个实验是csapp lab系列的第三个实验，实验内容主要是通过一些“攻击”手段，让我们了解缓冲区溢出隐患以及如何利用缓</description>
+    </item>
     
     <item>
       <title>CSAPP--Bomb Lab实验记录</title>
