@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        CSAPP--Architecture Lab实验记录 - lincx blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="google-site-verification" content="4MZdGdeC01hQIYurYzKBAjusQxTyeztil3joPOvIqQc" />
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="csapp architecture lab实验记录" />
+    <meta name="generator" content="Hugo 0.89.4 with theme pure" />
+    <title>CSAPP--Architecture Lab实验记录 - lincx blog</title>
+    
+    
+    <link rel="stylesheet" href="https://www.stana.top/css/style.min.a85959a41e7abcc0db1f81f44bd264649303417f91b536e87dcde644340fea6d.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="CSAPP--Architecture Lab实验记录" />
+<meta property="og:description" content="csapp architecture lab实验记录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stana.top/2021/12/architecture_lab/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-09T10:33:23+08:00" />
+<meta property="article:modified_time" content="2021-12-09T10:33:23+08:00" />
+
+<meta itemprop="name" content="CSAPP--Architecture Lab实验记录">
+<meta itemprop="description" content="csapp architecture lab实验记录"><meta itemprop="datePublished" content="2021-12-09T10:33:23+08:00" />
+<meta itemprop="dateModified" content="2021-12-09T10:33:23+08:00" />
+<meta itemprop="wordCount" content="4993">
+<meta itemprop="keywords" content="csapp-lab," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CSAPP--Architecture Lab实验记录"/>
+<meta name="twitter:description" content="csapp architecture lab实验记录"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          
+            <img class="img-circle img-rotate" src="https://www.stana.top/images/avatar.png" width="150" height="150">
+          
+          <h2 id="name" class="hidden-xs hidden-sm">lincx</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">developer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Guangdong, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>enjoy~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link" rel="4">csapp-lab<span
+               class="tag-list-count">4</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/git-pages/" class="tag-list-link" rel="1">git-pages<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/gitee/" class="tag-list-link" rel="1">gitee<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/hugo/" class="tag-list-link" rel="1">hugo<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/vercel/" class="tag-list-link" rel="1">vercel<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link" rel="2">汇编<span
+               class="tag-list-count">2</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.stana.top/categories/csapp/" class="category-list-link">csapp</a><span class="category-list-count">4</span></li>
+            <li class="category-list-item"><a href="https://www.stana.top/categories/tool/" class="category-list-link">tool</a><span class="category-list-count">2</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link">csapp-lab</a><span
+                    class="tag-list-count">4</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/git-pages/" class="tag-list-link">git-pages</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/gitee/" class="tag-list-link">gitee</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/markdown/" class="tag-list-link">markdown</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/vercel/" class="tag-list-link">vercel</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link">汇编</a><span
+                    class="tag-list-count">2</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/architecture_lab/" class="title">CSAPP--Architecture Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-09 10:33:23 &#43;0800 CST" itemprop="datePublished">2021-12-09</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/attack_lab/" class="title">CSAPP--Attack Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-07 23:42:32 &#43;0800 CST" itemprop="datePublished">2021-12-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/bomb_lab/" class="title">CSAPP--Bomb Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-06 14:20:42 &#43;0800 CST" itemprop="datePublished">2021-12-06</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/csapp_datalab/" class="title">CSAPP--Data Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-04 11:31:20 &#43;0800 CST" itemprop="datePublished">2021-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/picturebed/" class="title">Gitee PicGo打造免费个人图床</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-03 20:43:32 &#43;0800 CST" itemprop="datePublished">2021-12-03</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2021/12/architecture_lab/"
+    >CSAPP--Architecture Lab实验记录</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.stana.top/2021/12/architecture_lab/" class="article-date">
+  <time datetime="2021-12-09 10:33:23 &#43;0800 CST" itemprop="datePublished">2021-12-09</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/csapp/"> CSAPP </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/csapp-lab/"> csapp-lab </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2021/12/architecture_lab/" class="leancloud_visitors"  data-flag-title="CSAPP--Architecture Lab实验记录">
+			<span class="leancloud-visitors-count">0</span>
+		</span>
+    </span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/12/architecture_lab/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4993字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="csapp--architecture-lab实验记录">CSAPP&ndash;Architecture Lab实验记录</h1>
+<h2 id="实验准备">实验准备</h2>
+<h3 id="实验资料">实验资料</h3>
+<ul>
+<li>《深入理解计算机系统》第四章 处理器体系结构</li>
+<li>lab<a href="http://csapp.cs.cmu.edu/3e/labs.html">官网</a></li>
+</ul>
+<h3 id="环境搭建">环境搭建</h3>
+<p>博主用的是 linux （ubuntu20.04）</p>
+<p>1、首先下载实验资料</p>
+<pre><code class="language-shell">$ wget http://csapp.cs.cmu.edu/im/labs/archlab.tar
+</code></pre>
+<p>2、解压</p>
+<pre><code class="language-shell">$ tar xvf archlab-handout.tar
+$ cd archlab-handout
+$ tar xvf sim.tar
+</code></pre>
+<p>因为本套实验依赖<code>tcl/tk</code>、<code>flex</code>、<code>bison</code>，我们需要安装这几个软件：</p>
+<pre><code class="language-shell">$ sudo apt install tcl tcl-dev tk tk-dev 
+$ sudo apt-get install bison flex
+</code></pre>
+<p>因为 Makefile 里写的 tcl 的版本已经比较老了，我们需要修改一下 Makefile：</p>
+<pre><code class="language-bash">$ sed -i &quot;s/tcl8.5/tcl8.6/g&quot; Makefile
+$ sed -i &quot;s/CFLAGS=/CFLAGS=-DUSE_INTERP_RESULT /g&quot; Makefile
+</code></pre>
+<p>3、执行编译：</p>
+<pre><code class="language-bash">$ cd sim
+$ make clean; make
+</code></pre>
+<h2 id="实验内容">实验内容</h2>
+<h3 id="part-a">Part A</h3>
+<p>这个部分在 sim/misc 这个文档夹里完成。你的任务就是写 3 个 Y86-64 进程并且模拟它。这 3 个进程要实现的功能在 sim/misc/examples.c 里面。</p>
+<p><code>examples.c</code>内容：</p>
+<pre><code class="language-c">/*
+ * Architecture Lab: Part A
+ *
+ * High level specs for the functions that the students will rewrite
+ * in Y86-64 assembly language
+ */
+
+/* $begin examples */
+/* linked list element */
+typedef struct ELE {
+    long val;
+    struct ELE *next;
+} *list_ptr;
+
+/* sum_list - Sum the elements of a linked list */
+long sum_list(list_ptr ls)
+{
+    long val = 0;
+    while (ls) {
+        val += ls-&gt;val;
+        ls = ls-&gt;next;
+    }
+    return val;
+}
+
+/* rsum_list - Recursive version of sum_list */
+long rsum_list(list_ptr ls)
+{
+    if (!ls)
+        return 0;
+    else {
+        long val = ls-&gt;val;
+        long rest = rsum_list(ls-&gt;next);
+        return val + rest;
+    }
+}
+
+/* copy_block - Copy src to dest and return xor checksum of src */
+long copy_block(long *src, long *dest, long len)
+{
+    long result = 0;
+    while (len &gt; 0) {
+        long val = *src++;
+        *dest++ = val;
+        result ^= val;
+        len--;
+    }
+    return result;
+}
+/* $end examples */
+</code></pre>
+<p>使用 YAS 将相应的进程转换成二进制，然后再把生成的二进制放到命令集模拟器 YIS 上运行。</p>
+<p>下面是三组链表数据：</p>
+<pre><code class="language-yacas"># Sample linked list
+        .align 8
+ele1:
+        .quad 0x00a
+        .quad ele2
+ele2:
+        .quad 0x0b0
+        .quad ele3
+ele3:
+        .quad 0xc00
+        .quad 0
+</code></pre>
+<h4 id="sumys-迭代计算链表元素和">sum.ys: 迭代计算链表元素和</h4>
+<p>Write a Y86-64 program sum.ys that iteratively sums the elements of a linked list. Your program should consist of some code that sets up the stack structure, invokes a function, and then halts. In this case, the function should be Y86-64 code for a function (sum list) that is functionally equivalent to the C sum list function in Figure 1</p>
+<pre><code class="language-yacas"># sum_list.ys by linxc
+# Execution begins at address 0
+
+        .pos 0
+        irmovq stack,%rsp
+        call main
+        halt
+# Sample linked list
+        .align 8
+ele1:
+        .quad 0x00a
+        .quad ele2
+ele2:
+        .quad 0x0b0
+        .quad ele3
+ele3:
+        .quad 0xc00
+        .quad 0
+
+main:
+	irmovq ele1,%rdi
+	call sum_list
+	ret
+		
+
+
+sum_list:
+        xorq %rax,%rax
+		jmp test
+loop:
+		mrmovq (%rdi),%rsi
+		addq %rsi,%rax #求和
+		mrmovq 8(%rdi), %rdi # 将指针(下一个 struct 的地址)放进 %rdi
+test:
+		andq %rdi,%rdi
+		jne loop
+		ret
+stack:
+
+
+</code></pre>
+<p>接下来用 YAS 和 YIS 进行汇编并模拟运行,结果：</p>
+<pre><code class="language-bash">$ ./yas sum.ys
+$ ./yis sum.yo
+Stopped in 26 steps at PC = 0x13.  Status 'HLT', CC Z=1 S=0 O=0
+Changes to registers:
+%rax:   0x0000000000000000      0x0000000000000cba
+%rsp:   0x0000000000000000      0x0000000000000100
+%r9:    0x0000000000000000      0x0000000000000c00
+
+Changes to memory:
+0x00f0: 0x0000000000000000      0x000000000000005b
+0x00f8: 0x0000000000000000      0x0000000000000013
+</code></pre>
+<p>可以看到 %rax 的值就是标号 ele1，ele2，ele3 处三个元素的和 0xcba，并且可以看到部分寄存器和部分内存地址的值也发生了改变。</p>
+<h4 id="rsumys-递归计算链表元素和">rsum.ys: 递归计算链表元素和</h4>
+<p>写一个类似的 Y86-64 进程 rsum.ys 递归的计算链表的和，链表元素与上面一样。</p>
+<pre><code class="language-yacas"># rsum_list.ys by linxc
+# Execution begins at address 0
+
+        .pos 0
+        irmovq stack,%rsp
+        call main
+        halt
+# Sample linked list
+        .align 8
+ele1:
+        .quad 0x00a
+        .quad ele2
+ele2:
+        .quad 0x0b0
+        .quad ele3
+ele3:
+        .quad 0xc00
+        .quad 0
+
+main:
+        irmovq ele1,%rdi
+        call rsum_list
+        ret
+
+
+
+rsum_list:
+                pushq %r12
+                xorq %rax,%rax
+                andq %rdi,%rdi
+                je re
+                mrmovq (%rdi),%r12
+                mrmovq 8(%rdi), %rdi# 将指针(下一个 struct 的地址)放进 %rdi
+                call rsum_list
+                addq %r12,%rax
+
+re:             popq %r12
+                ret
+
+
+                .pos 0x100
+stack:
+
+</code></pre>
+<p>结果：</p>
+<pre><code class="language-bash">$ ./yas rsum.ys
+$  ./yis rsum.yo
+Stopped in 42 steps at PC = 0x13.  Status 'HLT', CC Z=0 S=0 O=0
+Changes to registers:
+%rax:   0x0000000000000000      0x0000000000000cba
+%rsp:   0x0000000000000000      0x0000000000000100
+
+Changes to memory:
+0x00b8: 0x0000000000000000      0x0000000000000c00
+0x00c0: 0x0000000000000000      0x0000000000000088
+0x00c8: 0x0000000000000000      0x00000000000000b0
+0x00d0: 0x0000000000000000      0x0000000000000088
+0x00d8: 0x0000000000000000      0x000000000000000a
+0x00e0: 0x0000000000000000      0x0000000000000088
+0x00f0: 0x0000000000000000      0x000000000000005b
+0x00f8: 0x0000000000000000      0x0000000000000013
+</code></pre>
+<h4 id="copyys-复制函数">copy.ys: 复制函数</h4>
+<p>将内存中的一块数据拷贝到另一个不重叠的内存位置，并计算被拷贝数据的 <strong>checksum(Xor)</strong>。C 语言代码如下：</p>
+<pre><code class="language-yacas"># copy.ys by linxc
+# Execution begins at address 0
+
+        .pos 0
+        irmovq stack,%rsp
+        call main
+        halt
+.align 8
+# Source block
+src:
+        .quad 0x00a
+        .quad 0x0b0
+        .quad 0xc00
+# Destination block
+dest:
+        .quad 0x111
+        .quad 0x222
+        .quad 0x333
+
+main:
+        irmovq src,%rdi
+		irmovq dest,%rsi
+		irmovq $3,%rdx
+        call copy_block
+        ret
+
+
+
+copy_block:
+		pushq %r8
+		pushq %r9
+		pushq %r12
+		irmovq $1,%r9
+		irmovq $8,%r12
+        xorq %rax,%rax
+		jmp re
+loop:
+		mrmovq 0(%rdi),%r8
+		addq %r12,%rdi 
+		rmmovq %r8,(%rsi)
+		addq %r12,%rsi
+		xorq %r8,%rax #求和
+		subq %r9,%rdx 	
+re:
+		andq %rdx, %rdx      # len &gt; 0？
+		jne loop
+		popq %r12
+		popq %r9
+        popq %r8
+		ret
+		.pos 0x100
+stack:
+
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code class="language-shell">$ ./yas copy.ys
+$ ./yis copy.yo
+Stopped in 45 steps at PC = 0x13.  Status 'HLT', CC Z=1 S=0 O=0
+Changes to registers:
+%rax:   0x0000000000000000      0x0000000000000cba
+%rsp:   0x0000000000000000      0x0000000000000100
+%rsi:   0x0000000000000000      0x0000000000000048
+%rdi:   0x0000000000000000      0x0000000000000030
+
+Changes to memory:
+0x0030: 0x0000000000000111      0x000000000000000a
+0x0038: 0x0000000000000222      0x00000000000000b0
+0x0040: 0x0000000000000333      0x0000000000000c00
+0x00f0: 0x0000000000000000      0x000000000000006f
+0x00f8: 0x0000000000000000      0x0000000000000013
+</code></pre>
+<h3 id="part-b">Part B</h3>
+<p>这部分在目录 <strong>sim/seq</strong> 里完成。要求为处理器增加一个<code>iaddq</code>指令。通过修改 <code>seq-full.hcl</code> 文档，使其支持 <code>iaddq</code> 命令。</p>
+<p>按照提示，我们可以看书本p266，图4-18 <code>irmovq</code>指令计算顺序，模拟<code>iaddq</code>指令顺序：</p>
+<ol>
+<li>取指：icode：ifun&lt;&mdash;M1[PC]
+rA: rB &lt;&ndash;M1[PC+1]
+valC  &lt;&ndash;M8[PC+2]
+valP &lt;&mdash;PC+10</li>
+<li>译码：valB &lt;&mdash;R[rb]</li>
+<li>执行：valE&lt;&ndash;valC+valB</li>
+<li>访存：无</li>
+<li>写回：R[rb]&lt;&ndash;valE</li>
+<li>更新PC：PC&lt;&ndash;valP</li>
+</ol>
+<p>按照上面修改<code>seq-full.hcl</code> 文档内容如下：</p>
+<pre><code class="language-haxe">#/* $begin seq-all-hcl */
+####################################################################
+#  HCL Description of Control for Single Cycle Y86-64 Processor SEQ   #
+#  Copyright (C) Randal E. Bryant, David R. O'Hallaron, 2010       #
+####################################################################
+
+## Your task is to implement the iaddq instruction
+## The file contains a declaration of the icodes
+## for iaddq (IIADDQ)
+## Your job is to add the rest of the logic to make it work
+
+####################################################################
+#    C Include's.  Don't alter these                               #
+####################################################################
+
+quote '#include &lt;stdio.h&gt;'
+quote '#include &quot;isa.h&quot;'
+quote '#include &quot;sim.h&quot;'
+quote 'int sim_main(int argc, char *argv[]);'
+quote 'word_t gen_pc(){return 0;}'
+quote 'int main(int argc, char *argv[])'
+quote '  {plusmode=0;return sim_main(argc,argv);}'
+
+####################################################################
+#    Declarations.  Do not change/remove/delete any of these       #
+####################################################################
+
+##### Symbolic representation of Y86-64 Instruction Codes #############
+wordsig INOP    'I_NOP'
+wordsig IHALT   'I_HALT'
+wordsig IRRMOVQ 'I_RRMOVQ'
+wordsig IIRMOVQ 'I_IRMOVQ'
+wordsig IRMMOVQ 'I_RMMOVQ'
+wordsig IMRMOVQ 'I_MRMOVQ'
+wordsig IOPQ    'I_ALU'
+wordsig IJXX    'I_JMP'
+wordsig ICALL   'I_CALL'
+wordsig IRET    'I_RET'
+wordsig IPUSHQ  'I_PUSHQ'
+wordsig IPOPQ   'I_POPQ'
+# Instruction code for iaddq instruction
+wordsig IIADDQ  'I_IADDQ'
+
+##### Symbolic represenations of Y86-64 function codes                  #####
+wordsig FNONE    'F_NONE'        # Default function code
+
+##### Symbolic representation of Y86-64 Registers referenced explicitly #####
+wordsig RRSP     'REG_RSP'      # Stack Pointer
+wordsig RNONE    'REG_NONE'     # Special value indicating &quot;no register&quot;
+
+##### ALU Functions referenced explicitly                            #####
+wordsig ALUADD  'A_ADD'         # ALU should add its arguments
+
+##### Possible instruction status values                             #####
+wordsig SAOK    'STAT_AOK'      # Normal execution
+wordsig SADR    'STAT_ADR'      # Invalid memory address
+wordsig SINS    'STAT_INS'      # Invalid instruction
+wordsig SHLT    'STAT_HLT'      # Halt instruction encountered
+
+##### Signals that can be referenced by control logic ####################
+
+##### Fetch stage inputs                #####
+wordsig pc 'pc'                         # Program counter
+##### Fetch stage computations          #####
+wordsig imem_icode 'imem_icode'         # icode field from instruction memory
+wordsig imem_ifun  'imem_ifun'          # ifun field from instruction memory
+wordsig icode     'icode'               # Instruction control code
+wordsig ifun      'ifun'                # Instruction function
+wordsig rA        'ra'                  # rA field from instruction
+wordsig rB        'rb'                  # rB field from instruction
+wordsig valC      'valc'                # Constant from instruction
+wordsig valP      'valp'                # Address of following instruction
+boolsig imem_error 'imem_error'         # Error signal from instruction memory
+boolsig instr_valid 'instr_valid'       # Is fetched instruction valid?
+
+##### Decode stage computations         #####
+wordsig valA    'vala'                  # Value from register A port
+wordsig valB    'valb'                  # Value from register B port
+
+##### Execute stage computations        #####
+wordsig valE    'vale'                  # Value computed by ALU
+boolsig Cnd     'cond'                  # Branch test
+
+##### Memory stage computations         #####
+wordsig valM    'valm'                  # Value read from memory
+boolsig dmem_error 'dmem_error'         # Error signal from data memory
+
+
+####################################################################
+#    Control Signal Definitions.                                   #
+####################################################################
+
+################ Fetch Stage     ###################################
+
+# Determine instruction code
+word icode = [
+        imem_error: INOP;
+        1: imem_icode;          # Default: get from instruction memory
+];
+
+# Determine instruction function
+word ifun = [
+        imem_error: FNONE;
+        1: imem_ifun;           # Default: get from instruction memory
+];
+
+bool instr_valid = icode in
+        { INOP, IHALT, IRRMOVQ, IIRMOVQ, IRMMOVQ, IMRMOVQ,
+               IOPQ, IJXX, ICALL, IRET, IPUSHQ, IPOPQ, IIADDQ };
+
+# Does fetched instruction require a regid byte?
+bool need_regids =
+        icode in { IRRMOVQ, IOPQ, IPUSHQ, IPOPQ,
+                     IIRMOVQ, IRMMOVQ, IMRMOVQ,IIADDQ };
+
+# Does fetched instruction require a constant word?
+bool need_valC =
+        icode in { IIRMOVQ, IRMMOVQ, IMRMOVQ, IJXX, ICALL,IIADDQ };
+
+################ Decode Stage    ###################################
+
+## What register should be used as the A source?
+word srcA = [
+        icode in { IRRMOVQ, IRMMOVQ, IOPQ, IPUSHQ  } : rA;
+        icode in { IPOPQ, IRET } : RRSP;
+        1 : RNONE; # Don't need register
+];
+
+## What register should be used as the B source?
+word srcB = [
+        icode in { IOPQ, IRMMOVQ, IMRMOVQ,IIADDQ  } : rB;
+        icode in { IPUSHQ, IPOPQ, ICALL, IRET } : RRSP;
+        1 : RNONE;  # Don't need register
+];
+
+## What register should be used as the E destination?
+word dstE = [
+        icode in { IRRMOVQ } &amp;&amp; Cnd : rB;
+        icode in { IIRMOVQ, IOPQ,IIADDQ } : rB;
+        icode in { IPUSHQ, IPOPQ, ICALL, IRET } : RRSP;
+        1 : RNONE;  # Don't write any register
+];
+
+## What register should be used as the M destination?
+word dstM = [
+        icode in { IMRMOVQ, IPOPQ } : rA;
+        1 : RNONE;  # Don't write any register
+];
+
+################ Execute Stage   ###################################
+
+## Select input A to ALU
+word aluA = [
+        icode in { IRRMOVQ, IOPQ } : valA;
+        icode in { IIRMOVQ, IRMMOVQ, IMRMOVQ,IIADDQ  } : valC;
+        icode in { ICALL, IPUSHQ } : -8;
+        icode in { IRET, IPOPQ } : 8;
+        # Other instructions don't need ALU
+];
+
+## Select input B to ALU
+word aluB = [
+        icode in { IRMMOVQ, IMRMOVQ, IOPQ, ICALL,
+                      IPUSHQ, IRET, IPOPQ,IIADDQ  } : valB;
+        icode in { IRRMOVQ, IIRMOVQ } : 0;
+        # Other instructions don't need ALU
+];
+
+## Set the ALU function
+word alufun = [
+        icode == IOPQ : ifun;
+        1 : ALUADD;
+];
+
+## Should the condition codes be updated?
+bool set_cc = icode in { IOPQ };
+
+################ Memory Stage    ###################################
+
+## Set read control signal
+bool mem_read = icode in { IMRMOVQ, IPOPQ, IRET };
+
+## Set write control signal
+bool mem_write = icode in { IRMMOVQ, IPUSHQ, ICALL };
+
+## Select memory address
+word mem_addr = [
+        icode in { IRMMOVQ, IPUSHQ, ICALL, IMRMOVQ } : valE;
+        icode in { IPOPQ, IRET } : valA;
+        # Other instructions don't need address
+];
+
+## Select memory input data
+word mem_data = [
+        # Value from register
+        icode in { IRMMOVQ, IPUSHQ } : valA;
+        # Return PC
+        icode == ICALL : valP;
+        # Default: Don't write anything
+];
+
+## Determine instruction status
+word Stat = [
+        imem_error || dmem_error : SADR;
+        !instr_valid: SINS;
+        icode == IHALT : SHLT;
+        1 : SAOK;
+];
+
+################ Program Counter Update ############################
+
+## What address should instruction be fetched at
+
+word new_pc = [
+        # Call.  Use instruction constant
+        icode == ICALL : valC;
+        # Taken branch.  Use instruction constant
+        icode == IJXX &amp;&amp; Cnd : valC;
+        # Completion of RET instruction.  Use value from stack
+        icode == IRET : valM;
+        # Default: Use incremented PC
+        1 : valP;
+];
+#/* $end seq-all-hcl */
+</code></pre>
+<p>接下来，检验一下修改对不对：</p>
+<pre><code class="language-shell">$ make VERSION=full
+# Building the seq-full.hcl version of SEQ
+../misc/hcl2c -n seq-full.hcl &lt;seq-full.hcl &gt;seq-full.c
+gcc -Wall -O2 -isystem /usr/include/tcl8.5 -I../misc -DHAS_GUI -o ssim \
+        seq-full.c ssim.c ../misc/isa.c -L/usr/lib -ltk -ltcl -lm
+ssim.c:20:10: fatal error: tk.h: No such file or directory
+   20 | #include &lt;tk.h&gt;
+      |          ^~~~~~
+compilation terminated.
+make: *** [Makefile:44: ssim] Error 1
+
+......
+
+$ make VERSION=full
+/usr/bin/ld: /tmp/ccbOoipJ.o:(.data.rel+0x0): undefined reference to `matherr'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:44: ssim] Error 1
+</code></pre>
+<p>我在执行<code>make VERSION=full</code>命令的时候，报了上面的两个错误，对于第一个错误，这个刚开始一样只需执行下面两条命令：</p>
+<pre><code class="language-bash">$ sed -i &quot;s/tcl8.5/tcl8.6/g&quot; Makefile
+$ sed -i &quot;s/CFLAGS=/CFLAGS=-DUSE_INTERP_RESULT /g&quot; Makefile 
+</code></pre>
+<p>对于第二个错误，undefined reference to <code>matherr</code>。我们可以在<code>ssim.c</code>找到<code>matherr</code>,然后注释掉那两行，因为没有用到。</p>
+<p>修改完后，重新执行：</p>
+<pre><code class="language-bash">$  make VERSION=full
+$ (cd ../ptest; make SIM=../seq/ssim TFLAGS=-i)
+./optest.pl -s ../seq/ssim -i
+Simulating with ../seq/ssim
+Test op-iaddq-256-rdx failed
+Test op-iaddq-4-rdx failed
+Test op-iaddq-256-rbx failed
+Test op-iaddq-4-rbx failed
+Test op-iaddq-256-rsp failed
+Test op-iaddq-4-rsp failed
+  6/58 ISA Checks Failed
+./jtest.pl -s ../seq/ssim -i
+Simulating with ../seq/ssim
+Test ji-jle-64-32 failed
+Test ji-jl-32-64 failed
+Test ji-je-32-64 failed
+Test ji-je-64-32 failed
+Test ji-jne-32-64 failed
+Test ji-jne-64-32 failed
+Test ji-jge-32-64 failed
+Test ji-jg-64-32 failed
+  8/96 ISA Checks Failed
+./ctest.pl -s ../seq/ssim -i
+Simulating with ../seq/ssim
+  All 22 ISA Checks Succeed
+./htest.pl -s ../seq/ssim -i
+Simulating with ../seq/ssim
+  All 756 ISA Checks Succeed
+</code></pre>
+<p>当看到<code>All 756 ISA Checks Succeed</code>就是成功了。</p>
+<h3 id="part-c">Part C</h3>
+<p>这里我们要做的就是修改 <code>sim/pipe/pipe-full.hcl</code> 以及 <code>sim/pipe/ncopy.ys</code> 的内容。使我们的程序运行效率尽量高。在为 <code>pipe-full.hcl</code> 实现完 <code>iaddq</code> 之后。我们就可以分别使用如下指令测试我们的代码：</p>
+<pre><code class="language-bash">$ ./correctness.pl #结果是否正确
+$ ./benchmark.pl #得出效率，分数越高结果越好
+</code></pre>
+<p>修改之后的<code>pipe-full.hcl</code>文件：</p>
+<pre><code class="language-haxe">#/* $begin pipe-all-hcl */
+####################################################################
+#    HCL Description of Control for Pipelined Y86-64 Processor     #
+#    Copyright (C) Randal E. Bryant, David R. O'Hallaron, 2014     #
+####################################################################
+
+## Your task is to implement the iaddq instruction
+## The file contains a declaration of the icodes
+## for iaddq (IIADDQ)
+## Your job is to add the rest of the logic to make it work
+
+####################################################################
+#    C Include's.  Don't alter these                               #
+####################################################################
+
+quote '#include &lt;stdio.h&gt;'
+quote '#include &quot;isa.h&quot;'
+quote '#include &quot;pipeline.h&quot;'
+quote '#include &quot;stages.h&quot;'
+quote '#include &quot;sim.h&quot;'
+quote 'int sim_main(int argc, char *argv[]);'
+quote 'int main(int argc, char *argv[]){return sim_main(argc,argv);}'
+
+####################################################################
+#    Declarations.  Do not change/remove/delete any of these       #
+####################################################################
+
+##### Symbolic representation of Y86-64 Instruction Codes #############
+wordsig INOP    'I_NOP'
+wordsig IHALT   'I_HALT'
+wordsig IRRMOVQ 'I_RRMOVQ'
+wordsig IIRMOVQ 'I_IRMOVQ'
+wordsig IRMMOVQ 'I_RMMOVQ'
+wordsig IMRMOVQ 'I_MRMOVQ'
+wordsig IOPQ    'I_ALU'
+wordsig IJXX    'I_JMP'
+wordsig ICALL   'I_CALL'
+wordsig IRET    'I_RET'
+wordsig IPUSHQ  'I_PUSHQ'
+wordsig IPOPQ   'I_POPQ'
+# Instruction code for iaddq instruction
+wordsig IIADDQ  'I_IADDQ'
+
+##### Symbolic represenations of Y86-64 function codes            #####
+wordsig FNONE    'F_NONE'        # Default function code
+
+##### Symbolic representation of Y86-64 Registers referenced      #####
+wordsig RRSP     'REG_RSP'           # Stack Pointer
+wordsig RNONE    'REG_NONE'          # Special value indicating &quot;no register&quot;
+
+##### ALU Functions referenced explicitly ##########################
+wordsig ALUADD  'A_ADD'              # ALU should add its arguments
+
+##### Possible instruction status values                       #####
+wordsig SBUB    'STAT_BUB'      # Bubble in stage
+wordsig SAOK    'STAT_AOK'      # Normal execution
+wordsig SADR    'STAT_ADR'      # Invalid memory address
+wordsig SINS    'STAT_INS'      # Invalid instruction
+wordsig SHLT    'STAT_HLT'      # Halt instruction encountered
+
+##### Signals that can be referenced by control logic ##############
+
+##### Pipeline Register F ##########################################
+
+wordsig F_predPC 'pc_curr-&gt;pc'       # Predicted value of PC
+
+##### Intermediate Values in Fetch Stage ###########################
+
+wordsig imem_icode  'imem_icode'      # icode field from instruction memory
+wordsig imem_ifun   'imem_ifun'       # ifun  field from instruction memory
+wordsig f_icode 'if_id_next-&gt;icode'  # (Possibly modified) instruction code
+wordsig f_ifun  'if_id_next-&gt;ifun'   # Fetched instruction function
+wordsig f_valC  'if_id_next-&gt;valc'   # Constant data of fetched instruction
+wordsig f_valP  'if_id_next-&gt;valp'   # Address of following instruction
+boolsig imem_error 'imem_error'      # Error signal from instruction memory
+boolsig instr_valid 'instr_valid'    # Is fetched instruction valid?
+
+##### Pipeline Register D ##########################################
+wordsig D_icode 'if_id_curr-&gt;icode'   # Instruction code
+wordsig D_rA 'if_id_curr-&gt;ra'        # rA field from instruction
+wordsig D_rB 'if_id_curr-&gt;rb'        # rB field from instruction
+wordsig D_valP 'if_id_curr-&gt;valp'     # Incremented PC
+
+##### Intermediate Values in Decode Stage  #########################
+
+wordsig d_srcA   'id_ex_next-&gt;srca'  # srcA from decoded instruction
+wordsig d_srcB   'id_ex_next-&gt;srcb'  # srcB from decoded instruction
+wordsig d_rvalA 'd_regvala'          # valA read from register file
+wordsig d_rvalB 'd_regvalb'          # valB read from register file
+
+##### Pipeline Register E ##########################################
+wordsig E_icode 'id_ex_curr-&gt;icode'   # Instruction code
+wordsig E_ifun  'id_ex_curr-&gt;ifun'    # Instruction function
+wordsig E_valC  'id_ex_curr-&gt;valc'    # Constant data
+wordsig E_srcA  'id_ex_curr-&gt;srca'    # Source A register ID
+wordsig E_valA  'id_ex_curr-&gt;vala'    # Source A value
+wordsig E_srcB  'id_ex_curr-&gt;srcb'    # Source B register ID
+wordsig E_valB  'id_ex_curr-&gt;valb'    # Source B value
+wordsig E_dstE 'id_ex_curr-&gt;deste'    # Destination E register ID
+wordsig E_dstM 'id_ex_curr-&gt;destm'    # Destination M register ID
+
+##### Intermediate Values in Execute Stage #########################
+wordsig e_valE 'ex_mem_next-&gt;vale'      # valE generated by ALU
+boolsig e_Cnd 'ex_mem_next-&gt;takebranch' # Does condition hold?
+wordsig e_dstE 'ex_mem_next-&gt;deste'      # dstE (possibly modified to be RNONE)
+
+##### Pipeline Register M                  #########################
+wordsig M_stat 'ex_mem_curr-&gt;status'     # Instruction status
+wordsig M_icode 'ex_mem_curr-&gt;icode'    # Instruction code
+wordsig M_ifun  'ex_mem_curr-&gt;ifun'     # Instruction function
+wordsig M_valA  'ex_mem_curr-&gt;vala'      # Source A value
+wordsig M_dstE 'ex_mem_curr-&gt;deste'     # Destination E register ID
+wordsig M_valE  'ex_mem_curr-&gt;vale'      # ALU E value
+wordsig M_dstM 'ex_mem_curr-&gt;destm'     # Destination M register ID
+boolsig M_Cnd 'ex_mem_curr-&gt;takebranch' # Condition flag
+boolsig dmem_error 'dmem_error'         # Error signal from instruction memory
+
+##### Intermediate Values in Memory Stage ##########################
+wordsig m_valM 'mem_wb_next-&gt;valm'      # valM generated by memory
+wordsig m_stat 'mem_wb_next-&gt;status'    # stat (possibly modified to be SADR)
+
+##### Pipeline Register W ##########################################
+wordsig W_stat 'mem_wb_curr-&gt;status'     # Instruction status
+wordsig W_icode 'mem_wb_curr-&gt;icode'    # Instruction code
+wordsig W_dstE 'mem_wb_curr-&gt;deste'     # Destination E register ID
+wordsig W_valE  'mem_wb_curr-&gt;vale'      # ALU E value
+wordsig W_dstM 'mem_wb_curr-&gt;destm'     # Destination M register ID
+wordsig W_valM  'mem_wb_curr-&gt;valm'     # Memory M value
+
+####################################################################
+#    Control Signal Definitions.                                   #
+####################################################################
+
+################ Fetch Stage     ###################################
+
+## What address should instruction be fetched at
+word f_pc = [
+        # Mispredicted branch.  Fetch at incremented PC
+        M_icode == IJXX &amp;&amp; !M_Cnd : M_valA;
+        # Completion of RET instruction
+        W_icode == IRET : W_valM;
+        # Default: Use predicted value of PC
+        1 : F_predPC;
+];
+
+## Determine icode of fetched instruction
+word f_icode = [
+        imem_error : INOP;
+        1: imem_icode;
+];
+
+# Determine ifun
+word f_ifun = [
+        imem_error : FNONE;
+        1: imem_ifun;
+];
+
+# Is instruction valid?
+bool instr_valid = f_icode in
+        { INOP, IHALT, IRRMOVQ, IIRMOVQ, IRMMOVQ, IMRMOVQ,
+          IOPQ, IJXX, ICALL, IRET, IPUSHQ, IPOPQ ,IIADDQ };
+
+# Determine status code for fetched instruction
+word f_stat = [
+        imem_error: SADR;
+        !instr_valid : SINS;
+        f_icode == IHALT : SHLT;
+        1 : SAOK;
+];
+
+# Does fetched instruction require a regid byte?
+bool need_regids =
+        f_icode in { IRRMOVQ, IOPQ, IPUSHQ, IPOPQ,
+                     IIRMOVQ, IRMMOVQ, IMRMOVQ,IIADDQ };
+
+# Does fetched instruction require a constant word?
+bool need_valC =
+        f_icode in { IIRMOVQ, IRMMOVQ, IMRMOVQ, IJXX, ICALL,IIADDQ };
+
+# Predict next value of PC
+word f_predPC = [
+        f_icode in { IJXX, ICALL } : f_valC;
+        1 : f_valP;
+];
+
+################ Decode Stage ######################################
+
+
+## What register should be used as the A source?
+word d_srcA = [
+        D_icode in { IRRMOVQ, IRMMOVQ, IOPQ, IPUSHQ  } : D_rA;
+        D_icode in { IPOPQ, IRET } : RRSP;
+        1 : RNONE; # Don't need register
+];
+
+## What register should be used as the B source?
+word d_srcB = [
+        D_icode in { IOPQ, IRMMOVQ, IMRMOVQ  } : D_rB;
+        D_icode in { IPUSHQ, IPOPQ, ICALL, IRET } : RRSP;
+        1 : RNONE;  # Don't need register
+];
+
+## What register should be used as the E destination?
+word d_dstE = [
+        D_icode in { IRRMOVQ, IIRMOVQ, IOPQ} : D_rB;
+        D_icode in { IPUSHQ, IPOPQ, ICALL, IRET } : RRSP;
+        1 : RNONE;  # Don't write any register
+];
+
+## What register should be used as the M destination?
+word d_dstM = [
+        D_icode in { IMRMOVQ, IPOPQ } : D_rA;
+        1 : RNONE;  # Don't write any register
+];
+
+## What should be the A value?
+## Forward into decode stage for valA
+word d_valA = [
+        D_icode in { ICALL, IJXX } : D_valP; # Use incremented PC
+        d_srcA == e_dstE : e_valE;    # Forward valE from execute
+        d_srcA == M_dstM : m_valM;    # Forward valM from memory
+        d_srcA == M_dstE : M_valE;    # Forward valE from memory
+        d_srcA == W_dstM : W_valM;    # Forward valM from write back
+        d_srcA == W_dstE : W_valE;    # Forward valE from write back
+        1 : d_rvalA;  # Use value read from register file
+];
+
+word d_valB = [
+        d_srcB == e_dstE : e_valE;    # Forward valE from execute
+        d_srcB == M_dstM : m_valM;    # Forward valM from memory
+        d_srcB == M_dstE : M_valE;    # Forward valE from memory
+        d_srcB == W_dstM : W_valM;    # Forward valM from write back
+        d_srcB == W_dstE : W_valE;    # Forward valE from write back
+        1 : d_rvalB;  # Use value read from register file
+];
+
+################ Execute Stage #####################################
+
+## Select input A to ALU
+word aluA = [
+        E_icode in { IRRMOVQ, IOPQ } : E_valA;
+        E_icode in { IIRMOVQ, IRMMOVQ, IMRMOVQ, IIADDQ } : E_valC;
+        E_icode in { ICALL, IPUSHQ } : -8;
+        E_icode in { IRET, IPOPQ } : 8;
+        # Other instructions don't need ALU
+];
+
+## Select input B to ALU
+word aluB = [
+        E_icode in { IRMMOVQ, IMRMOVQ, IOPQ, ICALL,
+                     IPUSHQ, IRET, IPOPQ, IIADDQ } : E_valB;
+        E_icode in { IRRMOVQ, IIRMOVQ } : 0;
+        # Other instructions don't need ALU
+];
+
+## Set the ALU function
+word alufun = [
+        E_icode == IOPQ : E_ifun;
+        1 : ALUADD;
+];
+
+## Should the condition codes be updated?
+bool set_cc = E_icode == IOPQ &amp;&amp;
+        # State changes only during normal operation
+        !m_stat in { SADR, SINS, SHLT } &amp;&amp; !W_stat in { SADR, SINS, SHLT };
+
+## Generate valA in execute stage
+word e_valA = E_valA;    # Pass valA through stage
+
+## Set dstE to RNONE in event of not-taken conditional move
+word e_dstE = [
+        E_icode == IRRMOVQ &amp;&amp; !e_Cnd : RNONE;
+        1 : E_dstE;
+];
+
+################ Memory Stage ######################################
+
+## Select memory address
+word mem_addr = [
+        M_icode in { IRMMOVQ, IPUSHQ, ICALL, IMRMOVQ } : M_valE;
+        M_icode in { IPOPQ, IRET } : M_valA;
+        # Other instructions don't need address
+];
+
+## Set read control signal
+bool mem_read = M_icode in { IMRMOVQ, IPOPQ, IRET };
+
+## Set write control signal
+bool mem_write = M_icode in { IRMMOVQ, IPUSHQ, ICALL };
+
+#/* $begin pipe-m_stat-hcl */
+## Update the status
+word m_stat = [
+        dmem_error : SADR;
+        1 : M_stat;
+];
+#/* $end pipe-m_stat-hcl */
+
+## Set E port register ID
+word w_dstE = W_dstE;
+
+## Set E port value
+word w_valE = W_valE;
+
+## Set M port register ID
+word w_dstM = W_dstM;
+
+## Set M port value
+word w_valM = W_valM;
+
+## Update processor status
+word Stat = [
+        W_stat == SBUB : SAOK;
+        1 : W_stat;
+];
+
+################ Pipeline Register Control #########################
+
+# Should I stall or inject a bubble into Pipeline Register F?
+# At most one of these can be true.
+bool F_bubble = 0;
+bool F_stall =
+        # Conditions for a load/use hazard
+        E_icode in { IMRMOVQ, IPOPQ } &amp;&amp;
+         E_dstM in { d_srcA, d_srcB } ||
+        # Stalling at fetch while ret passes through pipeline
+        IRET in { D_icode, E_icode, M_icode };
+
+# Should I stall or inject a bubble into Pipeline Register D?
+# At most one of these can be true.
+bool D_stall =
+        # Conditions for a load/use hazard
+        E_icode in { IMRMOVQ, IPOPQ } &amp;&amp;
+         E_dstM in { d_srcA, d_srcB };
+
+bool D_bubble =
+        # Mispredicted branch
+        (E_icode == IJXX &amp;&amp; !e_Cnd) ||
+        # Stalling at fetch while ret passes through pipeline
+        # but not condition for a load/use hazard
+        !(E_icode in { IMRMOVQ, IPOPQ } &amp;&amp; E_dstM in { d_srcA, d_srcB }) &amp;&amp;
+          IRET in { D_icode, E_icode, M_icode };
+
+# Should I stall or inject a bubble into Pipeline Register E?
+# At most one of these can be true.
+bool E_stall = 0;
+bool E_bubble =
+        # Mispredicted branch
+        (E_icode == IJXX &amp;&amp; !e_Cnd) ||
+        # Conditions for a load/use hazard
+        E_icode in { IMRMOVQ, IPOPQ } &amp;&amp;
+         E_dstM in { d_srcA, d_srcB};
+
+# Should I stall or inject a bubble into Pipeline Register M?
+# At most one of these can be true.
+bool M_stall = 0;
+# Start injecting bubbles as soon as exception passes through memory stage
+bool M_bubble = m_stat in { SADR, SINS, SHLT } || W_stat in { SADR, SINS, SHLT };
+
+# Should I stall or inject a bubble into Pipeline Register W?
+bool W_stall = W_stat in { SADR, SINS, SHLT };
+bool W_bubble = 0;
+#/* $end pipe-all-hcl */
+</code></pre>
+<p>测试一下正确性：</p>
+<pre><code class="language-shell">$ ./correctness.pl
+Simulating with instruction set simulator yis
+        ncopy
+0       OK
+1       OK
+2       OK
+3       OK
+4       OK
+5       OK
+6       OK
+7       OK
+8       OK
+9       OK
+10      OK
+11      OK
+12      OK
+13      OK
+14      OK
+15      OK
+16      OK
+17      OK
+18      OK
+19      OK
+20      OK
+21      OK
+22      OK
+23      OK
+24      OK
+25      OK
+26      OK
+27      OK
+28      OK
+29      OK
+30      OK
+31      OK
+32      OK
+33      OK
+34      OK
+35      OK
+36      OK
+37      OK
+38      OK
+39      OK
+40      OK
+41      OK
+42      OK
+43      OK
+44      OK
+45      OK
+46      OK
+47      OK
+48      OK
+49      OK
+50      OK
+51      OK
+52      OK
+53      OK
+54      OK
+55      OK
+56      OK
+57      OK
+58      OK
+59      OK
+60      OK
+61      OK
+62      OK
+63      OK
+64      OK
+128     OK
+192     OK
+256     OK
+68/68 pass correctness test
+</code></pre>
+<p>​	优化就没有做了，可以从CPU流水线特性考虑优化策略</p>
+<h2 id="总结">总结</h2>
+<p>这次的实验让我对CPU的取指过程有了更深了解，自己尝试写汇编代码，刚开始也是会报很多错，然后又回去看代码，最后成功解决，<del>锻炼了肉眼debug能力哈哈</del></p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://www.stana.top/2021/12/architecture_lab/" title="CSAPP--Architecture Lab实验记录" target="_blank" rel="external">https://www.stana.top/2021/12/architecture_lab/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lincx-911" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.stana.top/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lincx-911" target="_blank"><span class="text-dark">lincx</span><small class="ml-1x">developer</small></a></h3>
+        <div>预防掉发，多敲代码</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="vcomments"></div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.stana.top/2021/12/attack_lab/" title="CSAPP--Attack Lab实验记录"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone,wechat"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/lincx-911" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.stana.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://twitter.com/" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+</ul>
+  
+  <div class="copyright">
+    &copy;2020  -
+    2021
+    <div class="publishby">
+        Theme by <a href="https://github.com/lincx-911" target="_blank"> lincx </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+      <div>
+        <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2020130626号-1</a>
+      </div>
+    
+    
+  </div>
+  
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.stana.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://www.stana.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/www.stana.top\/',
+            CONTENT_URL: 'https:\/\/www.stana.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.stana.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+    var GUEST = ['nick', 'mail', 'link'];
+    var meta = 'nick,mail';
+    meta = meta.split(',').filter(function (item) {
+        return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+        el: '#vcomments',
+        verify: null ,
+        notify: null ,
+        appId: 'ocMp8WMQiBMKT83NJXmMrHR2-gzGzoHsz',
+        appKey: '1rmhmMQvdUG0trgmzmTWYGea',
+        placeholder: 'enjoy~',
+        avatar: 'wavatar',
+        meta: meta,
+        pageSize: '10' || 10,
+        visitor: true 
+});
+</script>
+
+  </body>
+</html>

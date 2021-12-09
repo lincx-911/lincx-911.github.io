@@ -6,10 +6,19 @@
     <description>Recent content on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Tue, 07 Dec 2021 23:42:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 09 Dec 2021 10:33:23 +0800</lastBuildDate>
     
         <atom:link href="https://www.stana.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSAPP--Architecture Lab实验记录</title>
+      <link>https://www.stana.top/2021/12/architecture_lab/</link>
+      <pubDate>Thu, 09 Dec 2021 10:33:23 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2021/12/architecture_lab/</guid>
+      <description>CSAPP&amp;ndash;Architecture Lab实验记录 实验准备 实验资料 《深入理解计算机系统》第四章 处理器体系结构 lab官网 环境搭建 博主用的是 linux （ubuntu20.04） 1、首先下</description>
+    </item>
     
     <item>
       <title>CSAPP--Attack Lab实验记录</title>
