@@ -6,10 +6,19 @@
     <description>Recent content in csapp-lab on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Thu, 09 Dec 2021 10:33:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Dec 2021 09:44:21 +0800</lastBuildDate>
     
         <atom:link href="https://www.stana.top/tags/csapp-lab/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSAPP--Cache Lab实验记录</title>
+      <link>https://www.stana.top/2021/12/cache_lab/</link>
+      <pubDate>Fri, 10 Dec 2021 09:44:21 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2021/12/cache_lab/</guid>
+      <description>CSAPP&amp;ndash;Cache Lab实验记录 前言 This lab will help you understand the impact that cache memories can have on the performance of your C programs. The lab consists of two parts. In the first part you will write a small C program (about 200-300 lines) that simulates the behavior of a cache memory. In the second part, you will optimize a small matrix transpose function,</description>
+    </item>
     
     <item>
       <title>CSAPP--Architecture Lab实验记录</title>

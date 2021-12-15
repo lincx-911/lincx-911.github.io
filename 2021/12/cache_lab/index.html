@@ -2,7 +2,7 @@
 <html lang="zh">
   <head>
     <title>
-        CSAPP--Data Lab实验记录 - lincx blog
+        CSAPP--Cache Lab实验记录 - lincx blog
       </title>
         <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,29 +21,29 @@
     <meta http-equiv="window-target" content="_top" />
     
     
-    <meta name="description" content="csapp datalab实验记录" />
+    <meta name="description" content="csapp cache lab实验记录" />
     <meta name="generator" content="Hugo 0.89.4 with theme pure" />
-    <title>CSAPP--Data Lab实验记录 - lincx blog</title>
+    <title>CSAPP--Cache Lab实验记录 - lincx blog</title>
     
     
     <link rel="stylesheet" href="https://www.stana.top/css/style.min.a85959a41e7abcc0db1f81f44bd264649303417f91b536e87dcde644340fea6d.css">
     
     <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-    <meta property="og:title" content="CSAPP--Data Lab实验记录" />
-<meta property="og:description" content="csapp datalab实验记录" />
+    <meta property="og:title" content="CSAPP--Cache Lab实验记录" />
+<meta property="og:description" content="csapp cache lab实验记录" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.stana.top/2021/12/csapp_datalab/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-12-04T11:31:20+08:00" />
-<meta property="article:modified_time" content="2021-12-04T11:31:20+08:00" />
+<meta property="og:url" content="https://www.stana.top/2021/12/cache_lab/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-10T09:44:21+08:00" />
+<meta property="article:modified_time" content="2021-12-10T09:44:21+08:00" />
 
-<meta itemprop="name" content="CSAPP--Data Lab实验记录">
-<meta itemprop="description" content="csapp datalab实验记录"><meta itemprop="datePublished" content="2021-12-04T11:31:20+08:00" />
-<meta itemprop="dateModified" content="2021-12-04T11:31:20+08:00" />
-<meta itemprop="wordCount" content="2688">
+<meta itemprop="name" content="CSAPP--Cache Lab实验记录">
+<meta itemprop="description" content="csapp cache lab实验记录"><meta itemprop="datePublished" content="2021-12-10T09:44:21+08:00" />
+<meta itemprop="dateModified" content="2021-12-10T09:44:21+08:00" />
+<meta itemprop="wordCount" content="2239">
 <meta itemprop="keywords" content="csapp-lab," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="CSAPP--Data Lab实验记录"/>
-<meta name="twitter:description" content="csapp datalab实验记录"/>
+<meta name="twitter:title" content="CSAPP--Cache Lab实验记录"/>
+<meta name="twitter:description" content="csapp cache lab实验记录"/>
 
     <!--[if lte IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -332,8 +332,8 @@ function tagCloud(where, min, max) {
       <h1 itemprop="name">
   <a
     class="article-title"
-    href="/2021/12/csapp_datalab/"
-    >CSAPP--Data Lab实验记录</a
+    href="/2021/12/cache_lab/"
+    >CSAPP--Cache Lab实验记录</a
   >
 </h1>
 
@@ -341,8 +341,8 @@ function tagCloud(where, min, max) {
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.stana.top/2021/12/csapp_datalab/" class="article-date">
-  <time datetime="2021-12-04 11:31:20 &#43;0800 CST" itemprop="datePublished">2021-12-04</time>
+<a href="https://www.stana.top/2021/12/cache_lab/" class="article-date">
+  <time datetime="2021-12-10 09:44:21 &#43;0800 CST" itemprop="datePublished">2021-12-10</time>
 </a>
 </span>
 <span class="article-category">
@@ -356,461 +356,316 @@ function tagCloud(where, min, max) {
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2021/12/csapp_datalab/" class="leancloud_visitors"  data-flag-title="CSAPP--Data Lab实验记录">
+    	<span id="/2021/12/cache_lab/" class="leancloud_visitors"  data-flag-title="CSAPP--Cache Lab实验记录">
 			<span class="leancloud-visitors-count">0</span>
 		</span>
     </span>
-        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/12/csapp_datalab/#comments"
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2021/12/cache_lab/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2688字</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6分 </span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2239字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5分 </span>
       </div>
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
-      <h1 id="csapp--data-lab实验记录">CSAPP&ndash;Data Lab实验记录</h1>
-<p>[TOC]</p>
+      <h1 id="csapp--cache-lab实验记录">CSAPP&ndash;Cache Lab实验记录</h1>
 <h2 id="前言">前言</h2>
-<blockquote>
-<p>Students implement simple logical, two&rsquo;s complement, and floating point functions, but using a highly restricted subset of C. For example, they might be asked to compute the absolute value of a number using only bit-level operations and straightline code. This lab helps students understand the bit-level representations of C data types and the bit-level behavior of the operations on data.</p>
-</blockquote>
-<h3 id="实验要求">实验要求</h3>
-<pre><code class="language-c">/*
- * Instructions to Students:
- *
- * STEP 1: Read the following instructions carefully.
- */
-
-You will provide your solution to the Data Lab by
-editing the collection of functions in this source file.
-
-INTEGER CODING RULES:
- 
-  Replace the &quot;return&quot; statement in each function with one
-  or more lines of C code that implements the function. Your code 
-  must conform to the following style:
- 
-  int Funct(arg1, arg2, ...) {
-      /* brief description of how your implementation works */
-      int var1 = Expr1;
-      ...
-      int varM = ExprM;
-
-      varJ = ExprJ;
-      ...
-      varN = ExprN;
-      return ExprR;
-  }
-
-  Each &quot;Expr&quot; is an expression using ONLY the following:
-  1. Integer constants 0 through 255 (0xFF), inclusive. You are
-      not allowed to use big constants such as 0xffffffff.
-  2. Function arguments and local variables (no global variables).
-  3. Unary integer operations ! ~
-  4. Binary integer operations &amp; ^ | + &lt;&lt; &gt;&gt;
-    
-  Some of the problems restrict the set of allowed operators even further.
-  Each &quot;Expr&quot; may consist of multiple operators. You are not restricted to
-  one operator per line.
-
-  You are expressly forbidden to:
-  1. Use any control constructs such as if, do, while, for, switch, etc.
-  2. Define or use any macros.
-  3. Define any additional functions in this file.
-  4. Call any functions.
-  5. Use any other operations, such as &amp;&amp;, ||, -, or ?:
-  6. Use any form of casting.
-  7. Use any data type other than int.  This implies that you
-     cannot use arrays, structs, or unions.
-
- 
-  You may assume that your machine:
-  1. Uses 2s complement, 32-bit representations of integers.
-  2. Performs right shifts arithmetically.
-  3. Has unpredictable behavior when shifting an integer by more
-     than the word size.
-
-EXAMPLES OF ACCEPTABLE CODING STYLE:
-  /*
-   * pow2plus1 - returns 2^x + 1, where 0 &lt;= x &lt;= 31
-   */
-  int pow2plus1(int x) {
-     /* exploit ability of shifts to compute powers of 2 */
-     return (1 &lt;&lt; x) + 1;
-  }
-
-  /*
-   * pow2plus4 - returns 2^x + 4, where 0 &lt;= x &lt;= 31
-   */
-  int pow2plus4(int x) {
-     /* exploit ability of shifts to compute powers of 2 */
-     int result = (1 &lt;&lt; x);
-     result += 4;
-     return result;
-  }
-
-FLOATING POINT CODING RULES
-
-For the problems that require you to implent floating-point operations,
-the coding rules are less strict.  You are allowed to use looping and
-conditional control.  You are allowed to use both ints and unsigneds.
-You can use arbitrary integer and unsigned constants.
-
-You are expressly forbidden to:
-  1. Define or use any macros.
-  2. Define any additional functions in this file.
-  3. Call any functions.
-  4. Use any form of casting.
-  5. Use any data type other than int or unsigned.  This means that you
-     cannot use arrays, structs, or unions.
-  6. Use any floating point data types, operations, or constants.
-
-
-NOTES:
-  1. Use the dlc (data lab checker) compiler (described in the handout) to 
-     check the legality of your solutions.
-  2. Each function has a maximum number of operators (! ~ &amp; ^ | + &lt;&lt; &gt;&gt;)
-     that you are allowed to use for your implementation of the function. 
-     The max operator count is checked by dlc. Note that '=' is not 
-     counted; you may use as many of these as you want without penalty.
-  3. Use the btest test harness to check your functions for correctness.
-  4. Use the BDD checker to formally verify your functions
-  5. The maximum number of ops for each function is given in the
-     header comment for each function. If there are any inconsistencies 
-     between the maximum ops in the writeup and in this file, consider
-     this file the authoritative source.
-
-/*
- * STEP 2: Modify the following functions according the coding rules.
- * 
- *   IMPORTANT. TO AVOID GRADING SURPRISES:
- *   1. Use the dlc compiler to check that your solutions conform
- *      to the coding rules.
- *   2. Use the BDD checker to formally verify that your solutions produce 
- *      the correct answers.
- */
-</code></pre>
+<p>This lab will help you understand the impact that cache memories can have on the performance of your C programs. The lab consists of two parts.</p>
+<p>In the first part you will write a small C program (about 200-300 lines) that simulates the behavior of a cache memory. In the second part, you will optimize a small matrix transpose function, with the goal of minimizing the number of cache misses.</p>
+<p>这个实验包括两个部分，Part A 是编写一个c语言cache模拟器。Part B是一个矩阵转置，给出了三种规模，你的任务就是尽可能的提高高速缓存的命中率，它会根据你的miss，hits，eviction这三个值的大小进行打分，评分的范围已给出。</p>
+<h2 id="实验准备">实验准备</h2>
+<ul>
+<li>下载实验资料&ndash;<a href="http://csapp.cs.cmu.edu/3e/labs.html">官网</a></li>
+<li>深入理解计算机系统第六章</li>
+<li>实验指导<a href="http://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/recitations/rec07.pdf">ppt</a></li>
+</ul>
 <h2 id="实验内容">实验内容</h2>
-<h3 id="1-bitand">1. bitAnd</h3>
-<p>题目要求只能使用 ~ 与 | 进行解答。可以想想摩尔运算 A&amp;B = ~（（~A) | (~B) )</p>
-<pre><code class="language-c">/* 
- * bitAnd - x&amp;y using only ~ and | 
- *   Example: bitAnd(6, 5) = 4
- *   Legal ops: ~ |
- *   Max ops: 8
- *   Rating: 1
- */
-int bitAnd(int x, int y) {
-  return ~((~x)|(~y));
-}
+<h3 id="part-a">Part A</h3>
+<p><strong>（1）内容分析</strong></p>
+<p>编写一个cache模拟器，该模拟器可以模拟在一系列的数据访问中cache的命中、不命中与牺牲行的情况，其中，需要牺牲行时，用LRU替换策略进行替换。</p>
+<p>cache模拟器需要处理下列的命令</p>
+<pre><code>Usage: ./csim-ref [-hv] -s &lt;s&gt; -E &lt;E&gt; -b &lt;b&gt; -t &lt;tracefile&gt;
 </code></pre>
-<h3 id="2-getbyte">2 .getByte</h3>
-<p>获取第 （n+1） 字节。一个字节8 bit，n字节 为 8*n bit = (n&laquo;3) bit 。所以可以将x  右移 n&laquo;3 bit，然后与 0xff 做与运算，得到结果。</p>
-<pre><code class="language-c">/* 
- * getByte - Extract byte n from word x
- *   Bytes numbered from 0 (LSB) to 3 (MSB)
- *   Examples: getByte(0x12345678,1) = 0x56
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 6
- *   Rating: 2
- */
-int getByte(int x, int n) {
-  int mask=0xff;
-  return (x&gt;&gt;(n&lt;&lt;3))&amp;mask;
-}
+<p>其中各参数意义如下：</p>
+<p>①-h：输出帮助信息的选项；</p>
+<p>②-v：输出详细运行过程信息的选项；</p>
+<p>③-s：组索引的位数(意味着组数S=2^s)；</p>
+<p>④-E：每一组包含的行数；</p>
+<p>⑤-b：偏移位的宽度(意味着块的大小为B=2^b);</p>
+<p>⑥-t：输入数据文件的路径(测试数据从该文件里面读取)。</p>
+<p><code>traces</code> 文件夹下面的五个文件是测试数据。以·<code>yi.trace</code>为例</p>
+<pre><code class="language-bash">$ cat yi.trace
+ L 10,1
+ M 20,1
+ L 22,1
+ S 18,1
+ L 110,1
+ L 210,1
+ M 12,1
 </code></pre>
-<h3 id="3-logicalshift">3. logicalShift</h3>
-<p>在c语言中 <code>&gt;&gt;</code>运算为算术右移，当x&lt;0 时，右移最高位会补1，x&gt;0，右移最高位补0。而逻辑右移，最高位都是补0。</p>
-<p>所以解题思路，可以先做 x&raquo;n 然后再与mask=<code>0xfffffff</code>移位后的结果做<code>&amp;</code>运算。  <code>((0x1&lt;&lt;(32+~n))+~0)|(0x1&lt;&lt;(32+~n))</code> 这个就是构造mask的方法。</p>
-<p>~0=-，这个式子就类似 (m-1)|(m) ,例如 7|8 == 0111 | 1000 =1111就是让最高位与后面的位都置1.</p>
-<pre><code class="language-c">/* 
- * logicalShift - shift x to the right by n, using a logical shift
- *   Can assume that 0 &lt;= n &lt;= 31
- *   Examples: logicalShift(0x87654321,4) = 0x08765432
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 20
- *   Rating: 3 
- */
-int logicalShift(int x, int n) {
-  int mask=((0x1&lt;&lt;(32+~n))+~0)|(0x1&lt;&lt;(32+~n));
-  return (x&gt;&gt;n)&amp;mask;
-}
+<p>格式为：</p>
+<p>(空格) 操作类型 地址 大小</p>
+<p>其中，</p>
+<p>“I”表示指令加载，</p>
+<p>“L”表示数据加载，</p>
+<p>“S”表示数据存储，</p>
+<p>“M”表示数据修改（即数据存储之后的数据加载）。</p>
+<p>每个“I”前面都没有空格。每个“M”，“L”和“S”之前总是有空格。</p>
+<p>地址字段指定一个32位的十六进制存储器地址。</p>
+<p>大小字段指定操作访问的字节数；</p>
+<p>每个数据加载 (L) 或存储 (S) 操作最多可导致一次缓存未命中。数据修改操作 (M) 被视为加载，然后是存储到同一地址。因此，M 操作可能导致两次缓存命中，或者一次未命中和一次命中加上可能的逐出。</p>
+<p><strong>（2）cache</strong></p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211210103531181.png" alt="image-20211210103531181"></p>
+<p>首先是cache的构成:</p>
+<p>cache有2^s组，每组有E行（E分为三种情况：E=1，称为直接映射高速缓存；1&lt;E&lt;C/B:组相联高速缓存；E=C/B，全相连高速缓存，也就是一组包含了所有的行），然后是每行的构成：（1）有效位vild(取0和1，1表示存储了有效信息，0表示没有，判断命中的时候需要用到）（2）标记位t=m-(s+b),当cpu要读取某个地址的内容时，就会将某个地址的第一个部分：标记位与它进行对比，匹配相等则命中，也就是锁定在某一行（3）数据块B，B负责存储这个地址的内容，把B想象成字节数组就好，共有B-1个小块（别和B这个数据块搞混咯,下标从0开始，因此是B-1）。在这里简单提下b的作用吧，虽然实验没用到。b理解为数据块B这个数组的下标就好，也就是你要从B[b]这个位置开始读取字。注意这里的数据都是2进制的。</p>
+<p>根据上面的分析可以定义cache结构体：</p>
+<pre><code class="language-c">// 定义行属性
+typedef struct{
+    int valid_bit;
+    int tag;
+    int lru_count;
+}Cache_line,**Cache;
 </code></pre>
-<h3 id="4-bitcount">4. bitCount</h3>
-<p>这个题目要求算出 <code>x</code> 的二进制 中 <code>1</code>的个数。</p>
-<pre><code class="language-c">/*
- * bitCount - returns count of number of 1's in word
- *   Examples: bitCount(5) = 2, bitCount(7) = 3
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 40
- *   Rating: 4
- */
-int bitCount(int x) {
-   int mk1, mk2, mk3, mk4, mk5, result;
-    mk5 = 0xff | (0xff &lt;&lt; 8);
-    mk4 = 0xff | (0xff &lt;&lt; 16);
-    mk3 = 0x0f | (0x0f &lt;&lt; 8);
-    mk3 = mk3 | (mk3 &lt;&lt; 16);
-    mk2 = 0x33 | (0x33 &lt;&lt; 8);
-    mk2 = mk2 | (mk2 &lt;&lt; 16);
-    mk1 = 0x55 | (0x55 &lt;&lt; 8);
-    mk1 = mk1 | (mk1 &lt;&lt; 16);
+<p><strong>（3）几个函数</strong></p>
+<ul>
+<li>**getopt()：**解析命令行</li>
+<li>**fscanf：**读文件</li>
+<li>**malloc/free：**分配释放内存</li>
+</ul>
+<p><strong>（4）编写程序</strong></p>
+<pre><code class="language-c">#include&lt;stdlib.h&gt;
+#include&lt;stdio.h&gt;
+#include&lt;unistd.h&gt;
+#include&lt;malloc.h&gt;
+#include&lt;string.h&gt;
+#include &lt;limits.h&gt;
+#include&lt;getopt.h&gt;
+#include&quot;cachelab.h&quot;
+int h,v,s,E,b,S; //模拟参数
 
-    // 先把16个相邻两位有几个1，并用这两位表示，然后以此类推，
-    // 即： 32-&gt;16， 16-&gt;8， 8-&gt;4， 4-&gt;2， 2-&gt;1
-    result = (mk1 &amp; x) + (mk1 &amp; (x &gt;&gt; 1));
-    result = (mk2 &amp; result) + (mk2 &amp; (result &gt;&gt; 2));
-    result = mk3 &amp; (result + (result &gt;&gt; 4));
-    result = mk4 &amp; (result + (result &gt;&gt; 8));
-    result = mk5 &amp; (result + (result &gt;&gt; 16));
-    return result;
-}
-</code></pre>
-<h3 id="5-bang">5. bang</h3>
-<p>不能使用<code>!</code>计算 <code>!x</code>。这道题的思路是找<code>x </code>的二进制数是否存在 <code>1</code>，那么可以利用二分查找的思想，先找高16位。若高16位为0，则找低16位。否则在高16位找。</p>
-<p>然后又折半，找八位&hellip;&hellip;以此类推，最后得到 <code>x</code>，0 -&gt;1,1-&gt;0。</p>
-<p>思路2 一个非0的数与其相反数做 <code>|</code>运算，则最高位为1， x |((~x)+1。当x=0时，结果依然为0。所以可以通过判断最高位的值然后做 <code>~</code>运算 再&amp;1得到结果。</p>
-<pre><code class="language-c">/* 
- * bang - Compute !x without using !
- *   Examples: bang(3) = 0, bang(0) = 1
- *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 12
- *   Rating: 4 
- */
-int bang(int x) {
-  x=(x&gt;&gt;16)|x;
-  x=(x&gt;&gt;8)|x;
-  x=(x&gt;&gt;4)|x;
-  x=(x&gt;&gt;2)|x;
-  x=(x&gt;&gt;1)|x;
-  return ~x&amp;0x1;
-}
-/*
-*题解2
-*/
-int bang(int x) {
-  x=(x&gt;&gt;16)|x;
-  x=(x&gt;&gt;8)|x;
-  x=(x&gt;&gt;4)|x;
-  x=(x&gt;&gt;2)|x;
-  x=(x&gt;&gt;1)|x;
-  return ~x&amp;0x1;
-}
-</code></pre>
-<h3 id="6-tmin">6. tmin</h3>
-<p>二进制补码最小值</p>
-<pre><code class="language-c">/*
- * tmin - return minimum two's complement integer
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 4
- *   Rating: 1
- */
-int tmin(void) {
-  return 0x1&lt;&lt;31;
-}
-</code></pre>
-<h3 id="7-fitsbits">7. fitsBits</h3>
-<p>只给出n个二进制位，能否表示x。</p>
-<p>可以先将x 右移 n-1 位，然后，比较这时是否全1或全0，若是，则可以表示，若不是，则不能表示。</p>
-<pre><code class="language-c">/*
- * fitsBits - return 1 if x can be represented as an
- *  n-bit, two's complement integer.
- *   1 &lt;= n &lt;= 32
- *   Examples: fitsBits(5,3) = 0, fitsBits(-4,3) = 1
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 15
- *   Rating: 2
- */
-int fitsBits(int x, int n) {
-  int bit = ~(~n+1);
-  int temp = x&gt;&gt;bit;
-  return !temp|!(temp+1);
-}
-</code></pre>
-<h3 id="8--divpwr2">8.  divpwr2</h3>
-<p>计算 x/(2^n) 但结果需要向0 靠近。</p>
-<p>主要考虑负数的情况，因为 -33/16 = -3，向更小的方向靠近了。所以可以构造一个数 bias （偏置）使得在 x &gt;= 0时，bias = 0；在 x &lt; 0 时，bias = (1 &laquo; n) - 1;</p>
-<pre><code class="language-c">/*
- * divpwr2 - Compute x/(2^n), for 0 &lt;= n &lt;= 30
- *  Round toward zero
- *   Examples: divpwr2(15,1) = 7, divpwr2(-33,4) = -2
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 15
- *   Rating: 2
- */
-int divpwr2(int x, int n) {
-    int bias=(x&gt;&gt;31)&amp;((0x1&lt;&lt;n)+~0);
-  	return (x+bias)&gt;&gt;n;
-}
-</code></pre>
-<h3 id="9-negate">9. negate</h3>
-<p>相反数</p>
-<pre><code class="language-c">/*
- * negate - return -x
- *   Example: negate(1) = -1.
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 5
- *   Rating: 2
- */
-int negate(int x) {
-  return (~x+1);
-}
-</code></pre>
-<h3 id="10-ispositive">10. isPositive</h3>
-<p>判断是否为正数</p>
-<pre><code class="language-c">/*
- * isPositive - return 1 if x &gt; 0, return 0 otherwise
- *   Example: isPositive(-1) = 0.
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 8
- *   Rating: 3
- */
-int isPositive(int x) {
-  int tmp=(x&gt;&gt;31)&amp;0x1;
-  int ans = !(!tmp|x);
-  return ans;
-}
-</code></pre>
-<h3 id="11-islessorequal">11. isLessOrEqual</h3>
-<p>x &lt;= y 是否成立。可以用x-y 判断结果是否为非正数。</p>
-<pre><code class="language-c">/*
- * isLessOrEqual - if x &lt;= y  then return 1, else return 0
- *   Example: isLessOrEqual(4,5) = 1.
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 24
- *   Rating: 3
- */
-int isLessOrEqual(int x, int y) {
-   int val=!!((x+~y)&gt;&gt;31);
-    x=x&gt;&gt;31;
-    y=y&gt;&gt;31;
-    return (!!x|!y)&amp;((!!x&amp;!y)|(val));
-}
-</code></pre>
-<h3 id="12-ilog2">12. ilog2</h3>
-<p>思路有点像第五题，这道题主要是想找出最高位的1是第几位。</p>
-<pre><code class="language-c">/*
- * ilog2 - return floor(log base 2 of x), where x &gt; 0
- *   Example: ilog2(16) = 4
- *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;
- *   Max ops: 90
- *   Rating: 4
- */
-int ilog2(int x) {
-  int ans=0;
-  ans=(!!(x&gt;&gt;(16)))&lt;&lt;4;
-  ans=ans+((!!(x&gt;&gt;(8+ans)))&lt;&lt;3);
-  ans=ans+((!!(x&gt;&gt;(4+ans)))&lt;&lt;2);
-  ans=ans+((!!(x&gt;&gt;(2+ans)))&lt;&lt;1);
-  ans=ans+((!!(x&gt;&gt;(1+ans)))&lt;&lt;0);
-  return ans;
-}
-</code></pre>
-<h3 id="13-float_neg">13. float_neg</h3>
-<p>计算浮点数x的负数。。浮点数是由s(1位)E(8位)M(23位)<code>(-1)^s * M * 2^E</code>组成的浮点数。判断是否为NAN</p>
-<pre><code class="language-c">/*
- * float_neg - Return bit-level equivalent of expression -f for
- *   floating point argument f.
- *   Both the argument and result are passed as unsigned int's, but
- *   they are to be interpreted as the bit-level representations of
- *   single-precision floating point values.
- *   When argument is NaN, return argument.
- *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
- *   Max ops: 10
- *   Rating: 2
- */
-unsigned float_neg(unsigned uf) {
-  int c=0x00ffffff;
-  if(((uf&lt;&lt;1)^(0xffffffff))&lt;c){
-    return uf;
-  }else{
-    return uf^(0x80000000);
-  }
-}
-</code></pre>
-<h3 id="14-float_i2f">14. float_i2f</h3>
-<p>将int转换为float</p>
-<pre><code class="language-c">/*
- * float_i2f - Return bit-level equivalent of expression (float) x
- *   Result is returned as unsigned int, but
- *   it is to be interpreted as the bit-level representation of a
- *   single-precision floating point values.
- *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
- *   Max ops: 30
- *   Rating: 4
- */
-unsigned float_i2f(int x) {
-  unsigned ans;
-  int tmpx=x;
-  int f=0;
-  int delta=0;
-  int tail=0;
-  int E=0;
+char trace[1000]; //接收trace文件路径
 
-  if(x == 0) return x;
-  if(x == 0x80000000) return 0xcf000000;
+int hit_count,miss_count,eviction_count;
+// 定义行属性
+typedef struct{
+    int valid_bit;
+    int tag;
+    int lru_stamp;//时间戳
+}Cache_line,*Cache_asso,**Sim_cache;
 
-   ans=x&amp;0x80000000;
+Sim_cache Cache = NULL;
 
-   if(ans)  tmpx = -x;
+int timenow=0; // 记录当前时间
 
-   while( (tmpx&gt;&gt;E)) E++;
-    E = E -1;
-
-    tmpx = tmpx&lt;&lt;(31-E);
-    tail = (tmpx &gt;&gt; 8) &amp; 0x007FFFFF;
-    f = tmpx &amp; 0xff;
-    delta =(f&gt;128) || ( (f == 128)  &amp;&amp; (tail &amp; 1) );
-    tail+=delta;
-
-    E=E+127;
-
-    if(tail &gt;&gt; 23)
-    {
-        tail = tail &amp;0x007FFFFF;
-        E+=1;
+// 初始化cache
+void init_cache(){
+    Cache = (Sim_cache)malloc(sizeof(Cache_asso)*S);
+    for(int i=0;i&lt;S;++i){
+        Cache[i] = (Cache_asso)malloc(sizeof(Cache_line)*E);
+        for(int j=0;j&lt;E;++j){
+            Cache[i][j].valid_bit=0;
+            Cache[i][j].tag=-1;
+            Cache[i][j].lru_stamp=0;
+        }
     }
-    ans=ans | E &lt;&lt; 23 | tail;
-    return ans;
 }
 
-</code></pre>
-<h3 id="15-float_twice">15. float_twice</h3>
-<pre><code class="language-c">/*
- * float_twice - Return bit-level equivalent of expression 2*f for
- *   floating point argument f.
- *   Both the argument and result are passed as unsigned int's, but
- *   they are to be interpreted as the bit-level representation of
- *   single-precision floating point values.
- *   When argument is NaN, return argument
- *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
- *   Max ops: 30
- *   Rating: 4
- */
-unsigned float_twice(unsigned uf) {
-  unsigned S=uf&amp;0x80000000;
-   unsigned E=uf&amp;0x7F800000;
-   unsigned M=uf&amp;0x007FFFFF;
-   unsigned wu = 0xFF000000;
-   unsigned tmp = uf &lt;&lt; 1;
-   unsigned ans = uf;
+/* 打印 helper 内容的函数，-h 命令使用，内容可自定义*/
+void printUsage()
+{
+    printf(&quot;Usage: ./csim-ref [-hv] -s &lt;num&gt; -E &lt;num&gt; -b &lt;num&gt; -t &lt;file&gt;\n&quot;
+            &quot;Options:\n&quot;
+            &quot;  -h         Print this help message.\n&quot;
+            &quot;  -v         Optional verbose flag.\n&quot;
+            &quot;  -s &lt;num&gt;   Number of set index bits.\n&quot;
+            &quot;  -E &lt;num&gt;   Number of lines per set.\n&quot;
+            &quot;  -b &lt;num&gt;   Number of block offset bits.\n&quot;
+            &quot;  -t &lt;file&gt;  Trace file.\n\n&quot;
+            &quot;Examples:\n&quot;
+            &quot;  linux&gt;  ./csim-ref -s 4 -E 1 -b 4 -t traces/yi.trace\n&quot;
+            &quot;  linux&gt;  ./csim-ref -v -s 8 -E 2 -b 4 -t traces/yi.trace\n&quot;);
+}
+// 加载数据
+void loadData(unsigned int addr){
+    int set_index=(addr &gt;&gt; b) &amp; ((-1U) &gt;&gt; (64 - s));
+    int tag = addr&gt;&gt;(b+s);
+    int min_stamp = INT_MAX;
+    int min_stamp_index = -1;
+    for(int i=0;i&lt;E;++i){
+        if(Cache[set_index][i].tag==tag){
+            Cache[set_index][i].lru_stamp=timenow;
+            ++hit_count;
+            if(v==1)printf(&quot;hit &quot;);
+            return;
+        }
+    }
+    // 未命中
+    for(int i=0;i&lt;E;++i){ //查看有无空位
+        if(Cache[set_index][i].valid_bit==0){
+            Cache[set_index][i].valid_bit=1;
+            Cache[set_index][i].tag = tag;
+            Cache[set_index][i].lru_stamp=timenow;
+            ++miss_count;
+            if(v==1)printf(&quot;miss &quot;);
+            return;
+        }
+    }
+    if(v==1)printf(&quot;miss eviction &quot;);
+    //满了
+    ++eviction_count;
+    ++miss_count;
+    //找出早那个
+    for(int i=0;i&lt;E;++i){
+        if(Cache[set_index][i].lru_stamp&lt;min_stamp){
+            min_stamp_index=i;
+            min_stamp=Cache[set_index][i].lru_stamp;
+        }
+    }
+    Cache[set_index][min_stamp_index].tag=tag;
+    Cache[set_index][min_stamp_index].lru_stamp=timenow;
+    return;
 
-   if( ( wu &amp; tmp ) ==  wu)
-   {
-            return uf;
-   }
+}
+// 释放内存
+void free_Cache(){
+    for(int i = 0; i &lt; S; ++i)
+		free(Cache[i]);
+	free(Cache);         
+}
+// 解析trace的参数
+void pahse_trace(){
+    FILE* pFile = fopen(trace,&quot;r&quot;);
+    if(pFile==NULL){
+        printf(&quot;open file error\n&quot;);
+        exit(-1);
+    }
+    char op[10];
+    unsigned int addr;
+    int size;
+    while(fscanf(pFile,&quot;%s %x,%d\n&quot;,op,&amp;addr,&amp;size)&gt;0){
+        if(strcmp(op,&quot;I&quot;)==0)continue;
+        if(v==1)printf(&quot;%s %x %d &quot;,op,addr,size);
+        loadData(addr);
+        if(strcmp(op,&quot;M&quot;)==0){
+            loadData(addr);
+        }
+        if(v==1)printf(&quot;\n&quot;);
+        timenow++;
+    }   
+    fclose(pFile);
+    free_Cache();
+}
 
-   if(E != 0)
-   {
-        ans=S+(E+0x00800000)+M;
-   }
-   else if( M!=0 )
-   {
-        ans=S+E+(M &lt;&lt; 1);
-   }
 
-    return ans;
+
+int main(int argc, char* argv[])
+{
+    h=0;
+    v=0;
+    hit_count=miss_count=eviction_count=0;
+    int opt=-1;
+    while (-1!=(opt=getopt(argc,argv,&quot;hvs:E:b:t:&quot;)))
+    {
+        switch (opt)
+        {
+        case 'v':
+            v = 1;
+            break;
+        case 's':
+            s = atoi(optarg);
+            break;
+        case 'E':
+            E = atoi(optarg);
+            break;
+        case 'b':
+            b = atoi(optarg);
+            break;
+        case 't':
+            strcpy(trace,optarg);
+            break;
+        case 'h':
+            h = 1;
+        default:
+            printUsage();
+            break;
+        }
+    }
+    //检验参数
+    if(s&lt;=0 || E&lt;=0 || b&lt;=0 ||trace==NULL){
+        printf(&quot;illegal argument\n&quot;);
+        exit(-1);
+    }
+    S=1&lt;&lt;s;
+    if(h==1){
+        printUsage();
+    }
+    init_cache();
+    pahse_trace();
+    printSummary(hit_count, miss_count, eviction_count);
+    return 0;
 }
 </code></pre>
+<p>编译，并查看结果：</p>
+<pre><code class="language-bash">$ make clean;make
+rm -rf *.o
+rm -f *.tar
+rm -f csim
+rm -f test-trans tracegen
+rm -f trace.all trace.f*
+rm -f .csim_results .marker
+gcc -g -Wall -Werror -std=c99 -m64 -o csim csim.c cachelab.c -lm
+gcc -g -Wall -Werror -std=c99 -m64 -O0 -c trans.c
+gcc -g -Wall -Werror -std=c99 -m64 -o test-trans test-trans.c cachelab.c trans.o
+gcc -g -Wall -Werror -std=c99 -m64 -O0 -o tracegen tracegen.c trans.o cachelab.c
+# Generate a handin tar file each time you compile
+tar -cvf lincx-handin.tar  csim.c trans.c
+csim.c
+trans.c
+
+$ ./test-csim
+                        Your simulator     Reference simulator
+Points (s,E,b)    Hits  Misses  Evicts    Hits  Misses  Evicts
+     3 (1,1,1)       9       8       6       9       8       6  traces/yi2.trace
+     3 (4,2,4)       4       5       2       4       5       2  traces/yi.trace
+     3 (2,1,4)       2       3       1       2       3       1  traces/dave.trace
+     3 (2,1,3)     167      71      67     167      71      67  traces/trans.trace
+     3 (2,2,3)     201      37      29     201      37      29  traces/trans.trace
+     3 (2,4,3)     212      26      10     212      26      10  traces/trans.trace
+     3 (5,1,5)     231       7       0     231       7       0  traces/trans.trace
+     6 (5,1,5)  265189   21775   21743  265189   21775   21743  traces/long.trace
+     27
+
+TEST_CSIM_RESULTS=27
+</code></pre>
+<p>全部通过。</p>
+<h3 id="part-b">Part B</h3>
+<p><strong>（1）任务：</strong></p>
+<ol>
+<li>
+<p>编写一个实现矩阵转置的函数。即对于给定的矩阵A[N][M]，得到矩阵B[M][N]，使得对于任意0&lt;=i&lt;N、0&lt;=j&lt;M，有B[j][i]=A[i][j]，并且使函数调用过程中对cache的不命中数miss尽可能少。</p>
+</li>
+<li>
+<p>在如下函数里面编写最终代码：</p>
+<p>char transpose_submit_desc[] = &ldquo;Transpose submission&rdquo;;</p>
+<p>void transpose_submit(int M, int N, int A[N][M], int B[M][N])；</p>
+<p><strong>要求</strong>：</p>
+<ol>
+<li>
+<p>最多只能定义 12 个局部变量</p>
+</li>
+<li>
+<p>不使用任何的数组，不调用任何类似于 malloc 的开辟内存的函数</p>
+</li>
+<li>
+<p>测试矩阵的规模为 32 × 32，64 × 64，61 × 67</p>
+</li>
+<li>
+<p>测试 cache 的组成：32 组， 每组一行，每个块 32 字节。对于编写的函数，miss 个数越少越好。</p>
+</li>
+</ol>
+<p><strong>（2）分析</strong></p>
+<p>这里可分成32x32，16x16，8x8，4x4,cache每块的字节数是32，也就是8个int，因此为了有效地利用cache的块容量，选取8x8的分块效果是最好的。</p>
+</li>
+</ol>
 
     </div>
     <div class="article-footer">
@@ -818,7 +673,7 @@ unsigned float_twice(unsigned uf) {
   <ul class="post-copyright list-unstyled">
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接: </strong>
-      <a href="https://www.stana.top/2021/12/csapp_datalab/" title="CSAPP--Data Lab实验记录" target="_blank" rel="external">https://www.stana.top/2021/12/csapp_datalab/</a>
+      <a href="https://www.stana.top/2021/12/cache_lab/" title="CSAPP--Cache Lab实验记录" target="_blank" rel="external">https://www.stana.top/2021/12/cache_lab/</a>
     </li>
     <li class="post-copyright-license">
       <strong>License: </strong>
@@ -853,14 +708,9 @@ unsigned float_twice(unsigned uf) {
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.stana.top/2021/12/picturebed/" title="Gitee PicGo打造免费个人图床"><i
+                <a href="https://www.stana.top/2021/12/architecture_lab/" title="CSAPP--Architecture Lab实验记录"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
-            </li>
-            <li class="next">
-                <a href="https://www.stana.top/2021/12/bomb_lab/"
-                    title="CSAPP--Bomb Lab实验记录"><span>上一篇&nbsp;&nbsp;</span><i
-                        class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
             
             <li class="toggle-toc">
