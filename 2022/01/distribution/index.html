@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>
+        Distribution - lincx blog
+      </title>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="google-site-verification" content="4MZdGdeC01hQIYurYzKBAjusQxTyeztil3joPOvIqQc" />
+    
+    <meta name="theme-color" content="#000000" />
+    
+    <meta http-equiv="window-target" content="_top" />
+    
+    
+    <meta name="description" content="分布式相关原理小总结" />
+    <meta name="generator" content="Hugo 0.89.4 with theme pure" />
+    <title>Distribution - lincx blog</title>
+    
+    
+    <link rel="stylesheet" href="https://www.stana.top/css/style.min.a85959a41e7abcc0db1f81f44bd264649303417f91b536e87dcde644340fea6d.css">
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+    <meta property="og:title" content="Distribution" />
+<meta property="og:description" content="分布式相关原理小总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stana.top/2022/01/distribution/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-13T16:10:27+08:00" />
+<meta property="article:modified_time" content="2022-01-13T16:10:27+08:00" />
+
+<meta itemprop="name" content="Distribution">
+<meta itemprop="description" content="分布式相关原理小总结"><meta itemprop="datePublished" content="2022-01-13T16:10:27+08:00" />
+<meta itemprop="dateModified" content="2022-01-13T16:10:27+08:00" />
+<meta itemprop="wordCount" content="15834">
+<meta itemprop="keywords" content="分布式," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Distribution"/>
+<meta name="twitter:description" content="分布式相关原理小总结"/>
+
+    <!--[if lte IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+      <![endif]-->
+
+    <!--[if lt IE 9]>
+        <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  
+  
+
+  <body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          
+            <img class="img-circle img-rotate" src="https://www.stana.top/images/avatar.png" width="150" height="150">
+          
+          <h2 id="name" class="hidden-xs hidden-sm">lincx</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">developer</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Guangdong, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content"><p>enjoy~</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div id="tag-cloud-list" class="widget-body">
+            
+            
+            <a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link" rel="5">csapp-lab<span
+               class="tag-list-count">5</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/git-pages/" class="tag-list-link" rel="1">git-pages<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/gitee/" class="tag-list-link" rel="1">gitee<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/hugo/" class="tag-list-link" rel="1">hugo<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/markdown/" class="tag-list-link" rel="1">markdown<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/vercel/" class="tag-list-link" rel="1">vercel<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" class="tag-list-link" rel="1">分布式<span
+               class="tag-list-count">1</span></a>
+            
+            
+            <a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link" rel="2">汇编<span
+               class="tag-list-count">2</span></a>
+            
+    </div>
+<script>
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    tagCloud('#tag-cloud-list a',  8 ,  20 );
+  }
+};
+
+function tagCloud(where, min, max) {
+  let iMax = 0;
+  let iMin = 0;
+  $(where).each(function() {
+    let weight = Number($(this).attr("rel"));
+    if(iMax < weight) iMax = weight;
+    if(iMin > weight || iMin == 0) iMin = weight;
+  });
+  let step = (max - min)/(iMax - iMin);
+  $(where).each(function() {
+    let weight = $(this).attr("rel") - iMin;
+    $(this).css({"font-size": min + (weight * step) + 'px'});
+  });
+};
+</script>
+</div>
+
+      <div class="widget">
+    <h3 class="widget-title"> 分类</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.stana.top/categories/csapp/" class="category-list-link">csapp</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://www.stana.top/categories/tool/" class="category-list-link">tool</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://www.stana.top/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-list-link">分布式</a><span class="category-list-count">1</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/csapp-lab/" class="tag-list-link">csapp-lab</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/git-pages/" class="tag-list-link">git-pages</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/gitee/" class="tag-list-link">gitee</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/markdown/" class="tag-list-link">markdown</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/vercel/" class="tag-list-link">vercel</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" class="tag-list-link">分布式</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.stana.top/tags/%E6%B1%87%E7%BC%96/" class="tag-list-link">汇编</a><span
+                    class="tag-list-count">2</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2022/01/distribution/" class="title">Distribution</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2022-01-13 16:10:27 &#43;0800 CST" itemprop="datePublished">2022-01-13</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/cache_lab/" class="title">CSAPP--Cache Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-10 09:44:21 &#43;0800 CST" itemprop="datePublished">2021-12-10</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/architecture_lab/" class="title">CSAPP--Architecture Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-09 10:33:23 &#43;0800 CST" itemprop="datePublished">2021-12-09</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/attack_lab/" class="title">CSAPP--Attack Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-07 23:42:32 &#43;0800 CST" itemprop="datePublished">2021-12-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.stana.top/2021/12/bomb_lab/" class="title">CSAPP--Bomb Lab实验记录</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2021-12-06 14:20:42 &#43;0800 CST" itemprop="datePublished">2021-12-06</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">文章目录</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2022/01/distribution/"
+    >Distribution</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.stana.top/2022/01/distribution/" class="article-date">
+  <time datetime="2022-01-13 16:10:27 &#43;0800 CST" itemprop="datePublished">2022-01-13</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"> 分布式 </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"> 分布式 </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2022/01/distribution/" class="leancloud_visitors"  data-flag-title="Distribution">
+			<span class="leancloud-visitors-count">0</span>
+		</span>
+    </span>
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2022/01/distribution/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 15834字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 32分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="分布式相关算法总结">分布式相关算法总结</h1>
+<h2 id="一拜占庭将军问题">一、拜占庭将军问题</h2>
+<p>拜占庭将军问题是一个共识问题。这个概念最早由Leslie Lamport于1980年发表的“Reaching agreement in the presence of faults&quot;论文中提出。</p>
+<p>拜占庭是位于如今土耳其的伊斯坦布尔，是东罗马帝国的首都。由于拜占庭罗马帝国国土辽阔，出于防御的原因，每个军队之间的距离相隔较远，所以将军之间只能通过信件来传递信息。当发生战争的时候，拜占庭军队的所有将军必须达成共识，决定是否攻击敌人。但是，军队内可能存在间谍或者叛徒扰乱将军们的决定，在进行达成共识交流时，最后的结果可能不能代表大多数将军的意见。这时，在已知存在成员不可靠的情况下，其余忠诚的将军如何派除叛徒或者间谍的影响达成一致的决定，就是著名的拜占庭将军问题。</p>
+<p>拜占庭将军问题对现实世界的模拟。由于硬件错误、网络拥塞、连接失败等原因，计算机和网络可能会出现预想不到的行为。拜占庭错误在计算机科学领域特指的是分布式系统中的某些恶意节点扰乱系统的正常运行，包括选择性不传递消息，选择性伪造消息等。</p>
+<h2 id="二capbaseacid理论">二、CAP、BASE、ACID理论</h2>
+<h3 id="21-cap原理">2.1 CAP原理</h3>
+<p>学习分布式经典的理论莫过于CAP理论。</p>
+<p><strong>CPA定理</strong> 指的是在一个分布式系统中，<code>一致性（Consistency）</code>、<code>可用性（Availability）</code>、<code>分区容错性（Partition tolerance）</code>。CAP 原则上，这三个要素最多只能同时实现两点，不可能三者兼顾。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">元素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">一致性（Consistency）</td>
+<td>所有节点访问同一份最新的数据副本</td>
+</tr>
+<tr>
+<td style="text-align:center">可用性（Availability）</td>
+<td>每次访问都能保证得到一个非报错的响应，但不保证数据是最新的</td>
+</tr>
+<tr>
+<td style="text-align:center">分区容错性（Partition tolerance）</td>
+<td>当分布式系统遇到网络分区故障的时候，仍然可以对外界提供一致性、可用性的服务</td>
+</tr>
+</tbody>
+</table>
+<h4 id="211-一致性consistency">2.1.1 一致性（Consistency）</h4>
+<p>这里的一致性指的是强一致性而不是最终一致性。一致性严谨的表述是原子读写，即所有的读写都应该看起来是“原子”的，或者“串行”的。也就是说，在一致性系统中，一旦客户端向系统内其中一个节点写入一份数据，那么之后client从其他节点读取到的都是刚刚写入的数据。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211230145710123.png" alt="image-20211230145710123"></p>
+<p>上面的系统模拟一致性模型。</p>
+<ol>
+<li>客户端向分布式系统其中一个节点写入val1</li>
+<li>由于val1是新写入的值，其他节点（B、C）都没有设置该值，所以需要从A节点同步该数据</li>
+<li>待全部节点都同步完成之后，A节点再向客户端返回一个成功写入的响应。</li>
+<li>之后，另一个客户端向B节点请求该数据的时候，B节点可以直接该值返回给该客户端</li>
+</ol>
+<h4 id="212-可用性availability">2.1.2 可用性（Availability）</h4>
+<p>分布式系统中的非故障节点在收到请求时，都必须返回响应。</p>
+<p>在可用系统中，如果我们的客户端向服务器发送请求，并且服务器未崩溃，则服务器必须最终响应客户端，不允许服务器忽略客户的请求。</p>
+<h4 id="213-分区容错性partition-tolerance">2.1.3 分区容错性（Partition tolerance）</h4>
+<p>允许网络丢失从一个节点发送到另一个节点的任意多条消息，即不同步
+也就是说，节点A和节点B发送给对方的任何消息都是可以放弃的，也就是说节点A和节点B可能因为各种意外情况，导致无法成功进行同步，分布式系统要能容忍这种情况。</p>
+<h4 id="214-三者不可同时兼顾">2.1.4 三者不可同时兼顾</h4>
+<p>假设三者能同时兼顾</p>
+<ul>
+<li>首先我们对系统进行分区，由于满足分区容错性，节点A与节点B之间不能够进行正常通信，初始值都为val0
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211230153000200.png" alt="image-20211230153000200"></li>
+<li>这时，客户端向节点A写入val1，但是因为分区容错性，该val1没有同步到节点B。此时，节点A是val1，节点B是val0。</li>
+<li>由于需要满足可用性，节点A必须向client1返回数据。
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211230153132669.png" alt="image-20211230153132669"></li>
+<li>这时，client2向节点B访问数据，节点B只能返回val0
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211230153527938.png" alt="image-20211230153527938"></li>
+</ul>
+<p>显然，节点A与节点B出现了数据不一致的现象，不能满足一致性。</p>
+<h4 id="215-三者权衡">2.1.5 三者权衡</h4>
+<ul>
+<li>CA (Consistency + Availability)：关注一致性和可用性，它需要非常严格的全体一致的协议，比如“两阶段提交”（2PC）。CA 系统不能容忍网络错误或节点错误，一旦出现这样的问题，整个系统就会拒绝写请求，因为它并不知道对面的那个结点是否挂掉了，还是只是网络问题。唯一安全的做法就是把自己变成只读的。</li>
+<li>CP (consistency + partition tolerance)：关注一致性和分区容忍性。它关注的是系统里大多数人的一致性协议，比如：Paxos 算法 (Quorum 类的算法)。这样的系统只需要保证大多数结点数据一致，而少数的结点会在没有同步到最新版本的数据时变成不可用的状态。这样能够提供一部分的可用性。</li>
+<li>AP (availability + partition tolerance)：这样的系统关心可用性和分区容忍性。因此，这样的系统不能达成一致性，需要给出数据冲突，给出数据冲突就需要维护数据版本。</li>
+</ul>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20211230154402193.png" alt="image-20211230154402193"></p>
+<h3 id="22-base理论">2.2 BASE理论</h3>
+<p>BASE理论是<code>Basically Available(基本可用)</code>，<code>Soft State（软状态）</code>和<code>Eventually Consistent（最终一致性）</code>三个短语的缩写</p>
+<p>核心思想：</p>
+<blockquote>
+<p>即使无法做到强一致性（Strong consistency），但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
+</blockquote>
+<h4 id="221-基本可用basically-available">2.2.1 基本可用（Basically Available）</h4>
+<p>基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。</p>
+<p>相较于正常的系统而言：</p>
+<ol>
+<li>**响应时间上的损失：**正常情况下的搜索引擎0.5秒即返回用户结果，而基本可用的搜索引擎可以在2秒作用返回结果。</li>
+<li>**功能上的损失：**在一个电商网站上，正常情况下，用户可以顺利完成每一笔订单</li>
+</ol>
+<h4 id="222-软状态soft-state">2.2.2 软状态（Soft State）</h4>
+<p>软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据至少会有三个副本，允许不同节点间副本同步的延时就是软状态的体现</p>
+<h4 id="223-最终一致性eventual-consistency">2.2.3 最终一致性（Eventual Consistency）</h4>
+<p>最终一致性是指系统中的所有数据副本经过一定时间后，最终能够达到一致的状态。</p>
+<h3 id="23-acid">2.3 ACID</h3>
+<p>ACID是传统数据库常用的设计理念，追求强一致性模型。</p>
+<p>关系数据库的ACID模型拥有 高一致性 + 可用性 很难进行分区：</p>
+<ul>
+<li><strong>原子性（Atomicity）</strong>：一个事务中所有操作都必须全部完成，要么全部不完成。</li>
+<li><strong>一致性（Consistency）</strong>：在事务开始或结束时，数据库应该在一致状态。</li>
+<li><strong>隔离性（Isolation）</strong>：事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。</li>
+<li><strong>持久性（Durability）</strong>：持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来即使数据库发生故障也不应该对其有任何影响</li>
+</ul>
+<h2 id="三分布式协议和算法">三、分布式协议和算法</h2>
+<h3 id="31-raft-算法">3.1 Raft 算法</h3>
+<h4 id="311-背景">3.1.1 背景</h4>
+<p>在Raft算法诞生之前，Paoxs几乎成为了一致性协议的代名词。1990年，Leslie Lamport教授向ACM Transactions on Computer Systems提交了关于Paxos算法的论文。然而，对大多数人来说，理解Paxos太困难了，而且难以实现。而一致性协议对大规模分布式系统又非常重要。因此，斯坦福大学的Diego Ongaro 和 John Ousterhout 决定设计一种比Paxos更容易理解的一致性算法&mdash;-Raft</p>
+<h4 id="312-概念">3.1.2 概念</h4>
+<p>Raft是实现分布式共识的一种算法，主要用来管理日志复制的一致性。它和Paxos的功能是一样，但是相比于Paxos，Raft算法更容易理解、也更容易应用到实际的系统当中。</p>
+<p><strong>Raft的三个角色（状态）</strong></p>
+<p>在一个由Raft协议组织的集群中，一共包含如下3类角色：</p>
+<ul>
+<li><strong>Leader（领导人）</strong>：负责日志的同步管理，处理来自客户端的请求，与Follower保持heartBeat的联系。同一时刻最多只有一个Leader存在。</li>
+<li><strong>Candidate（候选人）</strong>：负责选举投票，集群刚启动或者Leader宕机时，状态为Follower的节点将转为Candidate并发起选举，选举胜出（获得超过半数节点的投票）后，从Candidate转为Leader状态。</li>
+<li><strong>Follower（群众）</strong>：响应 Leader 的日志同步请求，响应Candidate的邀票请求，以及把客户端请求到Follower的事务转发（重定向）给Leader。所有节点开始的时候都是Follower状态。</li>
+</ul>
+<p><strong>复制状态机</strong></p>
+<p>在一个分布式数据库中，如果每个节点的状态一致，每个节点都执行相同的命令序列，那么最终他们会得到一个一致的状态。也就是和说，为了保证整个分布式系统的一致性，我们需要保证每个节点执行相同的命令序列，也就是说每个节点的日志要保持一样。所以说，保证日志复制一致就是Raft等一致性算法的工作了。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220103123418956.png" alt="image-20220103123418956"></p>
+<p>这里就涉及Replicated State Machine（复制状态机）。它的基本思想是一个分布式的复制状态机系统由多个复制单元组成，每个复制单元均是一个状态机，它的状态保存在一组状态变量中。如上图所示。在一个节点上，一致性模块（Consensus Module，也就是分布式共识算法）接收到了来自客户端的命令。然后把接收到的命令写入到日志中，该节点和其他节点通过一致性模块进行通信确保每个日志最终包含相同的命令序列。一旦这些日志的命令被正确复制，每个节点的状态机（State Machine）都会按照相同的序列去执行他们，从而最终得到一致的状态。然后将达成共识的结果返回给客户端。</p>
+<p><strong>任期（Term）</strong></p>
+<p>在分布式系统中，“时间同步”是一个很大的难题，因为每个机器可能由于所处的地理位置、机器环境等因素会不同程度造成时钟不一致，但是为了识别“过期信息”，时间信息必不可少。</p>
+<p>Raft算法中就采用任期（Term）的概念，将时间切分为一个个的Term（同时每个节点自身也会本地维护currentTerm），可以认为是逻辑上的时间。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220103124157792.png" alt="image-20220103124157792"></p>
+<p>每一任期的开始都是一次领导人选举，一个或多个候选人（Candidate）会尝试成为领导（Leader）。如果一个人赢得选举，就会在该任期（Term）内剩余的时间担任领导人。在某些情况下，选票可能会被评分，有可能没有选出领导人（如t3），那么，将会开始另一任期，并且理科开始下一次选举。Raft 算法保证在给定的一个任期最少要有一个领导人。</p>
+<p><strong>心跳（heartbeats）和超时机制（timeout）</strong></p>
+<p>在Raft算法中，有两个timeout机制来控制领导人选举：</p>
+<p>一个是选举定时器（election timeout）：即Follower等待成为Candidate状态的等待时间，这个时间被随机设定为150ms~300ms之间。</p>
+<p>另一个是heartbeat timeout：在某个节点成为Leader以后，它会发送Append Entries消息给其他节点，这些消息就是通过heartbeat timeout来传送，Follower接收到Leader的心跳包的同时也重新设置选举定时器。</p>
+<h4 id="313-工作机制">3.1.3 工作机制</h4>
+<p>Raft将一致性问题分解成了三个相对独立的子问题：</p>
+<ul>
+<li>**选举（Leader Election）：**当Leader宕机或者集群初始化时，一个新的Leader需要被选举出来；</li>
+<li>**日志复制（Log Replication）：**Leader接收来自客户端的请求并将其以日志条目的形式复制到集群中的其他节点，并且强制要求其他节点的日志与自己保持一致；</li>
+<li>**安全性（Safety）：**如果任何服务器节点已经应用了一个确定的日志条目到它的状态机中，那么其他服务器节点不能在同一个日志索引位置应用一个不同的指令。</li>
+</ul>
+<h5 id="领导人选举leader-election">领导人选举（Leader Election）</h5>
+<p>（1）一开始，所有节点都是以Follower角色启动，所有节点的状态都是 Follower，初始 Term（任期）为 0。同时启动选举定时器（时间随机，降低冲突概率），超时时间在100~500 毫秒之间且并不一致。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220106180702674.png" alt="image-20220106180702674"></p>
+<p>（2）如果一个节点发现在超过选举定时器的时间后一直没有收到Leader发送的心跳请求，则该节点就会成为候选人（Candidate），并且一直处于该状态，直到下列三种情况发生：</p>
+<ol>
+<li>该节点（Candidate）在选举中获胜</li>
+<li>其他节点赢得了选举</li>
+<li>一段时间后没有任何一台服务器赢得选举（这时候，就会进入下一轮Term的选举，并随机设置选举定时器的时间）
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220106180741858.png" alt="image-20220106180741858"></li>
+</ol>
+<p>（3）然后这个候选人（Candidate）就会向其他节点发送投票请求（Request Vote），如果得到半数以上节点的同意，就成为Leader（Leader）。如果选举超时，还没有Leader选出，则进入下一任期（Term），重新选举。
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220106181307089.png" alt="image-20220106181307089"></p>
+<p>（4）完成Leader选举后，Leader就会定时给其他节点发送心跳包（Heartbeat），告诉其他节点Leader还在运行，同时重置这些节点的选举定时器。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220106181335408.png" alt="image-20220106181335408"></p>
+<h5 id="日志复制log-replication">日志复制（Log Replication）</h5>
+<p>在一个Raft集群中，只有Leader节点可以处理客户端的请求（如果客户端的请求发送到了Follower，Follower将请求重定向到Leader），客户端的每个请求都包含一条被复制状态机执行的指令。Leader将这条指令作为一条新的日志条目（Entry）附加到日志中去，然后并行地将附加条目发送给Follower，让它们复制这条日志条目。</p>
+<p>（1）客户端向Leader提交指令，Leader收到命令后，将命令追加到本地日志中。此时，这个命令处于“<strong>uncomitted</strong>”状态，复制状态机不会执行该命令。
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220107154759148.png" alt="image-20220107154759148"></p>
+<p>（2）Leader 与 Followers 之间保持着心跳联系，随心跳 Leader 将追加的 Entry（AppendEntries）并行地发送给其它的 Follower，并让它们复制这条日志条目，这一过程称为复制（Replicate）。
+注意：</p>
+<ol>
+<li>
+<p>Leader 向 Followers 发送的不仅仅是追加的 Entry（AppendEntries）。</p>
+<p>在发送追加日志条目的时候，Leader会将新的日志条目紧接着之前条目的索引位置（preLogIndex），Leader 任期号（Term）也包含在其中。如果 Follower 在它的日志中找不到包含相同索引位置和任期号的条目，那么它就会拒绝接收新的日志条目，因为出现这种情况说明 Follower 和 Leader 不一致。</p>
+</li>
+<li>
+<p>如何解决 Leader 与 Follower 不一致的问题？</p>
+<p>Leader和Follower一系列崩溃的青葵会使它们的日志处于不一致状态。Follower可能会丢失一些在新的Leader中有的日志条目，它可能会拥有一些Leader没有的日志条目，又或者两个都有可能发送。</p>
+<p>要使两者回复一致，Leader需要找到两者最后达到一致的地方（LogIndex），实际上是个回溯的过程，然后删除从那个点之后的全部日志条目，发送自己的日志给 Follower。所有的这些操作都在进行附加日志的一致性检查时完成。</p>
+<p>Leader为每个Follower都维护一个nextIndex，它表示下一个需要发送给Follower的日志条目的索引。当一个节点刚转为Leader时，它会初始化所有的nextIndex值，为自己的最后一个日志的index+1。如果一个Follower的日志和Leader不一致，那么在下一次AppendEntry的时候就会失败。在被 Follower 拒绝之后，Leader 就会减小该 Follower 对应的 nextIndex 值并进行重试。最终 nextIndex 会在某个位置使得 Leader 和 Follower 的日志达成一致。当这种情况发生，附加日志就会成功，这时就会把 Follower 冲突的日志条目全部删除并且加上 Leader 的日志。一旦附加日志成功，那么 Follower 的日志就会和 Leader 保持一致，并且在接下来的任期继续保持一致。
+<img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220107155753789.png" alt="image-20220107155753789"></p>
+</li>
+</ol>
+<p>（3）Leader等待Follower回应。
+Followers接收到Leader发送过来的复制请求后，有两种可能的回应</p>
+<ul>
+<li>写入本地日志中，返回Success</li>
+<li>一致性检查失败，拒绝写入，返回False</li>
+</ul>
+<p>当 Leader 收到大多数 Followers 的回应后，会将写入的 Entry 标记为提交状态（Committed），并把这条日志条目应用到它的状态机中。</p>
+<p>（4）前面完成后，Leader会向客户端回应。</p>
+<p>（5）Leader节点在提交命令后，下一次的心跳包中就带有通知其他节点提交命令的消息，其他节点收到Leader的消息后，就将命令应用到状态机中（State Machine），最终每个节点的日志都保持了一致性。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220107155927478.png" alt="image-20220107155927478"></p>
+<h5 id="安全性safety">安全性（Safety）</h5>
+<p>不能保证每个状态机能按照相同的顺序执行同样的指令。例如，当领导人提交了若干日志条目的同时一个追随者可能宕机了，之后它又被选为了领导人然后用新的日志条目覆盖掉了旧的那些，最后，不同的状态机可能执行不同的命令序列。</p>
+<p>因此，Raft算法通过在领导人选举阶段增加一个限制来完善了Raft算法。该限制可以保证，Leader对于固定的任期号（Term），都拥有之前任期的所有被提交的日志条目。</p>
+<p><strong>选举限制</strong></p>
+<p>在所有基于 Leader 机制的一致性算法中，Leader 都必须存储所有已经提交的日志条目。一个Candidate节点要成为赢得选举，就需要跟网络中大部分节点进行通信，这就意味着每一条已经提交的日志条目最少在其中一台服务器上出现。Raft 使用了一种简单而有效的方法，以保证所有之前的任期号中已经提交的日志条目在选举的时候都会出现在新的 Leader 中。换言之，日志条目的传送是单向的，只从 Leader 传给 Follower，并且 Leader 从不会覆盖自身本地日志中已经存在的条目。RequestVote RPC 实现了这个限制：这个 RPC包括候选人的日志信息，如果它自己的日志比候选人的日志要新，那么它会拒绝候选人的投票请求。</p>
+<h3 id="32-一致性算法">3.2 一致性算法</h3>
+<h4 id="321-前言">3.2.1 前言</h4>
+<p>在互联网中，一致性哈希算法(Consistent Hashing)在分布式系统的应用还是十分广泛的。一致性哈希算法最早在论文《Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web》中提出。具体思路就是一致性哈希将整个哈希输出空间设置为一个环形区域。</p>
+<h4 id="322-分布式缓存">3.2.2 分布式缓存</h4>
+<p>随着业务的发展，流量的剧增，单体项目逐渐划分为分布式系统。对于经常访问的数据，我们可以使用缓存机制来存储，减少数据库的压力。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112171639714.png" alt="image-20220112171639714"></p>
+<p>一般会使用Redis作为缓存，为了保证Redis的高可用，我们一般会对Redis做主从复制，组成<code>Master-Slave</code>的形式，进行数据的读写分离。</p>
+<p>优化的最简单的策略是随机分配请求。每次Redis请求会随机发送到其中一个集群中，这种策略会存在下面的两个问题：</p>
+<ul>
+<li>同一份数据可能在多个Redis集群中存在，造成数据冗余。</li>
+<li>某一份数据在其中一台Redis数据库已存在，但是再次访问Redis数据库，并没有命中数据已存在的库。无法保证对相同的key的所有访问都发送到相同的Redis中。</li>
+</ul>
+<p>为了解决上述的问题，我们可以使用hash算法，将key 进行hash取模，将数据保存到特定的Redis数据库中。例如，我们有6台服务器，存储图片的时候，可以将图片的名称作为key，计算key 的hash值 再%6，得到0-5 中其中一个值，这个值对应的是服务器的编号，也就是该图片保存到的服务器的编号。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112171845462.png" alt="image-20220112171845462"></p>
+<p>但是，使用上述的hash算法进行缓存的时候，会出现一些缺陷，试想一下，如果6台服务已经无法满足我们的需求的时候，我们需要增加服务器的数量，例如数量由6变成8，此时，如果再用这种方法存储一张图片的话，那么这张图片所在的服务器编号必定与原来6台服务器时所在的服务器编号不同，除数由6变8，余数肯定不同了。这种情况带来的结果就是当服务器数量变动时，所有缓存的位置都要发生改变，换句话说，当服务器数量发生改变时，所有缓存在一定时间内是失效的，当应用无法从缓存中获取数据时，则会向后端服务器请求数据，同理，假设3台缓存中突然有一台缓存服务器出现了故障，无法进行缓存，那么我们则需要将故障机器移除，但是如果移除了一台缓存服务器，那么缓存服务器数量从6台变为4台，如果想要访问一张图片，这张图片的缓存位置必定会发生改变，以前缓存的图片也会失去缓存的作用与意义，由于大量缓存在同一时间失效，造成了缓存的雪崩，此时前端缓存已经无法起到承担部分压力的作用，后端服务器将会承受巨大的压力，整个系统很有可能被压垮，所以，我们应该想办法不让这种情况发生，但是由于上述HASH算法本身的缘故，使用取模法进行缓存时，这种情况是无法避免的，为了解决这些问题，一致性哈希算法诞生了。</p>
+<h4 id="323-一致性哈希算法">3.2.3 一致性哈希算法</h4>
+<p>上述方法存在的问题：</p>
+<ul>
+<li>当缓存服务器数量发生变化的时候，会引起缓存雪崩，可能会造成整体系统压力过大而崩溃（大量缓存同时失效）</li>
+<li>当缓存服务器数量发生变换的时候，几乎所有缓存的位置都发生了变化</li>
+</ul>
+<p>其实，一致性哈希算法也是使用取模的方法，只是，刚才描述的取模法是对服务器的数量进行取模，而一致性哈希算法是对2^32取模</p>
+<blockquote>
+<p>一致哈希 是一种特殊的哈希算法。在使用一致哈希算法后，哈希表槽位数（大小）的改变平均只需要对 K/n 个关键字重新映射，其中K是关键字的数量， n是槽位数量。然而在传统的哈希表中，添加或删除一个槽位的几乎需要对所有关键字进行重新映射。</p>
+</blockquote>
+<p>一致性hash算法将整个hash空间组织成一个虚拟的圆环，Hash函数的值空间为<code>0 ~ 2^32 - 1(一个32位无符号整型)</code></p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112174335571.png" alt="image-20220112174335571"></p>
+<p>整个空间按顺时针方向组织，我们将各个服务器使用Hash进行一个哈希，具体可以选择服务器的IP或主机名作为关键字进行哈希，这样每台服务器就确定在了哈希环的一个位置上。</p>
+<p><strong>hash（服务器A的IP地址） %  2^32</strong></p>
+<p>通过上述公式算出的结果一定是一个0到2^32-1之间的一个整数，我们就用算出的这个整数，代表服务器A，既然这个整数肯定处于0到2^32-1之间，那么，上图中的hash环上必定有一个点与这个整数对应，而我们刚才已经说明，使用这个整数代表服务器A，那么，服务器A就可以映射到这个环上，其他的服务器也依次类推，最后如下图示意</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112174735034.png" alt="image-20220112174735034"></p>
+<p>假设，我们需要使用缓存服务器缓存图片，而且我们仍然使用图片的名称作为找到图片的key，那么我们使用如下公式可以将图片映射到上图中的hash环上。从此位置沿顺时针滚动，遇到的第一台服务器就是其应该定位到的服务器。</p>
+<p><strong>hash（图片名称） %  2^32</strong></p>
+<p>映射后的示意图如下，下图中的橘黄色圆形表示图片。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112174759035.png" alt="image-20220112174759035"></p>
+<p>一致性哈希算法就是通过这种方法，判断一个对象应该被缓存到哪台服务器上的，将缓存服务器与被缓存对象都映射到hash环上以后，从被缓存对象的位置出发，沿顺时针方向遇到的第一个服务器，就是当前对象将要缓存于的服务器，由于被缓存对象与服务器hash后的值是固定的，所以，在服务器不变的情况下，一张图片必定会被缓存到固定的服务器上，那么，当下次想要访问这张图片时，只要再次使用相同的算法进行计算，即可算出这个图片被缓存在哪个服务器上，直接去对应的服务器查找对应的图片即可。</p>
+<h5 id="优点">优点</h5>
+<p><strong>容错性</strong></p>
+<p>假如服务器B宕机了，那么，原本存储到服务器B的数据B保存到服务器C中。因此，其中一台宕机后，干扰的只有前面的数据（原数据被保存到顺时针的下一个服务器），而不会干扰到其他的数据。</p>
+<p><strong>拓展性</strong></p>
+<p>假如在服务器B与服务器C之间添加服务器D，数据C就会保存到服务器D，受影响的只有服务器C，其他数据不会有影响。</p>
+<h5 id="缺点">缺点</h5>
+<p>前面部分都是讲述到服务器节点较多和节点分布较为均衡的情况，如果节点较少就会出现节点分布不均衡造成数据倾斜问题。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112180443490.png" alt="image-20220112180443490"></p>
+<p>如果服务器被映射成上图中的模样，那么被缓存的对象很有可能大部分集中缓存在某一台服务器上。如果出现上图中的情况，A、B、C三台服务器并没有被合理的平均的充分利用，缓存分布的极度不均匀，而且，如果此时服务器A出现故障，那么失效缓存的数量也将达到最大值，在极端情况下，仍然有可能引起系统的崩溃，上图中的情况则被称之为hash环的偏斜，那么，我们应该怎样防止hash环的偏斜呢？一致性hash算法中使用”虚拟节点”解决了这个问题。</p>
+<h4 id="324-虚拟节点">3.2.4 虚拟节点</h4>
+<p>为了解决这种数据存储不平衡的问题，一致性哈希算法引入了<strong>虚拟节点机制</strong>，即对每个节点计算多个哈希值，每个计算结果位置都放置在对应节点中，这些节点<strong>称为虚拟节点</strong>。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220112180934602.png" alt="image-20220112180934602"></p>
+<p>从上图可以看出，A、B、C三台服务器分别虚拟出了一个虚拟节点，当然，如果你需要，也可以虚拟出更多的虚拟节点。引入虚拟节点的概念后，缓存的分布就均衡多了，上图中，1号、3号图片被缓存在服务器A中，5号、4号图片被缓存在服务器B中，6号、2号图片被缓存在服务器C中，如果你还不放心，可以虚拟出更多的虚拟节点，以便减小hash环偏斜所带来的影响，虚拟节点越多，hash环上的节点就越多，缓存被均匀分布的概率就越大。</p>
+<h3 id="33-gossip-协议">3.3 Gossip 协议</h3>
+<p>Gossip 协议，顾名思义，就像流言蜚语一样，利用一种随机、带有传染性的方式，将信息
+传播到整个网络中，并在一定时间内，使得系统内的所有节点数据一致。对你来说，掌握这
+个协议不仅能很好地理解这种最常用的，实现最终一致性的算法，也能在后续工作中得心应
+手地实现数据的最终一致性。</p>
+<h4 id="331-gossip-三板斧">3.3.1 Gossip 三板斧</h4>
+<p>Gossip 的三板斧分别是：<strong>直接邮寄（Direct Mail）</strong>、**反熵（Anti-entropy）**和 <strong>谣言传播（Rumor mongering）</strong>。</p>
+<h4 id="332--直接邮寄direct-mail">3.3.2  直接邮寄（Direct Mail）</h4>
+<p><strong>直接邮寄</strong>：就是直接发送更新数据，当数据发送失败时，将数据缓存下来，然后重传。从图中你可以看到，节点 A 直接将更新数据发送给了节点 B、C。</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113143927145.png" alt="image-20220113143927145"></p>
+<p>但是直接邮寄有个不足之处就是当缓存队列满了的时候，会造成数据丢失，所以只采用直接邮寄是无法实现最终一致性的。</p>
+<h4 id="333-反熵anti-entropy">3.3.3 反熵（Anti-entropy）</h4>
+<p><strong>反熵</strong> ：指的是集群中的节点，每隔一段时间就随机选择某个其他节点，然后通过相互交换自己的所有数据来消除两者之间的差异，实现数据的最终一致性：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113145114827.png" alt="image-20220113145114827"></p>
+<p>实现反熵的时候，主要有 <strong>推</strong>、<strong>拉</strong>和<strong>推拉</strong>三种方式</p>
+<p>推方式，就是将自己的所有副本数据，推给对方，修复对方副本中的熵：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113150225600.png" alt="image-20220113150225600"></p>
+<p>拉方式，就是拉取对方的所有副本数据，修复自己副本中的熵：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113145929424.png" alt="image-20220113145929424"></p>
+<p>推拉的方式就是同时修复自己的副本和对方副本的熵：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113150453671.png" alt="image-20220113150453671"></p>
+<p>注意：反熵需要节点两两交换和对比自己所有的数据，执行反熵时通讯成本会很高，所以在实际场景中避免频繁执行反熵，并且可以通过引入校验和等机制，减少需要对比的数据量和通讯信息等。</p>
+<p>虽然反熵比较实用，但是执行反熵时，相关的节点都是已知的，而且节点数量不能太多，如果是一个动态变化或节点数比较多的分布式环境，这时候反熵就不适用了。当面对这种场景的时候就得通过“谣言传播”来实现最终一致性。</p>
+<h4 id="334-谣言传播rumor-mongering">3.3.4 谣言传播（Rumor mongering）</h4>
+<p>谣言传播，广泛地散播谣言，它指的是当一个节点有了新数据后，这个节点变成活跃状态，并周期性地联系其他节点向其发送新数据，直到所有的节点都存储了该新数据：</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113151454612.png" alt="image-20220113151454612"></p>
+<p>节点 A 向节点 B、D 发送新数据，节点 B 收到新数据后，变成活跃节点，然后节点 B 向节点 C、D 发送新数据。其实，谣言传播非常具有传染性，它适合动态变化的分布式系统。</p>
+<h4 id="335-小结">3.3.5 小结</h4>
+<p>在实际场景中，实现数据副本的最终一致性时，一般而言，直接邮寄的方式是一定要实现的，因为不需要做一致性对比，只是通过发送更新数据或缓存重传，来修复数据的不一致，性能损耗低。在存储组件中，节点都是已知的，一般采用反熵修复数据副本的一致性。当集群节点是变化的，或者集群节点数比较多时，这时要采用谣言传播的方式，同步更新数据，实现最终一致。</p>
+<h2 id="四-分布式锁">四、 分布式锁</h2>
+<h3 id="41-初始锁">4.1 初始锁</h3>
+<p><strong>1. 锁的双面性</strong></p>
+<p>现在我们写的程序基本上都有一定的并发性，要么单台多进线程、要么多台机器集群化，在仅读的场景下是不需要加锁的，因为数据是一致的，在读写混合或者写场景下如果不加以限制和约束就会造成写混乱数据不一致的情况。</p>
+<p>如果业务安全和正确性无法保证，再多的并发也是无意义的。</p>
+<p>高并发多半是考验基础架构是否强悍，合理正确地使用锁才是个人能力的体现。</p>
+<p>凡事基本上都是双面的，锁可以在一定程度上保证数据的一致性，但是锁也意味着维护和使用的复杂性，当然也伴随着性能的损耗，最大的锁可能就是CPython解释器的全局解释器锁GIL了。</p>
+<p><strong>2.单机锁和分布式锁</strong></p>
+<p>锁依据使用范围可简单分为：<strong>单机锁和分布式锁</strong>。</p>
+<p>Linux提供系统级单机锁，这类锁可以实现线程同步和互斥资源的共享，单机锁实现了机器内部线程之间对共享资源的并发控制。</p>
+<p>在分布式部署高并发场景下，经常会遇到资源的互斥访问的问题，最有效最普遍的方法是给共享资源或者对共享资源的操作加一把锁。</p>
+<p>分布式锁是控制分布式系统之间同步访问共享资源的一种方式，用于在分布式系统中协调他们之间的动作。</p>
+<h3 id="42-分布式锁">4.2 分布式锁</h3>
+<p><strong>1. 分布式锁的实现简介</strong></p>
+<p>分布式CAP理论告诉我们需要做取舍:</p>
+<blockquote>
+<p>任何一个分布式系统有三大特性：一致性Consistency、可用性Availability和分区容错性Partition Tolerance，但是由于网络分区不受人为控制，在网络发生分区时，我们必须在可用性和一致性二者中选择之一。</p>
+</blockquote>
+<p>在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只保证最终一致性。在很多场景中为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。</p>
+<p>分布式锁一般有四种实现方式：</p>
+<ul>
+<li>基于数据库
+在数据库中创建一张表，表里包含方法名等字段，并且在方法名字段上面创建唯一索引，执行某个方法需要使用此方法名向表中插入数据，成功插入则获取锁，执行结束则删除对应的行数据释放锁</li>
+<li>基于缓存数据库Redis
+Redis性能好并且实现方便，但是单节点的分布式锁在故障迁移时产生安全问题，Redlock是Redis的作者 Antirez 提出的集群模式分布式锁，基于N个完全独立的Redis节点实现分布式锁的高可用</li>
+<li>基于ZooKeeper
+ZooKeeper 是以 Paxos 算法为基础的分布式应用程序协调服务，为分布式应用提供一致性服务的开源组件</li>
+<li>基于Etcd
+Etcd是基于Raft算法为基础的分布式应用程序协调服务，为分布式应用提供一致性服务的开源组件</li>
+</ul>
+<p><strong>2. 分布式锁需要具备的条件</strong></p>
+<p>分布式锁在应用于分布式系统环境相比单机锁更为复杂，该锁需要具备一些特性：</p>
+<ul>
+<li>互斥性：在任意时刻，只有一个客户端（进程）能持有锁</li>
+<li>安全性：避免死锁情况，当一个客户端在持有锁期间内，由于意外崩溃而导致锁未能主动解锁，其持有的锁也能够被正确释放，并保证后续其它客户端也能加锁</li>
+<li>可用性：分布式锁需要有一定的高可用能力，当提供锁的服务节点故障（宕机）时不影响服务运行，避免单点风险，如Redis的集群模式、哨兵模式，ETCD/zookeeper的集群选主能力等保证HA，保证自身持有的数据与故障节点一致。</li>
+<li>对称性：对同一个锁，加锁和解锁必须是同一个进程，即不能把其他进程持有的锁给释放了，这又称为锁的可重入性。</li>
+</ul>
+<h3 id="43-基于redis实现分布式锁">4.3 基于Redis实现分布式锁</h3>
+<p>既然是锁，核心操作无外乎加锁、解锁。</p>
+<p>Redis的加锁操作：</p>
+<pre><code class="language-bash">SET lock_name my_random_value NX PX 30000
+</code></pre>
+<ul>
+<li>lock_name，锁的名称，对于 Redis 而言，lock_name 就是 Key-Value 中的 Key，具有唯一性。</li>
+<li>random_value，由客户端生成的一个随机字符串，它要保证在足够长的一段时间内，且在所有客户端的所有获取锁的请求中都是唯一的，用于唯一标识锁的持有者。</li>
+<li>NX 只有当 lock_name(key) 不存在的时候才能 SET 成功，从而保证只有一个客户端能获得锁，而其它客户端在锁被释放之前都无法获得锁。</li>
+<li>PX 30000 表示这个锁节点有一个 30 秒的自动过期时间（目的是为了防止持有锁的客户端故障后，无法主动释放锁而导致死锁，因此要求锁的持有者必须在过期时间之内执行完相关操作并释放锁）。</li>
+</ul>
+<p>Redis的解锁操作：</p>
+<pre><code class="language-bash">del lock_name
+</code></pre>
+<ul>
+<li>在加锁时为锁设置过期时间，当过期时间到达，Redis 会自动删除对应的 Key-Value，从而避免死锁。注意，这个过期时间需要结合具体业务综合评估设置，以保证锁的持有者能够在过期时间之内执行完相关操作并释放锁。</li>
+<li>正常执行完毕，未到达锁过期时间，通过del lock_name主动释放锁。</li>
+</ul>
+<p>上述方式实现的redis分布锁有个缺点：</p>
+<p>只作用在一个Redis节点上，即使Redis通过sentinel保证高可用，如果这个master节点由于某些原因发生了主从切换，那么就会出现锁丢失的情况：</p>
+<p>在Redis的master节点上拿到了锁；但是这个加锁的key还没有同步到slave节点；</p>
+<p>master故障，发生故障转移，slave节点升级为master节点；导致锁丢失。</p>
+<p>由此 redis官方推荐 redlock 来解决这个问题。</p>
+<p><strong>Redlock</strong></p>
+<p><strong>Redlock：全名叫做 Redis Distributed Lock;即使用redis实现的分布式锁；</strong></p>
+<p>使用场景：多个服务间保证同一时刻同一时间段内同一用户只能有一个请求（防止关键业务出现并发攻击）；</p>
+<p>官网文档地址如下：https://redis.io/topics/distlock</p>
+<p>这个锁的算法实现了多redis实例的情况，相对于单redis节点来说，优点在于 防止了 单节点故障造成整个服务停止运行的情况；并且在多节点中锁的设计，及多节点同时崩溃等各种意外情况有自己独特的设计方法；</p>
+<p><strong>多节点redis实现的分布式锁算法(RedLock):有效防止单点故障</strong></p>
+<p>假设有5个完全独立的redis主服务器</p>
+<p>1.获取当前时间戳</p>
+<p>2.client尝试按照顺序使用相同的key,value获取所有redis服务的锁，在获取锁的过程中的获取时间比锁过期时间短很多，这是为了不要过长时间等待已经关闭的redis服务。并且试着获取下一个redis实例。</p>
+<p>比如：TTL为5s,设置获取锁最多用1s，所以如果一秒内无法获取锁，就放弃获取这个锁，从而尝试获取下个锁</p>
+<p>3.client通过获取所有能获取的锁后的时间减去第一步的时间，这个时间差要小于TTL时间并且至少有3个redis实例成功获取锁，才算真正的获取锁成功</p>
+<p>4如果成功获取锁，则锁的真正有效时间是 TTL减去第三步的时间差 的时间；比如：TTL 是5s,获取所有锁用了2s,则真正锁有效时间为3s(其实应该再减去时钟漂移);</p>
+<p>5.如果客户端由于某些原因获取锁失败，便会开始解锁所有redis实例；因为可能已经获取了小于3个锁，必须释放，否则影响其他client获取锁</p>
+<h3 id="43-基于etcd实现分布式锁">4.3 基于etcd实现分布式锁</h3>
+<h4 id="431-机制">4.3.1 机制</h4>
+<p>etcd 支持以下功能，正是依赖这些功能来实现分布式锁的：</p>
+<ul>
+<li>Lease 机制：即租约机制（TTL，Time To Live），Etcd 可以为存储的 KV 对设置租约，当租约到期，KV 将失效删除；同时也支持续约，即 KeepAlive。</li>
+<li>Revision 机制：每个 key 带有一个 Revision 属性值，etcd 每进行一次事务对应的全局 Revision 值都会加一，因此每个 key 对应的 Revision 属性值都是全局唯一的。通过比较 Revision 的大小就可以知道进行写操作的顺序。</li>
+<li>在实现分布式锁时，多个程序同时抢锁，根据 Revision 值大小依次获得锁，可以避免 “羊群效应” （也称 “惊群效应”），实现公平锁。</li>
+<li>Prefix 机制：即前缀机制，也称目录机制。可以根据前缀（目录）获取该目录下所有的 key 及对应的属性（包括 key, value 以及 revision 等）。</li>
+<li>Watch 机制：即监听机制，Watch 机制支持 Watch 某个固定的 key，也支持 Watch 一个目录（前缀机制），当被 Watch 的 key 或目录发生变化，客户端将收到通知。</li>
+</ul>
+<h4 id="432-过程">4.3.2 过程</h4>
+<ul>
+<li>
+<p>步骤 1: 准备</p>
+<p>客户端连接 Etcd，以 /lock/mylock 为前缀创建全局唯一的 key，假设第一个客户端对应的 key=&quot;/lock/mylock/UUID1&quot;，第二个为 key=&quot;/lock/mylock/UUID2&quot;；客户端分别为自己的 key 创建租约 - Lease，租约的长度根据业务耗时确定，假设为 15s；</p>
+</li>
+<li>
+<p>步骤 2: 创建定时任务作为租约的“心跳”</p>
+<p>当一个客户端持有锁期间，其它客户端只能等待，为了避免等待期间租约失效，客户端需创建一个定时任务作为“心跳”进行续约。此外，如果持有锁期间客户端崩溃，心跳停止，key 将因租约到期而被删除，从而锁释放，避免死锁。</p>
+</li>
+<li>
+<p>步骤 3: 客户端将自己全局唯一的 key 写入 Etcd</p>
+<p>进行 put 操作，将步骤 1 中创建的 key 绑定租约写入 Etcd，根据 Etcd 的 Revision 机制，假设两个客户端 put 操作返回的 Revision 分别为 1、2，客户端需记录 Revision 用以接下来判断自己是否获得锁。</p>
+</li>
+<li>
+<p>步骤 4: 客户端判断是否获得锁</p>
+<p>客户端以前缀 /lock/mylock 读取 keyValue 列表（keyValue 中带有 key 对应的 Revision），判断自己 key 的 Revision 是否为当前列表中最小的，如果是则认为获得锁；否则监听列表中前一个 Revision 比自己小的 key 的删除事件，一旦监听到删除事件或者因租约失效而删除的事件，则自己获得锁。</p>
+</li>
+<li>
+<p>步骤 5: 执行业务</p>
+<p>获得锁后，操作共享资源，执行业务代码。</p>
+</li>
+<li>
+<p>步骤 6: 释放锁</p>
+<p>完成业务流程后，删除对应的key释放锁。</p>
+</li>
+</ul>
+<h4 id="433-原理">4.3.3 原理</h4>
+<p>Lock()函数的实现很简单：</p>
+<pre><code class="language-golang">// Lock locks the mutex with a cancelable context. If the context is canceled
+// while trying to acquire the lock, the mutex tries to clean its stale lock entry.
+func (m *Mutex) Lock(ctx context.Context) error {
+    s := m.s
+    client := m.s.Client()
+
+    m.myKey = fmt.Sprintf(&quot;%s%x&quot;, m.pfx, s.Lease())
+    cmp := v3.Compare(v3.CreateRevision(m.myKey), &quot;=&quot;, 0)
+    // put self in lock waiters via myKey; oldest waiter holds lock
+    put := v3.OpPut(m.myKey, &quot;&quot;, v3.WithLease(s.Lease()))
+    // reuse key in case this session already holds the lock
+    get := v3.OpGet(m.myKey)
+    // fetch current holder to complete uncontended path with only one RPC
+    getOwner := v3.OpGet(m.pfx, v3.WithFirstCreate()...)
+    resp, err := client.Txn(ctx).If(cmp).Then(put, getOwner).Else(get, getOwner).Commit()
+    if err != nil {
+        return err
+    }
+    m.myRev = resp.Header.Revision
+    if !resp.Succeeded {
+        m.myRev = resp.Responses[0].GetResponseRange().Kvs[0].CreateRevision
+    }
+    // if no key on prefix / the minimum rev is key, already hold the lock
+    ownerKey := resp.Responses[1].GetResponseRange().Kvs
+    if len(ownerKey) == 0 || ownerKey[0].CreateRevision == m.myRev {
+        m.hdr = resp.Header
+        return nil
+    }
+
+    // wait for deletion revisions prior to myKey
+    hdr, werr := waitDeletes(ctx, client, m.pfx, m.myRev-1)
+    // release lock key if wait failed
+    if werr != nil {
+        m.Unlock(client.Ctx())
+    } else {
+        m.hdr = hdr
+    }
+    return werr
+}
+</code></pre>
+<p>首先通过一个事务来尝试加锁，这个事务主要包含了4个操作: cmp、put、get、getOwner。需要注意的是，key是由pfx和Lease()组成的。</p>
+<ul>
+<li>cmp: 比较加锁的key的修订版本是否是0。如果是0就代表这个锁不存在。</li>
+<li>put: 向加锁的key中存储一个空值，这个操作就是一个加锁的操作，但是这把锁是有超时时间的，超时的时间是session的默认时长。超时是为了防止锁没有被正常释放导致死锁。</li>
+<li>get: get就是通过key来查询</li>
+<li>getOwner: 注意这里是用m.pfx来查询的，并且带了查询参数WithFirstCreate()。使用pfx来查询是因为其他的session也会用同样的pfx来尝试加锁，并且因为每个LeaseID都不同，所以第一次肯定会put成功。但是只有最早使用这个pfx的session才是持有锁的，所以这个getOwner的含义就是这样的。</li>
+</ul>
+<p>接下来才是通过判断来检查是否持有锁</p>
+<pre><code class="language-golang">m.myRev = resp.Header.Revision
+if !resp.Succeeded {
+    m.myRev = resp.Responses[0].GetResponseRange().Kvs[0].CreateRevision
+}
+// if no key on prefix / the minimum rev is key, already hold the lock
+ownerKey := resp.Responses[1].GetResponseRange().Kvs
+if len(ownerKey) == 0 || ownerKey[0].CreateRevision == m.myRev {
+    m.hdr = resp.Header
+    return nil
+}
+</code></pre>
+<p>m.myRev是当前的版本号，resp.Succeeded是cmp为true时值为true，否则是false。这里的判断表明当同一个session非第一次尝试加锁，当前的版本号应该取这个key的最新的版本号。</p>
+<p>下面是取得锁的持有者的key。如果当前没有人持有这把锁，那么默认当前会话获得了锁。或者锁持有者的版本号和当前的版本号一致， 那么当前的会话就是锁的持有者。</p>
+<pre><code class="language-golang">// wait for deletion revisions prior to myKey
+hdr, werr := waitDeletes(ctx, client, m.pfx, m.myRev-1)
+// release lock key if wait failed
+if werr != nil {
+    m.Unlock(client.Ctx())
+} else {
+    m.hdr = hdr
+}
+</code></pre>
+<p>上面这段代码就很好理解了，因为走到这里说明没有获取到锁，那么这里等待锁的删除。</p>
+<p>waitDeletes方法的实现也很简单，但是需要注意的是，这里的getOpts只会获取比当前会话版本号更低的key，然后去监控最新的key的删除。等这个key删除了，自己也就拿到锁了。</p>
+<p>这种分布式锁的实现和我一开始的预想是不同的。它不存在锁的竞争，不存在重复的尝试加锁的操作。而是通过使用统一的前缀pfx来put，然后根据各自的版本号来排队获取锁。效率非常的高。避免了惊群效应</p>
+<p><img src="https://gitee.com/lincx_py/imagebed/raw/master/images/image-20220113154416967.png" alt="image-20220113154416967"></p>
+<p>如图所示，共有4个session来加锁，那么根据revision来排队，获取锁的顺序为session2 -&gt; session3 -&gt; session1 -&gt; session4。</p>
+<p>这里面需要注意一个惊群效应，每一个client在锁住/lock这个path的时候，实际都已经插入了自己的数据，类似/lock/LEASE_ID，并且返回了各自的index（就是raft算法里面的日志索引），而只有最小的才算是拿到了锁，其他的client需要watch等待。例如client1拿到了锁，client2和client3在等待，而client2拿到的index比client3的更小，那么对于client1删除锁之后，client3其实并不关心，并不需要去watch。所以综上，等待的节点只需要watch比自己index小并且差距最小的节点删除事件即可。</p>
+<h2 id="五总结">五、总结</h2>
+<p>目前为止，已经对分布式的概念有了比较清晰的理解，了解了一些分布式协议的原理以及分布式锁的实现等，对自己学习与实现分布式锁有很大的帮助，当然我了解到的还只是分布式领域的冰山一角，还有许多知识等待我继续挖掘研究。</p>
+
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://www.stana.top/2022/01/distribution/" title="Distribution" target="_blank" rel="external">https://www.stana.top/2022/01/distribution/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License: </strong>
+        <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lincx-911" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.stana.top/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lincx-911" target="_blank"><span class="text-dark">lincx</span><small class="ml-1x">developer</small></a></h3>
+        <div>预防掉发，多敲代码</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+<section id="comments">
+    <div id="vcomments"></div>
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.stana.top/2021/12/cache_lab/" title="CSAPP--Cache Lab实验记录"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter"
+                data-mobile-sites="weibo,qq,qzone,wechat"></div>
+        </div>
+    </div>
+</nav>
+
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/lincx-911" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.stana.top/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://twitter.com/" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+</ul>
+  
+  <div class="copyright">
+    &copy;2020  -
+    2022
+    <div class="publishby">
+        Theme by <a href="https://github.com/lincx-911" target="_blank"> lincx </a>base on<a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
+    </div>
+    
+      <div>
+        <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2020130626号-1</a>
+      </div>
+    
+    
+  </div>
+  
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.stana.top/js/application.min.a94ab19cb63a95c8d7fbd7b85cab3ddeea8c369bdf75b9cab6708787ead123af.js"></script>
+<script src="https://www.stana.top/js/plugin.min.19c5bcb2fb0789ab4f2b7834e5ceb5e92635645605bab902c1024b25f1502364.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(未命名)',
+            },
+            ROOT_URL: 'https:\/\/www.stana.top\/',
+            CONTENT_URL: 'https:\/\/www.stana.top\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.stana.top/js/insight.min.4a2d52de4bfff73e0c688404fe3d17c9a3ae12d9888e1e1ac9c690e4890de2ded50fe55f2b819c2ba55435a76f396f3ea6805765f0b0af5635cdf74ea459eab0.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine"></script>
+<script type="text/javascript">
+    var GUEST = ['nick', 'mail', 'link'];
+    var meta = 'nick,mail';
+    meta = meta.split(',').filter(function (item) {
+        return GUEST.indexOf(item) > -1;
+    });
+    new Valine({
+        el: '#vcomments',
+        verify: null ,
+        notify: null ,
+        appId: 'ocMp8WMQiBMKT83NJXmMrHR2-gzGzoHsz',
+        appKey: '1rmhmMQvdUG0trgmzmTWYGea',
+        placeholder: 'enjoy~',
+        avatar: 'wavatar',
+        meta: meta,
+        pageSize: '10' || 10,
+        visitor: true 
+});
+</script>
+
+  </body>
+</html>

@@ -6,10 +6,19 @@
     <description>Recent content in Tags on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Fri, 10 Dec 2021 09:44:21 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jan 2022 16:10:27 +0800</lastBuildDate>
     
         <atom:link href="https://www.stana.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Distribution</title>
+      <link>https://www.stana.top/2022/01/distribution/</link>
+      <pubDate>Thu, 13 Jan 2022 16:10:27 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2022/01/distribution/</guid>
+      <description>分布式相关算法总结 一、拜占庭将军问题 拜占庭将军问题是一个共识问题。这个概念最早由Leslie Lamport于1980年发表的“Reachin</description>
+    </item>
     
     <item>
       <title>CSAPP--Cache Lab实验记录</title>
