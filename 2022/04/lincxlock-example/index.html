@@ -40,7 +40,7 @@
 <meta itemprop="name" content="Lincxlock Example--模拟发奖系统">
 <meta itemprop="description" content="lincxklock 应用实例"><meta itemprop="datePublished" content="2022-04-19T21:26:25+08:00" />
 <meta itemprop="dateModified" content="2022-04-19T21:26:25+08:00" />
-<meta itemprop="wordCount" content="1919">
+<meta itemprop="wordCount" content="1497">
 <meta itemprop="keywords" content="lincxlock," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Lincxlock Example--模拟发奖系统"/>
 <meta name="twitter:description" content="lincxklock 应用实例"/>
@@ -388,24 +388,13 @@ function tagCloud(where, min, max) {
     </span>
         <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2022/04/lincxlock-example/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1919字</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4分 </span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1497字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3分 </span>
       </div>
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
       <h2 id="lincxlock-example--模拟发奖系统">Lincxlock Example&ndash;模拟发奖系统</h2>
-<h3 id="需求背景">需求背景</h3>
-<p>​        在游戏发奖系统中，为了防止用户多次点击领奖请求引起多次领奖问题，需要确保每个游戏玩家在一次抽奖活动中只能得到获得一次奖励机会，且由于礼包数量有限，需要确保礼包按给定的数量发放，防止“超发”现象发生。</p>
-<h3 id="需求分析">需求分析</h3>
-<p>​        因为发奖服务是部署在分布式系统当中，要防止上述问题的发生，需要使用到分布式锁的功能，可以直接应用LINCXLOCK的分布式锁。在发奖系统中，为了保证效率，使用Redis作为缓存，所以在使用LINCXLOCK分布式锁的时候可基于Redis，作为插件方式引入。</p>
-<h3 id="具体实现">具体实现</h3>
-<p>代码执行流程如下图所示：</p>
-<p><a href="https://imgtu.com/i/LDQacQ"><img src="https://s1.ax1x.com/2022/04/19/LDQacQ.png" alt="LDQacQ.png"></a></p>
-<p>1、引用LINCXLOCK插件；</p>
-<p>2、通过编写配置文件或者直接赋值的方式初始化LINCXLOCK分布式锁</p>
-<p>3、创建用户id的分布式锁对象，调用加锁方法，成功后，继续执行；否则，返回“重复请求”的信息；</p>
-<p>4、判断可以领奖，创建礼包的分布式锁对象，调用加锁方法，成功后，继续执行下面的逻辑，否则，调用用户分布式锁对象的解锁方法，返回“已领奖”信息；</p>
-<p>5、结束之后，调用两个锁对象的解锁方法，释放锁，返回礼包。</p>
+<h3 id="内容修改中">内容修改中&hellip;&hellip;&hellip;</h3>
 <p><code>main.go</code>文件</p>
 <pre><code class="language-go">package main
 
