@@ -6,10 +6,28 @@
     <description>Recent content in Categories on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Thu, 13 Jan 2022 16:10:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Apr 2022 21:26:25 +0800</lastBuildDate>
     
         <atom:link href="https://www.stana.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lincxlock Example--模拟发奖系统</title>
+      <link>https://www.stana.top/2022/04/lincxlock-example/</link>
+      <pubDate>Tue, 19 Apr 2022 21:26:25 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2022/04/lincxlock-example/</guid>
+      <description>Lincxlock Example&amp;ndash;模拟发奖系统 需求背景 ​ 在游戏发奖系统中，为了防止用户多次点击领奖请求引起多次领奖问题，需要确保每个游戏玩家在一</description>
+    </item>
+    
+    <item>
+      <title>Lincxlock Test 测试文档</title>
+      <link>https://www.stana.top/2022/04/lincxlock-test/</link>
+      <pubDate>Tue, 19 Apr 2022 19:20:42 +0800</pubDate>
+      
+      <guid>https://www.stana.top/2022/04/lincxlock-test/</guid>
+      <description>1、测试环境 测试环境的集群使用本机docker 容器模拟多主机环境进行搭建。 1.1 Redis集群 采用三主三从的模式进行搭建，这里由于主机资源有限，</description>
+    </item>
     
     <item>
       <title>分布式相关算法总结</title>
