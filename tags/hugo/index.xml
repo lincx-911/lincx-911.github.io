@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>Go generics 泛型</title>
-      <link>https://www.stana.top/2022/04/go_generics/</link>
-      <pubDate>Thu, 21 Apr 2022 14:59:00 +0800</pubDate>
-      
-      <guid>https://www.stana.top/2022/04/go_generics/</guid>
-      <description>前言</description>
-    </item>
-    
-    <item>
       <title>Lincxlock Example--模拟发奖系统</title>
       <link>https://www.stana.top/2022/04/lincxlock-example/</link>
       <pubDate>Tue, 19 Apr 2022 21:26:25 +0800</pubDate>
@@ -118,7 +109,7 @@
       <guid>https://www.stana.top/about/</guid>
       <description>关于作者 😺一名在校计算机专业学生，技术主要集中在后端开发，同时也有接触过前端、小程序开发，平时喜欢接触一些新鲜玩意儿
 目前技术栈：
- 🔑 Golang、Java、JavaScript 🧨 Vue.js、Spring、Spring Boot、Gin 🎐 Mysql、Redis、Etcd ⛑ 云原生、分布式  🎈希望通过这个blog记录自己学习心得等，有问题欢迎联系哦！</description>
+🔑 Golang、Java、JavaScript 🧨 Vue.js、Spring、Spring Boot、Gin 🎐 Mysql、Redis、Etcd ⛑ 云原生、分布式 🎈希望通过这个blog记录自己学习心得等，有问题欢迎联系哦！</description>
     </item>
     
   </channel>
