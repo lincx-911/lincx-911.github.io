@@ -2,111 +2,120 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSAPP on lincx blog</title>
-    <link>https://www.stana.top/categories/csapp/</link>
+    <link>https://lincx-911.github.io/categories/csapp/</link>
     <description>Recent content in CSAPP on lincx blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>CC BY 4.0 CN</copyright>
     <lastBuildDate>Fri, 10 Dec 2021 09:44:21 +0800</lastBuildDate>
     
-        <atom:link href="https://www.stana.top/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://lincx-911.github.io/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Prometheus</title>
+      <link>https://lincx-911.github.io/2022/11/prometheus/</link>
+      <pubDate>Sun, 27 Nov 2022 22:05:07 +0800</pubDate>
+      
+      <guid>https://lincx-911.github.io/2022/11/prometheus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Lincxlock Example--模拟发奖系统</title>
-      <link>https://www.stana.top/2022/04/lincxlock-example/</link>
+      <link>https://lincx-911.github.io/2022/04/lincxlock-example/</link>
       <pubDate>Tue, 19 Apr 2022 21:26:25 +0800</pubDate>
       
-      <guid>https://www.stana.top/2022/04/lincxlock-example/</guid>
+      <guid>https://lincx-911.github.io/2022/04/lincxlock-example/</guid>
       <description>Lincxlock Example&amp;ndash;模拟发奖系统 需求背景 ​ 在游戏发奖系统中，为了防止用户多次点击领奖请求引起多次领奖问题，需要确保每个游戏玩家在一</description>
     </item>
     
     <item>
       <title>Lincxlock Test 测试文档</title>
-      <link>https://www.stana.top/2022/04/lincxlock-test/</link>
+      <link>https://lincx-911.github.io/2022/04/lincxlock-test/</link>
       <pubDate>Tue, 19 Apr 2022 19:20:42 +0800</pubDate>
       
-      <guid>https://www.stana.top/2022/04/lincxlock-test/</guid>
+      <guid>https://lincx-911.github.io/2022/04/lincxlock-test/</guid>
       <description>1、测试环境 测试环境的集群使用本机docker 容器模拟多主机环境进行搭建。 1.1 Redis集群 采用三主三从的模式进行搭建，这里由于主机资源有限，</description>
     </item>
     
     <item>
       <title>分布式相关算法总结</title>
-      <link>https://www.stana.top/2022/01/distribution/</link>
+      <link>https://lincx-911.github.io/2022/01/distribution/</link>
       <pubDate>Thu, 13 Jan 2022 16:10:27 +0800</pubDate>
       
-      <guid>https://www.stana.top/2022/01/distribution/</guid>
+      <guid>https://lincx-911.github.io/2022/01/distribution/</guid>
       <description>分布式相关算法总结 一、拜占庭将军问题 拜占庭将军问题是一个共识问题。这个概念最早由Leslie Lamport于1980年发表的“Reachin</description>
     </item>
     
     <item>
       <title>CSAPP--Cache Lab实验记录</title>
-      <link>https://www.stana.top/2021/12/cache_lab/</link>
+      <link>https://lincx-911.github.io/2021/12/cache_lab/</link>
       <pubDate>Fri, 10 Dec 2021 09:44:21 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/cache_lab/</guid>
+      <guid>https://lincx-911.github.io/2021/12/cache_lab/</guid>
       <description>CSAPP&amp;ndash;Cache Lab实验记录 前言 This lab will help you understand the impact that cache memories can have on the performance of your C programs. The lab consists of two parts. In the first part you will write a small C program (about 200-300 lines) that simulates the behavior of a cache memory. In the second part, you will optimize a small matrix transpose function,</description>
     </item>
     
     <item>
       <title>CSAPP--Architecture Lab实验记录</title>
-      <link>https://www.stana.top/2021/12/architecture_lab/</link>
+      <link>https://lincx-911.github.io/2021/12/architecture_lab/</link>
       <pubDate>Thu, 09 Dec 2021 10:33:23 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/architecture_lab/</guid>
+      <guid>https://lincx-911.github.io/2021/12/architecture_lab/</guid>
       <description>CSAPP&amp;ndash;Architecture Lab实验记录 实验准备 实验资料 《深入理解计算机系统》第四章 处理器体系结构 lab官网 环境搭建 博主用的是 linux （ubuntu20.04） 1、首先下</description>
     </item>
     
     <item>
       <title>CSAPP--Attack Lab实验记录</title>
-      <link>https://www.stana.top/2021/12/attack_lab/</link>
+      <link>https://lincx-911.github.io/2021/12/attack_lab/</link>
       <pubDate>Tue, 07 Dec 2021 23:42:32 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/attack_lab/</guid>
+      <guid>https://lincx-911.github.io/2021/12/attack_lab/</guid>
       <description>CSAPP&amp;ndash;Attack Lab实验记录 前言 这个实验是csapp lab系列的第三个实验，实验内容主要是通过一些“攻击”手段，让我们了解缓冲区溢出隐患以及如何利用缓冲</description>
     </item>
     
     <item>
       <title>CSAPP--Bomb Lab实验记录</title>
-      <link>https://www.stana.top/2021/12/bomb_lab/</link>
+      <link>https://lincx-911.github.io/2021/12/bomb_lab/</link>
       <pubDate>Mon, 06 Dec 2021 14:20:42 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/bomb_lab/</guid>
+      <guid>https://lincx-911.github.io/2021/12/bomb_lab/</guid>
       <description>CSAPP&amp;ndash;Bomb Lab实验记录 前言 本实验是《深入理解计算机系统》一书中的附带实验——二进制炸弹实验。二进制炸弹是一个作为目标代码文件提供给学生们的程序。运</description>
     </item>
     
     <item>
       <title>CSAPP--Data Lab实验记录</title>
-      <link>https://www.stana.top/2021/12/csapp_datalab/</link>
+      <link>https://lincx-911.github.io/2021/12/csapp_datalab/</link>
       <pubDate>Sat, 04 Dec 2021 11:31:20 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/csapp_datalab/</guid>
+      <guid>https://lincx-911.github.io/2021/12/csapp_datalab/</guid>
       <description>CSAPP&amp;ndash;Data Lab实验记录 [TOC] 前言 Students implement simple logical, two&amp;rsquo;s complement, and floating point functions, but using a highly restricted subset of C. For example, they might be asked to compute the absolute value of a number using only bit-level operations and straightline code. This lab helps students understand the bit-level representations of C data types and the bit-level behavior of the operations on</description>
     </item>
     
     <item>
       <title>Gitee PicGo打造免费个人图床</title>
-      <link>https://www.stana.top/2021/12/picturebed/</link>
+      <link>https://lincx-911.github.io/2021/12/picturebed/</link>
       <pubDate>Fri, 03 Dec 2021 20:43:32 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/picturebed/</guid>
+      <guid>https://lincx-911.github.io/2021/12/picturebed/</guid>
       <description>一、前言 Markdown是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，Markdown文件的后缀名便是“.md”。Mar</description>
     </item>
     
     <item>
       <title>hugo搭建个人博客</title>
-      <link>https://www.stana.top/2021/12/first/</link>
+      <link>https://lincx-911.github.io/2021/12/first/</link>
       <pubDate>Thu, 02 Dec 2021 18:39:17 +0800</pubDate>
       
-      <guid>https://www.stana.top/2021/12/first/</guid>
+      <guid>https://lincx-911.github.io/2021/12/first/</guid>
       <description>一、背景介绍 博主之前使用Hexo 搭建博客，用了三年，这个工具最大的缺点就是，每次更新blog后，项目运行跟打包的速度有点慢，直到近期在冲浪的</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://www.stana.top/about/</link>
+      <link>https://lincx-911.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.stana.top/about/</guid>
+      <guid>https://lincx-911.github.io/about/</guid>
       <description>关于作者 😺一名在校计算机专业学生，技术主要集中在后端开发，同时也有接触过前端、小程序开发，平时喜欢接触一些新鲜玩意儿
 目前技术栈：
 🔑 Golang、Java、JavaScript 🧨 Vue.js、Spring、Spring Boot、Gin 🎐 Mysql、Redis、Etcd ⛑ 云原生、分布式 🎈希望通过这个blog记录自己学习心得等，有问题欢迎联系哦！</description>
